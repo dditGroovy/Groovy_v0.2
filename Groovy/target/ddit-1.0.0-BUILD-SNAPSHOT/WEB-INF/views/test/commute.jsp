@@ -17,9 +17,6 @@
 
     .head-title, .middle-div, .small-title, .month {
         border: 1px solid black;
-    <%-- padding: 20px; --%>
-        margin-bottom: 10px;
-
     }
 
     .head-title {
@@ -36,6 +33,7 @@
 
     .month-grid {
         display: grid;
+        width: 100%;
         grid-template-columns: repeat(4, 351px);
         grid-template-rows: repeat(3, 98px);
         gap: 24px 24px;
@@ -113,10 +111,10 @@
         <div class="commute-time-and-bar">
                 <div class="commute-time">
                     <div class="attendence-time">
-                        <p>출근 08:54</p>
+                        <p>출근 <span>08:54</span></p>
                     </div>
                     <div class="left-time">
-                        <p>퇴근 18:00</p>
+                        <p>퇴근 <span>18:00</span></p>
                     </div>
                     <div class="total-time-today">
                         <p>오늘 근무 시간</p>
