@@ -1,0 +1,106 @@
+/* reset */
+@import url("./reset.css");
+
+/* aside */
+#sideBar{
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    padding: 64px 25px;
+    width: 344px;
+    height: 100vh;
+    background-color: var(--color-white);
+    border-right: 1px solid var(--color-stroke);
+    box-shadow: var(--clay-card);
+    
+}
+#header {
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    height: 250px;
+}
+/* profile */
+#profile img {border-radius: 50%;}
+
+/* user */
+.user {display: flex; flex-direction: column; gap: 12px;}
+
+/* uuser-service */
+.user-service ul {
+    display: flex;
+    align-items: center;
+}
+.user-service ul li {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    white-space: nowrap;
+    padding: 0 8px;
+}
+.ic-mail {margin-right: 4px;}
+.user-service ul li:first-child {border-right: 1px solid #C8CDD4;}
+i.icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid blue;
+    vertical-align: middle;
+}
+#linkMail {margin-left: 4px;}
+
+.btn-wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows:  repeat(2, 1fr);
+    gap: 4px;
+}
+.btn-wrap #logout{
+    grid-column: 1 / -1;
+}
+.btn-wrap #logout .ic-logout {margin-left: 8px;}
+.btn-wrap #videoConference, .btn-wrap #reservation {
+    position: relative;
+}
+.btn-wrap #videoConference::before, .btn-wrap #reservation::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+}
+.btn-detail {transition: 0.35s; opacity: 0;}
+.btn-wrap #videoConference:hover .btn-detail, .btn-wrap #reservation:hover .btn-detail{opacity: 1;}
+.btn-wrap #videoConference:hover::before, .btn-wrap #reservation:hover::before{opacity: 0;}
+
+/* nav */
+#nav {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+#nav > div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+#nav .nav-cate {margin-left: 24px; }
+#nav li a{
+    display: block;
+    padding: 16px 24px;
+    transition: 0.35s;
+    border-radius: 12px;
+}
+#nav li a.active, #nav li a:hover {
+    background: var(--color-main);
+    color: var(--color-white);
+}
+#nav .icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+}
