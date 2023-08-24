@@ -37,9 +37,19 @@ public class HomeController {
 		return "home";
 	}
 
-	@GetMapping("/test/test1")
+	@GetMapping("/test/commute")
 	public String test() {
+		return "test/commute";
+	}
+
+	@GetMapping("/test/test1")
+	public String test1() {
 		return "test/test1";
 	}
-	
+
+	@GetMapping("/test/company-notice")
+	public String companyNotice() {
+		return "test/company-notice";
+	}
+
 }
