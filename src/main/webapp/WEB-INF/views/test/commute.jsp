@@ -17,6 +17,28 @@
 </div>
 
 <div>
+    <p>주간 출 • 퇴근 시간 확인</p>
+    <table border="1">
+        <tr>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+        </tr>
+        <c:forEach var="" begin="" end="">
+            <tr>
+                <td></td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
+
+<div>
+    <p>근태 현황</p>
+    <select name="sortOptions" id="" class="stroke">
+        <option value="2023">2023</option>
+    </select>
     <c:forEach var="eachMonth" begin="1" end="12">
         <input type="button" class="month" value="<c:out value="${eachMonth}" />">
     </c:forEach>
@@ -24,5 +46,17 @@
 
 <div class="modal">
     <p>근태 현황</p>
-    <div></div>
+    <table>
+        <tr>
+            <th>날짜</th>
+            <th>상태</th>
+            <th>근무시간</th>
+        </tr>
+        <c:forEach var="" begin="" end="">
+            <tr>
+                <td></td>
+            </tr>
+        </c:forEach>
+    </table>
+    <button type="button" value="확인"></button>
 </div>

@@ -38,7 +38,7 @@ public class HomeController {
 	}
 
 	@GetMapping("/test/commute")
-	public String test() {
+	public String commute() {
 		return "test/commute";
 	}
 
