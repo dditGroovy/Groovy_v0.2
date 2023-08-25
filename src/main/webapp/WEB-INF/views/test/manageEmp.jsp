@@ -12,22 +12,23 @@
 <div id="addEmployeeModal" class="modal">
     <div class="modal-content">
         <form action="#" method="POST">
+            <label>비밀번호</label>
             <input type="text" name="password" required><br />
 
             <label>이름</label>
-            <input type="text" name="memName" required><br />
+            <input type="text" name="empName" required><br />
 
             <label>휴대폰 번호</label>
-            <input type="tel" name="memTel" required><br />
+            <input type="tel" name="empTel" required><br />
 
             <label>이메일</label>
-            <input type="email" name="memMail" required><br />
+            <input type="email" name="empMail" required><br />
 
             <label>주소</label>
-            <input type="text" name="memAddr" required><br />
+            <input type="text" name="empAddr" required><br />
 
             <label>생년월일</label>
-            <input type="text" name="memBirth" required><br />
+            <input type="text" name="empBirth" required><br />
 
             <label>최종학력</label>
             <input type="radio" name="empEdu" id="empEdu1" checked>
@@ -56,20 +57,20 @@
             <label for="empPos8">대표</label> <br />
 
             <label>부서</label>
-            <select name="department" id="mem-department">
-                <option value="인사">인사팀</option>
-                <option value="총무">총무팀</option>
-                <option value="회계">회계팀</option>
-                <option value="영업">영업팀</option>
-                <option value="홍보">홍보팀</option>
-                <option value="관리">관리직</option>
+            <select name="empDep" id="emp-department">
+                <option value="HRT">인사팀</option>
+                <option value="GAT">총무팀</option>
+                <option value="AT">회계팀</option>
+                <option value="ST">영업팀</option>
+                <option value="PRT">홍보팀</option>
+                <option value="MAG">관리직</option>
             </select><br />
 
             <label>입사일</label>
-            <input type="date" name="memHireDate" required><br />
+            <input type="date" name="joinDate" required><br />
 
             <label>사원번호</label>
-            <input type="text" name="memId" required readonly>
+            <input type="text" name="empId" required readonly>
             <button id="generateId">사원 번호 생성</button><br />
 
             <label>재직 상태 설정</label>
@@ -90,12 +91,12 @@
 <form action="backend-url-for-filter-sort" method="GET">
     <label>부서 필터</label>
     <select name="filterDep">
-        <option value="인사">인사팀</option>
-        <option value="총무">총무팀</option>
-        <option value="회계">회계팀</option>
-        <option value="영업">영업팀</option>
-        <option value="홍보">홍보팀</option>
-        <option value="관리">관리직</option>
+        <option value="HRT">인사팀</option>
+        <option value="GAT">총무팀</option>
+        <option value="AT">회계팀</option>
+        <option value="ST">영업팀</option>
+        <option value="PRT">홍보팀</option>
+        <option value="MAG">관리직</option>
     </select>
     <!-- 사원 검색 -->
     <form action="#" method="GET">
@@ -104,7 +105,7 @@
     </form>
     <label>정렬</label>
     <select name="sortBy">
-        <option value="sortHire">입사일</option>
+        <option value="sortJoin">입사일</option>
         <option value="sortabc">이름순</option>
         <option value="sortPos">직급순</option>
     </select>

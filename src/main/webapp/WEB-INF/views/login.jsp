@@ -54,9 +54,9 @@
 <div class="container">
     <div class="logo-img"></div>
     <div class="login-div">
-        <form action="#" method="post">
-            <input type="text" class="userId" placeholder="ID" />
-            <input type="text" class="userPw"placeholder="PASSWORD" />
+        <form action="${pageContext.request.contextPath}/login" method="post">
+            <input type="text" class="userId" name="id" placeholder="ID" />
+            <input type="text" class="userPw" name="password" placeholder="PASSWORD" />
             <div class="find-id-pw"><a href="#">비밀번호 찾기</a></div>
             <input type="submit" value="로그인">
         </form>
