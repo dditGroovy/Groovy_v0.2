@@ -16,6 +16,10 @@
     <p>34시간 30분</p>
 </div>
 
+<div class="bar">
+
+</div>
+
 <div>
     <p>주간 출 • 퇴근 시간 확인</p>
     <table border="1">
