@@ -14,10 +14,10 @@
     <%--@declare id="mempassword"--%>
     <%--@declare id="passwordchk"--%>
     <label for="memId">아이디</label>
-    <input type="text" name="memId" id="memId" readonly value="20230801"><br />
+    <input type="text" name="memId" id="memId" readonly value="20230801"><br/>
     <br/>
     <label for="memPassword">비밀번호</label>
-    <input type="password" name="memPassword" id="memPassword">  <br/>
+    <input type="password" name="memPassword" id="memPassword"> <br/>
     <label for="passwordchk">비밀번호 확인</label>
     <input type="password" name="passwordchk" id="passwordchk"> <br/> <br/>
     <button type="submit">비밀번호 설정하기</button>

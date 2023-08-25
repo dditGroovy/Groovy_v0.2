@@ -16,10 +16,14 @@ public class SignInController {
     }
 
     @PostMapping("/login")
-    public RedirectView signIn(EmployeeVO vo, HttpSession session) {
+    public String signIn(EmployeeVO vo, HttpSession session) {
         EmployeeVO empVO = service.selectEmployee(vo.getId());
         session.setAttribute("login", empVO);
-        return new RedirectView("/");
+        if(session != null){
+            return "/resetPassword";
+        } else {
+            return "/login";
+        }
     }
 
     public String signOut(HttpSession session) {
