@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div>
     <p>출근 <span>08:54</span></p>
@@ -30,11 +30,11 @@
             <th>목</th>
             <th>금</th>
         </tr>
-        <c:forEach var="" begin="" end="">
+<%--        <c:forEach var="" begin="" end="">--%>
             <tr>
                 <td></td>
             </tr>
-        </c:forEach>
+<%--        </c:forEach>--%>
     </table>
 </div>
 
@@ -56,11 +56,11 @@
             <th>상태</th>
             <th>근무시간</th>
         </tr>
-        <c:forEach var="" begin="" end="">
+<%--        <c:forEach var="" begin="" end="">--%>
             <tr>
                 <td></td>
             </tr>
-        </c:forEach>
+<%--        </c:forEach>--%>
     </table>
     <button type="button" value="확인"></button>
 </div>
