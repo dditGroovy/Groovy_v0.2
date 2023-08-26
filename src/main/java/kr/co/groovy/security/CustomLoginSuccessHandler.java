@@ -31,15 +31,16 @@ public class CustomLoginSuccessHandler extends
         log.info("role : " + roleNames);
 
         //신입사원(ROLE_NEW)
-		if(roleNames.contains("ROLE_NEW")) {
-			response.sendRedirect("/initPassword");
-		} else {
+        if (roleNames.contains("ROLE_NEW")) {
+            response.sendRedirect("/initPassword");
+        } else {
             response.sendRedirect("/");
         }
-
-        super.onAuthenticationSuccess(request, response, auth);
+        if (!response.isCommitted()) {
+            // 리다이렉트 전에 응답이 커밋되지 않았을 경우에만 리다이렉트 수행
+            super.onAuthenticationSuccess(request, response, auth);
+        }
     }
-
 }
 
 

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+
 </head>
 <body>
 <h1>사원 관리</h1>

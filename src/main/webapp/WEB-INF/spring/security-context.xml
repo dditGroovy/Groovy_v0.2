@@ -27,6 +27,7 @@
                 invalidate-session="true"
                 delete-cookies="true"
         />
+        <security:access-denied-handler ref="customAccessDenied"/>
         <!--csrf : 테스트 위해 잠시 비활성화 -->
         <security:intercept-url pattern="/resources/**" access="permitAll"/>
         <security:intercept-url pattern="/" access="permitAll"/>
