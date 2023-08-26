@@ -1,7 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.groovy.employee.EmployeeMapper">
-    <select id="">
+    <resultMap type="employeeVO" id="employeeDetailMap">
+        <result property="enabled" column="ENABLED"/>
+        <result property="depCode" column="DEP_CODE"/>
+        <result property="posCode" column="POS_CODE"/>
+        <result property="empStatus" column="EMP_STATUS"/>
+        <result property="empProfile" column="EMP_PROFILE"/>
+        <result property="empBir" column="EMP_BIR"/>
+        <result property="empEdu" column="EMP_EDU"/>
+        <result property="empJoinDate" column="EMP_JOIN_DATE"/>
+        <result property="empAddrDetail" column="EMP_ADDR_DETAIL"/>
+        <result property="empAddr" column="EMP_ADDR"/>
+        <result property="empZip" column="EMP_ZIP"/>
+        <result property="empMail" column="EMP_MAIL"/>
+        <result property="empTell" column="EMP_TELL"/>
+        <result property="empName" column="EMP_NAME"/>
+        <result property="empPw" column="EMP_PW"/>
+        <result property="empId" column="EMP_ID"/>
+        <result property="empSeq" column="EMP_SEQ"/>
+        <collection property="employeeAuthVOList" resultMap="employeeAuthMap"></collection>
+    </resultMap>
 
+    <resultMap type="employeeAuthVO" id="employeeAuthMap">
+        <result property="authCode" column="AUTH_CODE"/>
+        <result property="empId" column="EMP_ID"/>
+    </resultMap>
+    <select id="signIn" parameterType="String" resultMap="employeeDetailMap">
+        SELECT A.EMP_SEQ,
+               A.EMP_ID,
+               A.EMP_PW,
+               A.EMP_NAME,
+               A.EMP_TELL,
+               A.EMP_MAIL,
+               A.EMP_ZIP,
+               A.EMP_ADDR,
+               A.EMP_ADDR_DETAIL,
+               A.EMP_JOIN_DATE,
+               A.EMP_EDU,
+               A.EMP_BIR,
+               A.EMP_PROFILE,
+               A.EMP_STATUS,
+               A.POS_CODE,
+               A.DEP_CODE,
+               A.ENABLED,
+               B.AUTH_CODE,
+               B.EMP_ID
+        FROM EMPLOYEE A,
+             AUTH B
+        WHERE A.EMP_ID = B.EMP_ID
+          AND A.EMP_ID = #{empId}
     </select>
+    <update id="initPassword">
+        UPDATE EMPLOYEE
+        SET EMP_PW = #{empPw}
+        WHERE EMP_ID = #{empId}
+    </update>
+    <update id="modifyRole">
+        UPDATE AUTH
+        SET AUTH_CODE = 'ROLE_EMP'
+        WHERE EMP_ID = #{empId}
+    </update>
 </mapper>

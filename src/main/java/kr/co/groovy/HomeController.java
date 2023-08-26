@@ -11,19 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class HomeController {
-	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -34,12 +25,12 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "main/home";
 	}
 
 	@GetMapping("/test/commute")
 	public String commute() {
-		return "test/commute";
+		return "employee/commute";
 	}
 
 	@GetMapping("/test/test1")
@@ -47,20 +38,16 @@ public class HomeController {
 		return "test/test1";
 	}
 
-	@GetMapping("/")
-	public String login() {
-		return "login";
-	}
+//	@GetMapping("/login")
+//	public String login() {
+//		return "login";
+//	}
 
 	@GetMapping("/test/company-notice")
 	public String companyNotice() {
-		return "test/company-notice";
+		return "companyNotice";
 	}
 
-	@GetMapping("/resetPw")
-	public String resetPassword(){
-		return "resetPassword";
-	}
 
 
 }

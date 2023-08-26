@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec"
+           uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -9,18 +11,24 @@
 <h1>Welcome! 입사를 축하합니다</h1>
 <h2>비밀번호를 설정해주세요</h2>
 
-<form action="#" method="post">
+<form action="${pageContext.request.contextPath}/initPassword" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
     <%--@declare id="memid"--%>
     <%--@declare id="mempassword"--%>
     <%--@declare id="passwordchk"--%>
-    <label for="memId">아이디</label>
-    <input type="text" name="memId" id="memId" readonly value="20230801"><br/>
+    <label for="empId">아이디</label>
+    <sec:authorize access="isAuthenticated()">
+        <sec:authentication property="principal.username" var="empId"/>
+        <input type="text" name="empId" id="empId" readonly value="${empId}"><br/></sec:authorize>
     <br/>
-    <label for="memPassword">비밀번호</label>
-    <input type="password" name="memPassword" id="memPassword"> <br/>
+    <label for="empPass">비밀번호</label>
+    <input type="password" name="empPw" id="empPass"> <br/>
     <label for="passwordchk">비밀번호 확인</label>
     <input type="password" name="passwordchk" id="passwordchk"> <br/> <br/>
+    <div class="skysky"></div>
     <button type="submit">비밀번호 설정하기</button>
 </form>
+
 </body>
 </html>

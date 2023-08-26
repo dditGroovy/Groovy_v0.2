@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	일단 이거 메인 화면이라고 생각하고~
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>

@@ -4,12 +4,22 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-   <definition name="tiles-layout" template="/WEB-INF/views/tiles/index.jsp">
-      <put-attribute name="aside" value="/WEB-INF/views/tiles/aside.jsp" />
-      <put-attribute name="body" value="" />
-   </definition>
+    <definition name="tiles-layout" template="/WEB-INF/views/tiles/index.jsp">
+        <put-attribute name="aside" value="/WEB-INF/views/tiles/aside.jsp"/>
+        <put-attribute name="body" value=""/>
+    </definition>
+    <definition name="*/*" extends="tiles-layout">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+    </definition>
 
-   <definition name="*/*" extends="tiles-layout">
-      <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
-   </definition>
+    <!--  로그인/비밀번호 수정 tiles 미적용  -->
+    <definition name="normalLayout" template="/WEB-INF/views/tiles/normal.jsp">
+        <put-attribute name="NormalLayout" value=""/>
+    </definition>
+    <definition name="signIn.jsp" extends="normalForm">
+        <put-attribute name="NormalLayout" value="/WEB-INF/views/{1}.jsp"/>
+    </definition>
+    <definition name="resetPassword.jsp" extends="normalForm">
+        <put-attribute name="NormalLayout" value="/WEB-INF/views/{1}.jsp"/>
+    </definition>
 </tiles-definitions>

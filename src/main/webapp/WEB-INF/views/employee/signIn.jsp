@@ -31,7 +31,7 @@
         align-items: center;
     }
 
-    input[type="text"], input[type="submit"] {
+    input[type="text"], input[type="submit"], input[type="password"] {
         width: 516px;
         height: 64px;
         padding: 10px;
@@ -54,10 +54,12 @@
 <div class="container">
     <div class="logo-img"></div>
     <div class="login-div">
-        <form action="${pageContext.request.contextPath}/login" method="post">
-            <input type="text" class="userId" name="id" placeholder="ID" />
-            <input type="text" class="userPw" name="password" placeholder="PASSWORD" />
-            <div class="find-id-pw"><a href="#">비밀번호 찾기</a></div>
+        <form action="${pageContext.request.contextPath}/signIn" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+            <input type="text" class="userId" name="empId" placeholder="ID"/>
+            <input type="password" class="userPw" name="empPw" placeholder="PASSWORD"/>
+                        <div class="find-id-pw"><a href="#">비밀번호 찾기</a></div>
             <input type="submit" value="로그인">
         </form>
     </div>
