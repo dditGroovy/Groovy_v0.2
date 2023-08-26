@@ -5,7 +5,7 @@
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '/weather/getWeather', true);
         xhr.onload = function () {
-            if (xhr.status === 200 || xhr.status === 400) {
+            if (xhr.readyState === 4 && xhr.status === 200) {
                 var responseJSON = JSON.parse(xhr.responseText);
                 var items = responseJSON.response.body.items.item;
                 var sky = '';
@@ -31,11 +31,9 @@
                         temperature = '' + fcstValue + '℃';
                     }
                 }
-                console.log(sky);
-                console.log(temperature);
                 document.getElementById("weather").innerHTML = sky + " " + temperature;
             } else {
-                console.log('Request failed. Status:', xhr.status);
+                console.log(xhr.status);
             }
         };
         xhr.send();

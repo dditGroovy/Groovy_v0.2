@@ -74,7 +74,7 @@ public class Weather {
         rd.close();
         conn.disconnect();
         String result = sb.toString();
-        log.info(result);
+//        log.info(result);
 
         return result;
     }
