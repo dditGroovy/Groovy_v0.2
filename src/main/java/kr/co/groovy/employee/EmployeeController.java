@@ -15,7 +15,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/signIn")
-    public String singinForm() {
+    public String singInForm() {
         return "employee/signIn";
     }
 
