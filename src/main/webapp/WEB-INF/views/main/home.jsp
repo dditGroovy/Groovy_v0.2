@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div id="weather"></div>
+<img id="weatherImg" src="" width="100px">
 <script>
     window.onload = function () {
         var xhr = new XMLHttpRequest();
@@ -10,6 +11,7 @@
                 var items = responseJSON.response.body.items.item;
                 var sky = '';
                 var temperature = '';
+                var imgSrc = "/resources/images/";
 
                 for (var i = 0; i < items.length; i++) {
                     var jsonObj_4 = items[i];
@@ -19,12 +21,16 @@
                     if (category === 'SKY') {
                         if (fcstValue === '1') {
                             sky += '맑음';
+                            imgSrc +='sun.png';
                         } else if (fcstValue === '2') {
                             sky += '비';
+                            imgSrc +='heavyRain.png';
                         } else if (fcstValue === '3') {
                             sky += '구름 ';
+                            imgSrc +='cloud.png';
                         } else if (fcstValue === '4') {
                             sky += '흐림 ';
+                            imgSrc +='cloudSun.png';
                         }
                     }
                     if (category === 'TMP') {
@@ -32,6 +38,7 @@
                     }
                 }
                 document.getElementById("weather").innerHTML = sky + " " + temperature;
+                document.getElementById("weatherImg").src = imgSrc;
             } else {
                 console.log(xhr.status);
             }
