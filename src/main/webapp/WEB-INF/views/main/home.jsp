@@ -19,18 +19,23 @@
                     var category = jsonObj_4.category;
 
                     if (category === 'SKY') {
-                        if (fcstValue === '1') {
-                            sky += '맑음';
-                            imgSrc +='sun.png';
-                        } else if (fcstValue === '2') {
-                            sky += '비';
-                            imgSrc +='heavyRain.png';
-                        } else if (fcstValue === '3') {
-                            sky += '구름 ';
-                            imgSrc +='cloud.png';
-                        } else if (fcstValue === '4') {
-                            sky += '흐림 ';
-                            imgSrc +='cloudSun.png';
+                        switch (fcstValue) {
+                            case '1' :
+                                sky += '맑음';
+                                imgSrc += 'sun.png';
+                                break;
+                            case '2' :
+                                sky += '비';
+                                imgSrc += 'heavyRain.png';
+                                break;
+                            case '3' :
+                                sky += '구름 ';
+                                imgSrc += 'cloud.png';
+                                break;
+                            case '4' :
+                                sky += '흐림 ';
+                                imgSrc += 'cloudSun.png';
+                                break;
                         }
                     }
                     if (category === 'TMP') {
