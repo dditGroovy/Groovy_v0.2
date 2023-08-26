@@ -17,7 +17,6 @@
                     var category = jsonObj_4.category;
 
                     if (category === 'SKY') {
-                        sky = '현재 날씨는 ';
                         if (fcstValue === '1') {
                             sky += '맑음';
                         } else if (fcstValue === '2') {
@@ -34,7 +33,7 @@
                 }
                 console.log(sky);
                 console.log(temperature);
-                document.getElementById("weather").innerHTML = sky + "\n" + temperature;
+                document.getElementById("weather").innerHTML = sky + " " + temperature;
             } else {
                 console.log('Request failed. Status:', xhr.status);
             }

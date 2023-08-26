@@ -11,34 +11,46 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @RestController
 @RequestMapping("/weather")
 public class Weather {
-    private String nx = "60";    //위도
-    private String ny = "125";    //경도
-    private String baseDate = "20230826";    //조회하고싶은 날짜
-    private String baseTime = "0500";    //조회하고싶은 시간
-    private String type = "json";    //조회하고 싶은 type(json, xml 중 고름)
+    private String nx = "68";
+    private String ny = "100";
+    private String baseDate;
+    private String baseTime;
+    private String type = "json";
 
     @GetMapping("/getWeather")
     public String GetWeather() throws IOException {
+        String[] baseTimes = {"0200", "0500", "0800", "1100", "1400", "1700", "2000", "2300"};
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalTime currentTime = currentDateTime.toLocalTime();
+
+        String closestBaseTime = findClosestBaseTime(currentTime, baseTimes);
+
+        baseDate = currentDateTime.toLocalDate().toString().replace("-", "");
+        baseTime = closestBaseTime;
+
+        System.out.println("baseDate: " + baseDate);
+        System.out.println("baseTime: " + baseTime);
 
         String apiUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
         String serviceKey = "qZe4uWWBzGxh3ONQq9pLg2ttxtKjdcqH5RDNzmyGTr8JnV5p8RXvVxR%2Bnj21qUT9uZm%2FucTk9%2BWLviOGGsphtw%3D%3D";
 
         StringBuilder urlBuilder = new StringBuilder(apiUrl);
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + serviceKey);
-        urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + URLEncoder.encode(nx, "UTF-8")); //경도
-        urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + URLEncoder.encode(ny, "UTF-8")); //위도
-        urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode(baseDate, "UTF-8")); /* 조회하고싶은 날짜*/
-        urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode(baseTime, "UTF-8")); /* 조회하고싶은 시간 AM 02시부터 3시간 단위 */
-        urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8"));    /* 타입 */
+        urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + URLEncoder.encode(nx, "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + URLEncoder.encode(ny, "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "=" + URLEncoder.encode(baseDate, "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "=" + URLEncoder.encode(baseTime, "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8"));
 
-        /*
-         * GET방식으로 전송해서 파라미터 받아오기
-         */
         URL url = new URL(urlBuilder.toString());
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -66,5 +78,20 @@ public class Weather {
 
         return result;
     }
+    public static String findClosestBaseTime(LocalTime currentTime, String[] baseTimes) {
+        LocalTime closestTime = null;
+        long minDifference = Long.MAX_VALUE;
 
+        for (String baseTimeStr : baseTimes) {
+            LocalTime baseTime = LocalTime.parse(baseTimeStr, DateTimeFormatter.ofPattern("HHmm"));
+            long difference = Math.abs(currentTime.until(baseTime, java.time.temporal.ChronoUnit.MINUTES));
+
+            if (difference < minDifference) {
+                minDifference = difference;
+                closestTime = baseTime;
+            }
+        }
+
+        return closestTime.format(DateTimeFormatter.ofPattern("HHmm"));
+    }
 }
