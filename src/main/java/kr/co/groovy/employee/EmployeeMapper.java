@@ -10,4 +10,6 @@ public interface EmployeeMapper {
 
     void initPassword(@Param("empId") String id, @Param("empPw") String pw);
     int countEmp();
+
+    int inputEmp(EmployeeVO vo);
 }

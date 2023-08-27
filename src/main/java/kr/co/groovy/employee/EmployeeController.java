@@ -1,8 +1,7 @@
 package kr.co.groovy.employee;
 
+import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +20,7 @@ public class EmployeeController {
     public String singInForm() {
         return "signIn";
     }
+
     @GetMapping("/manageEmp")
     public String manageEmp() {
         return "admin/manageEmp";
@@ -33,17 +33,22 @@ public class EmployeeController {
 
     @PostMapping("/initPassword")
     public String initPassword(@RequestParam("empId") String id,
-                           @RequestParam("empPw") String pw) {
+                               @RequestParam("empPw") String pw) {
         service.initPassword(id, pw);
         return "main/home";
     }
+
     @ResponseBody
     @GetMapping("/countEmp")
-    public String countEmp(){
-        log.info("countEmp");
+    public String countEmp() {
         int result = service.countEmp();
-        log.info(result + "");
+        log.info("countEmp " + result);
         return Integer.toString(service.countEmp());
     }
 
+    @PostMapping("/inputEmp")
+    public String inputEmp(EmployeeVO vo) {
+        service.inputEmp(vo);
+        return "redirect:/employee/manageEmp";
+    }
 }

@@ -12,19 +12,21 @@
 <!--    사원 추가 모달   -->
 <div id="addEmployeeModal" class="modal">
     <div class="modal-content">
-        <form name="insertEmp">
+        <form name="insertEmp" action="/employee/inputEmp" method="post">
             <!-- seoju : csrf 토큰 추가-->
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="enabled" value="1"/>
+            <input type="hidden" name="empSign" value="noSign.jpg"/>
+            <input type="hidden" name="empProfile" value="noImage.jpg"/>
 
             <label>비밀번호</label>
-            <input type="text" name="empPw" required><br/>
+            <input type="password" name="empPw" required><br/>
 
             <label>이름</label>
             <input type="text" name="empName" required><br/>
 
             <label>휴대폰 번호</label>
-            <input type="tel" name="empTel" required><br/>
+            <input type="text" name="empTel" required><br/>
 
             <label>우편번호</label>
             <input type="text" name="empZip" required><br/>
@@ -34,7 +36,7 @@
             <input type="text" name="empAddrDetail" required><br/>
 
             <label>생년월일</label>
-            <input type="text" name="empBir" required><br/>
+            <input type="date" value="2000-01-01" name="empBir" required><br/>
 
             <label>최종학력</label>
             <input type="radio" name="empEdu" id="empEdu1" value="0" checked>
@@ -47,25 +49,25 @@
             <label for="empEdu3">박사</label><br/>
 
             <label>직급</label>
-            <input type="radio" name="empPos" id="empPos1" value="08" checked>
+            <input type="radio" name="posCode" id="empPos1" value="08" checked>
             <label for="empPos1">사원</label>
-            <input type="radio" name="empPos" id="empPos2" value="07">
+            <input type="radio" name="posCode" id="empPos2" value="07">
             <label for="empPos2">대리</label>
-            <input type="radio" name="empPos" id="empPos3" value="06">
+            <input type="radio" name="posCode" id="empPos3" value="06">
             <label for="empPos3">과장</label>
-            <input type="radio" name="empPos" id="empPos4" value="05">
+            <input type="radio" name="posCode" id="empPos4" value="05">
             <label for="empPos4">차장</label>
-            <input type="radio" name="empPos" id="empPos5" value="04">
+            <input type="radio" name="posCode" id="empPos5" value="04">
             <label for="empPos5">팀장</label>
-            <input type="radio" name="empPos" id="empPos6" value="03">
+            <input type="radio" name="posCode" id="empPos6" value="03">
             <label for="empPos6">부장</label>
-            <input type="radio" name="empPos" id="empPos7" value="02">
+            <input type="radio" name="posCode" id="empPos7" value="02">
             <label for="empPos7">이사</label>
-            <input type="radio" name="empPos" id="empPos8" value="01">
+            <input type="radio" name="posCode" id="empPos8" value="01">
             <label for="empPos8">대표</label> <br/>
 
             <label>부서</label>
-            <select name="empDep" id="emp-department">
+            <select name="depCode" id="emp-department">
                 <option value="HRT">인사팀</option>
                 <option value="GAT">총무팀</option>
                 <option value="AT">회계팀</option>
@@ -75,7 +77,7 @@
             </select><br/>
 
             <label>입사일</label>
-            <input type="date" value="2018-04-09" name="joinDate" id="joinDate" required><br/>
+            <input type="date" value="" name="empJoinDate" id="joinDate" required><br/>
             <label>사원번호</label>
             <input type="text" name="empId" id="empId" required readonly>
             <button id="generateId" type="button">사원 번호 생성</button>
@@ -92,7 +94,7 @@
             <input type="radio" name="empStatus" id="quit" value="2">
             <label for="quit">퇴사</label>
             <br/><br/>
-            <button type="button" id="insert">등록</button>
+            <button type="submit" id="insert">등록</button>
             <button type="reset">지우기</button>
         </form>
     </div>
@@ -195,12 +197,11 @@
     const empEdu = document.querySelectorAll("input[name=empEdu]");
     const empBir = document.querySelector("input[name=empBir]");
     const empStatus = document.querySelectorAll("input[name=empStatus]");
-    const empPos = document.querySelectorAll("input[name=empPos]");
-    const empDep = document.querySelector("select[name=empDep]");
-    const empJoinDate = document.querySelector("input[name=joinDate]");
+    const posCode = document.querySelectorAll("input[name=posCode]");
+    const depCode = document.querySelector("select[name=depCode]");
+    const empJoinDate = document.querySelector("input[name=empJoinDate]");
     const empList = document.querySelector("#emp-list");
     const enabled = document.querySelector("input[name=enabled]");
-    var idx;
 
     // 사원 리스트 - 전체 선택
     document.getElementById("selectAll").addEventListener("change", function () {
@@ -218,9 +219,6 @@
 
     // 사번 생성 버튼 클릭 이벤트
     document.querySelector("#generateId").addEventListener("click", function () {
-        const dateSplit = joinDateVal.split("-");
-        const depCode = empDep.value;
-
         // 사원 수 + 1 인덱스 처리
         $.ajax({
             url: "/employee/countEmp",
@@ -228,20 +226,20 @@
             dataType: 'text',
             success: function (data) {
                 console.log("countEmp: ", data);
+                // 사번 생성 (idx 3글자로 설정함)
+                const dateSplit = joinDateVal.split("-");
                 let count = parseInt(data) + 1;
-                idx = count.toString().padStart(4, '0');
-
+                let idx = count.toString().padStart(3, '0');
+                empId.value = dateSplit[0] + dateSplit[1] + idx;
+                // 사번에 따른 사원 이메일 생성
+                if (empId.value != "") {
+                    empMail.value = empId.value + "@groovy.com";
+                }
             },
             error: function (xhr) {
                 console.log(xhr.status)
             }
         })
-        empId.value = dateSplit[0] + dateSplit[1] + idx;
-
-        // 사번에 따른 사원 이메일 생성
-        if (empId.value != "") {
-            empMail.value = empId.value + "@groovy.com";
-        }
     })
 
 
@@ -263,7 +261,7 @@
             }
         }
         /* 직급 */
-        for (const pos of empPos) {
+        for (const pos of posCode) {
             if (pos.checked) {
                 empPosIs = pos.value;
                 break;
@@ -280,8 +278,8 @@
             empAddrDetail: empAddrDetail.value,
             empBir: empBir.value,
             empEdu: empEduIs,
-            empPos: empPosIs,
-            empDep: empDep.value,
+            posCode: empPosIs,
+            depCode: depCode.value,
             empJoinDate: empJoinDate.value,
             empMail: empMail.value,
             empStatus: empStatusIs,
@@ -300,7 +298,7 @@
             }
         }
         if (!hasNull) {
-            /* ajax */
+
             console.log(empVO);
         } else {
             alert("모든 항목을 입력해주세요.");

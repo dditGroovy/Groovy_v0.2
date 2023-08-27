@@ -19,7 +19,7 @@
         <result property="empPw" column="EMP_PW"/>
         <result property="empId" column="EMP_ID"/>
         <result property="empSeq" column="EMP_SEQ"/>
-        <collection property="employeeAuthVOList" resultMap="employeeAuthMap"></collection>
+        <collection property="employeeAuthVOList" resultMap="employeeAuthMap"/>
     </resultMap>
 
     <resultMap type="employeeAuthVO" id="employeeAuthMap">
@@ -27,8 +27,7 @@
         <result property="empId" column="EMP_ID"/>
     </resultMap>
     <select id="signIn" parameterType="String" resultMap="employeeDetailMap">
-        SELECT
-               A.EMP_ID,
+        SELECT A.EMP_ID,
                A.EMP_PW,
                A.EMP_NAME,
                A.EMP_TEL,
@@ -65,11 +64,44 @@
         end}
     </update>
     <select id="countEmp" resultType="int">
-        SELECT COUNT(*) FROM EMPLOYEE
+        SELECT COUNT(*)
+        FROM EMPLOYEE
     </select>
-<!--    <update id="modifyRole">-->
-<!--        UPDATE AUTH-->
-<!--        SET AUTH_CODE = 'ROLE_EMP'-->
-<!--        WHERE EMP_ID = #{empId}-->
-<!--    </update>-->
+    <insert id="inputEmp">
+        INSERT INTO EMPLOYEE
+        (EMP_ID,
+         EMP_PW,
+         EMP_NAME,
+         EMP_TEL,
+         EMP_MAIL,
+         EMP_ZIP,
+         EMP_ADDR,
+         EMP_ADDR_DETAIL,
+         EMP_JOIN_DATE,
+         EMP_EDU,
+         EMP_BIR,
+         EMP_PROFILE,
+         EMP_STATUS,
+         POS_CODE,
+         DEP_CODE,
+         ENABLED,
+         EMP_SIGN)
+        VALUES (#{empId},
+                #{empPw},
+                #{empName},
+                #{empTel},
+                #{empMail},
+                #{empZip},
+                #{empAddr},
+                #{empAddrDetail},
+                #{empJoinDate},
+                #{empEdu},
+                #{empBir},
+                #{empProfile},
+                #{empStatus},
+                #{posCode},
+                #{depCode},
+                #{enabled},
+                #{empSign})
+    </insert>
 </mapper>
