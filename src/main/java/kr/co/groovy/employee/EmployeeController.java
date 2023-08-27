@@ -20,7 +20,7 @@ public class EmployeeController {
 
     @GetMapping("/signIn")
     public String singInForm() {
-        return "employee/signIn";
+        return "signIn";
     }
     @GetMapping("/manageEmp")
     public String manageEmpForm() {
@@ -29,7 +29,7 @@ public class EmployeeController {
 
     @GetMapping("/initPassword")
     public String initPasswordForm() {
-        return "employee/initPassword";
+        return "initPassword";
     }
 
     @PostMapping("/initPassword")

@@ -11,15 +11,4 @@
     <definition name="*/*" extends="tiles-layout">
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
     </definition>
-
-    <!--  로그인/비밀번호 수정 tiles 미적용  -->
-    <definition name="normalLayout" template="/WEB-INF/views/tiles/normal.jsp">
-        <put-attribute name="NormalLayout" value=""/>
-    </definition>
-    <definition name="signIn.jsp" extends="normalForm">
-        <put-attribute name="NormalLayout" value="/WEB-INF/views/{1}.jsp"/>
-    </definition>
-    <definition name="resetPassword.jsp" extends="normalForm">
-        <put-attribute name="NormalLayout" value="/WEB-INF/views/{1}.jsp"/>
-    </definition>
 </tiles-definitions>

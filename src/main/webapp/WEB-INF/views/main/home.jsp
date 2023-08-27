@@ -1,38 +1,38 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div id="weather"></div>
-<img id="weatherImg" src="" width="100px">
+<img id="weatherImg" src="">
 <script>
-    window.onload = function () {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/weather/getWeather', true);
-        xhr.onload = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var responseJSON = JSON.parse(xhr.responseText);
-                var items = responseJSON.response.body.items.item;
-                var sky = '';
-                var temperature = '';
-                var imgSrc = "/resources/images/";
+    $(document).ready(function () {
+        $.ajax({
+            url: '/weather/getWeather',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                const items = data.response.body.items.item;
+                let sky = '';
+                let temperature = '';
+                let imgSrc = "/resources/images/";
 
-                for (var i = 0; i < items.length; i++) {
-                    var jsonObj_4 = items[i];
-                    var fcstValue = jsonObj_4.fcstValue;
-                    var category = jsonObj_4.category;
+                for (let i = 0; i < items.length; i++) {
+                    let jsonObj = items[i];
+                    let fcstValue = jsonObj.fcstValue;
+                    let category = jsonObj.category;
 
                     if (category === 'SKY') {
                         switch (fcstValue) {
-                            case '1' :
+                            case '1':
                                 sky += '맑음';
                                 imgSrc += 'sun.png';
                                 break;
-                            case '2' :
+                            case '2':
                                 sky += '비';
                                 imgSrc += 'heavyRain.png';
                                 break;
-                            case '3' :
+                            case '3':
                                 sky += '구름 ';
                                 imgSrc += 'cloud.png';
                                 break;
-                            case '4' :
+                            case '4':
                                 sky += '흐림 ';
                                 imgSrc += 'cloudSun.png';
                                 break;
@@ -42,12 +42,12 @@
                         temperature = '' + fcstValue + '℃';
                     }
                 }
-                document.getElementById("weather").innerHTML = sky + " " + temperature;
-                document.getElementById("weatherImg").src = imgSrc;
-            } else {
+                $('#weather').html(sky + " " + temperature);
+                $('#weatherImg').attr('src', imgSrc);
+            },
+            error: function (xhr) {
                 console.log(xhr.status);
             }
-        };
-        xhr.send();
-    };
+        });
+    });
 </script>
