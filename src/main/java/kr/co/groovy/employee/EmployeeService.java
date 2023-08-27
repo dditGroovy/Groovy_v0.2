@@ -21,9 +21,6 @@ public class EmployeeService {
         mapper.initPassword(id, pw);
     }
 
-    public void modifyRole(String empId) {
-        mapper.modifyRole(empId);
-    }
 
     ;
 

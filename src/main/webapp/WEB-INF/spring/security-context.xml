@@ -32,7 +32,6 @@
         <security:intercept-url pattern="/resources/**" access="permitAll"/>
         <security:intercept-url pattern="/" access="permitAll"/>
         <security:intercept-url pattern="/test/test1" access="hasRole('ROLE_EMP')"/>
-        <!--        <security:intercept-url pattern="/test/commute" access="hasRole('ROLE_ADMIN')"/>-->
         <security:csrf disabled="true"/>
     </security:http>
 

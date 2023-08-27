@@ -9,6 +9,5 @@ public interface EmployeeMapper {
     EmployeeVO signIn(String empId);
 
     void initPassword(@Param("empId") String id, @Param("empPw") String pw);
-    void modifyRole(String empId);
 
 }

@@ -35,12 +35,7 @@ public class EmployeeController {
     @PostMapping("/initPassword")
     public String initPassword(@RequestParam("empId") String id,
                            @RequestParam("empPw") String pw) {
-//        log.info();
-//        String password = passwordEncoder.encode(pw);
-//        log.info(pw);
-//        log.info(password);
         service.initPassword(id, pw);
-        service.modifyRole(id);
         return "main/home";
     }
 

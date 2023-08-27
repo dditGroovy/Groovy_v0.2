@@ -52,13 +52,20 @@
           AND A.EMP_ID = #{empId}
     </select>
     <update id="initPassword">
-        UPDATE EMPLOYEE
-        SET EMP_PW = #{empPw}
-        WHERE EMP_ID = #{empId}
+        {call declare
+        begin
+            UPDATE EMPLOYEE
+            SET EMP_PW = #{empPw}
+            WHERE EMP_ID = #{empId};
+
+            UPDATE AUTH
+            SET AUTH_CODE = 'ROLE_EMP'
+            WHERE EMP_ID = #{empId};
+        end}
     </update>
-    <update id="modifyRole">
-        UPDATE AUTH
-        SET AUTH_CODE = 'ROLE_EMP'
-        WHERE EMP_ID = #{empId}
-    </update>
+<!--    <update id="modifyRole">-->
+<!--        UPDATE AUTH-->
+<!--        SET AUTH_CODE = 'ROLE_EMP'-->
+<!--        WHERE EMP_ID = #{empId}-->
+<!--    </update>-->
 </mapper>
