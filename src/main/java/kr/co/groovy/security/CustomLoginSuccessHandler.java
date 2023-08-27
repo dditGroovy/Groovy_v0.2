@@ -20,7 +20,7 @@ public class CustomLoginSuccessHandler extends
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response, Authentication auth)
             throws ServletException, IOException {
-        log.warn("onAuthenticationSuccess");
+        log.warn("Authentication Successful");
         User customUser = (User) auth.getPrincipal();
         log.info("username : " + customUser.getUsername());
         List<String> roleNames = new ArrayList<String>();
