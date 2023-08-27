@@ -27,11 +27,11 @@
         <result property="empId" column="EMP_ID"/>
     </resultMap>
     <select id="signIn" parameterType="String" resultMap="employeeDetailMap">
-        SELECT A.EMP_SEQ,
+        SELECT
                A.EMP_ID,
                A.EMP_PW,
                A.EMP_NAME,
-               A.EMP_TELL,
+               A.EMP_TEL,
                A.EMP_MAIL,
                A.EMP_ZIP,
                A.EMP_ADDR,
@@ -44,6 +44,7 @@
                A.POS_CODE,
                A.DEP_CODE,
                A.ENABLED,
+               A.EMP_SIGN,
                B.AUTH_CODE,
                B.EMP_ID
         FROM EMPLOYEE A,
@@ -63,6 +64,9 @@
             WHERE EMP_ID = #{empId};
         end}
     </update>
+    <select id="countEmp" resultType="int">
+        SELECT COUNT(*) FROM EMPLOYEE
+    </select>
 <!--    <update id="modifyRole">-->
 <!--        UPDATE AUTH-->
 <!--        SET AUTH_CODE = 'ROLE_EMP'-->

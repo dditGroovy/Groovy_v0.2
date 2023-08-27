@@ -4,11 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
+@RequestMapping("/employee")
 @Controller
 public class EmployeeController {
     final
@@ -23,7 +22,7 @@ public class EmployeeController {
         return "signIn";
     }
     @GetMapping("/manageEmp")
-    public String manageEmpForm() {
+    public String manageEmp() {
         return "admin/manageEmp";
     }
 
@@ -37,6 +36,14 @@ public class EmployeeController {
                            @RequestParam("empPw") String pw) {
         service.initPassword(id, pw);
         return "main/home";
+    }
+    @ResponseBody
+    @GetMapping("/countEmp")
+    public String countEmp(){
+        log.info("countEmp");
+        int result = service.countEmp();
+        log.info(result + "");
+        return Integer.toString(service.countEmp());
     }
 
 }

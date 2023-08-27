@@ -3,6 +3,7 @@
 <head>
     <title>Title</title>
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+
 </head>
 <body>
 <h1>사원 관리</h1>
@@ -12,24 +13,28 @@
 <div id="addEmployeeModal" class="modal">
     <div class="modal-content">
         <form name="insertEmp">
+            <!-- seoju : csrf 토큰 추가-->
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" name="enabled" value="1"/>
+
             <label>비밀번호</label>
-            <input type="text" name="empPw" required><br />
+            <input type="text" name="empPw" required><br/>
 
             <label>이름</label>
-            <input type="text" name="empName" required><br />
+            <input type="text" name="empName" required><br/>
 
             <label>휴대폰 번호</label>
-            <input type="tel" name="empTel" required><br />
+            <input type="tel" name="empTel" required><br/>
 
             <label>우편번호</label>
-            <input type="text" name="empZip" required><br />
+            <input type="text" name="empZip" required><br/>
             <label>주소</label>
-            <input type="text" name="empAddr" required><br />
+            <input type="text" name="empAddr" required><br/>
             <label>상세주소</label>
-            <input type="text" name="empAddrDetail" required><br />
+            <input type="text" name="empAddrDetail" required><br/>
 
             <label>생년월일</label>
-            <input type="text" name="empBir" required><br />
+            <input type="text" name="empBir" required><br/>
 
             <label>최종학력</label>
             <input type="radio" name="empEdu" id="empEdu1" value="0" checked>
@@ -39,7 +44,7 @@
             <input type="radio" name="empEdu" id="empEdu3" value="2">
             <label for="empEdu3">석사</label>
             <input type="radio" name="empEdu" id="empEdu4" value="3">
-            <label for="empEdu3">박사</label><br />
+            <label for="empEdu3">박사</label><br/>
 
             <label>직급</label>
             <input type="radio" name="empPos" id="empPos1" value="08" checked>
@@ -57,7 +62,7 @@
             <input type="radio" name="empPos" id="empPos7" value="02">
             <label for="empPos7">이사</label>
             <input type="radio" name="empPos" id="empPos8" value="01">
-            <label for="empPos8">대표</label> <br />
+            <label for="empPos8">대표</label> <br/>
 
             <label>부서</label>
             <select name="empDep" id="emp-department">
@@ -67,17 +72,17 @@
                 <option value="ST">영업팀</option>
                 <option value="PRT">홍보팀</option>
                 <option value="MAG">관리직</option>
-            </select><br />
+            </select><br/>
 
             <label>입사일</label>
-            <input type="date" value="2018-04-09" name="joinDate" id="joinDate" required><br />
-
+            <input type="date" value="2018-04-09" name="joinDate" id="joinDate" required><br/>
             <label>사원번호</label>
             <input type="text" name="empId" id="empId" required readonly>
-            <button id="generateId" type="button">사원 번호 생성</button><br />
+            <button id="generateId" type="button">사원 번호 생성</button>
+            <br/>
 
             <label>이메일</label>
-            <input type="email" name="empMail" id="empMail" required><br />
+            <input type="email" name="empMail" id="empMail" required><br/>
 
             <label>재직 상태 설정</label>
             <input type="radio" name="empStatus" id="office" value="0" checked>
@@ -86,13 +91,13 @@
             <label for="leave">휴직</label>
             <input type="radio" name="empStatus" id="quit" value="2">
             <label for="quit">퇴사</label>
-            <br /><br />
+            <br/><br/>
             <button type="button" id="insert">등록</button>
             <button type="reset">지우기</button>
         </form>
     </div>
 </div>
-<hr />
+<hr/>
 <h2>사원 조회 필터, 검색 및 정렬 -> 프론트로 처리할건지?</h2>
 <form action="backend-url-for-filter-sort" method="GET">
     <label>부서 필터</label>
@@ -116,9 +121,10 @@
         <option value="sortPos">직급순</option>
     </select>
     <button type="submit">정렬</button>
-</form><br /><br />
+</form>
+<br/><br/>
 <!-- 사원 목록 -->
-<hr />
+<hr/>
 <h2>사원 조회 및 엑셀로 내보내기</h2>
 <form action="#" method="GET">
     <button type="exportExc">엑셀로 내보내기</button>
@@ -193,73 +199,93 @@
     const empDep = document.querySelector("select[name=empDep]");
     const empJoinDate = document.querySelector("input[name=joinDate]");
     const empList = document.querySelector("#emp-list");
+    const enabled = document.querySelector("input[name=enabled]");
+    var idx;
 
-
-    document.getElementById("selectAll").addEventListener("change", function() {
+    // 사원 리스트 - 전체 선택
+    document.getElementById("selectAll").addEventListener("change", function () {
         const checked = document.querySelectorAll(".selectEmp");
         checked.forEach(checkbox => {
             checkbox.checked = this.checked;
         });
     });
 
-    empJoinDate.addEventListener("change",function(){
+    // 입사일 선택 - value 값 변경
+    empJoinDate.addEventListener("change", function () {
         joinDateVal = this.value;
         console.log(joinDateVal);
     });
 
-    document.querySelector("#generateId").addEventListener("click",function(){
+    // 사번 생성 버튼 클릭 이벤트
+    document.querySelector("#generateId").addEventListener("click", function () {
         const dateSplit = joinDateVal.split("-");
         const depCode = empDep.value;
 
-        //ajax 처리 하고 idx에 담아주세여
-        let idx = "001";
-        empId.value = `${dateSplit[0]}${dateSplit[1]}${idx}`;
+        // 사원 수 + 1 인덱스 처리
+        $.ajax({
+            url: "/employee/countEmp",
+            type: 'GET',
+            dataType: 'text',
+            success: function (data) {
+                console.log("countEmp: ", data);
+                let count = parseInt(data) + 1;
+                idx = count.toString().padStart(4, '0');
 
-        if(empId.value != ""){
+            },
+            error: function (xhr) {
+                console.log(xhr.status)
+            }
+        })
+        empId.value = dateSplit[0] + dateSplit[1] + idx;
+
+        // 사번에 따른 사원 이메일 생성
+        if (empId.value != "") {
             empMail.value = empId.value + "@groovy.com";
         }
     })
 
 
     // 등록
-    document.querySelector("#insert").addEventListener("click",function(){
+    document.querySelector("#insert").addEventListener("click", function () {
 
         /* 학력 */
         for (const edu of empEdu) {
-            if(edu.checked){
+            if (edu.checked) {
                 empEduIs = edu.value;
                 break;
             }
         }
         /* 상태 */
         for (const status of empStatus) {
-            if(status.checked){
+            if (status.checked) {
                 empStatusIs = status.value;
                 break;
             }
         }
         /* 직급 */
         for (const pos of empPos) {
-            if(pos.checked){
+            if (pos.checked) {
                 empPosIs = pos.value;
                 break;
             }
         }
         /* 사원 VO */
         const empVO = {
-            empId : empId.value,
-            empName : empName.value,
-            empTel : empTel.value,
-            empZip : empZip.value,
-            empAddr : empAddr.value,
-            empAddrDetail : empAddrDetail.value,
-            empBir : empBir.value,
-            empEdu : empEduIs,
-            empPos : empPosIs,
-            empDep : empDep.value,
-            empJoinDate : empJoinDate.value,
-            empMail : empMail.value,
-            empStatus : empStatusIs
+            empId: empId.value,
+            empPw: empPw.value,
+            empName: empName.value,
+            empTel: empTel.value,
+            empZip: empZip.value,
+            empAddr: empAddr.value,
+            empAddrDetail: empAddrDetail.value,
+            empBir: empBir.value,
+            empEdu: empEduIs,
+            empPos: empPosIs,
+            empDep: empDep.value,
+            empJoinDate: empJoinDate.value,
+            empMail: empMail.value,
+            empStatus: empStatusIs,
+            enabled: enabled.value
         }
 
         /* 사원 데이터 중 하나라도 null 이면 전송 x alert */
@@ -268,37 +294,37 @@
             if (!empVO[vo] || empVO[vo].trim() === '') {
                 hasNull = true;
                 break;
-            }else {
+            } else {
                 hasNull = false;
                 break;
             }
         }
-        if(!hasNull){
+        if (!hasNull) {
             /* ajax */
             console.log(empVO);
-        }else {
+        } else {
             alert("모든 항목을 입력해주세요.");
         }
     })
 
 
     /*사원 목록 불러오기 */
-    function getEmpList(){
+    function getEmpList() {
 
         $.ajax({
-            type : "get",
+            type: "get",
             /* url 입력 */
-            url : "#",
-            dataType : "json",
-            success : function(rslt){
-                console.log("결과 확인 : "+ rslt);
-                rslt.sort((a,b) => {
+            url: "#",
+            dataType: "json",
+            success: function (rslt) {
+                console.log("결과 확인 : " + rslt);
+                rslt.sort((a, b) => {
                     return a.empSeq - b.empSeq;
                 })
 
                 let code = "<table border=1>";
                 code += `<thead><tr><th><input type="checkbox" id="selectAll"></th><th>사번</th><th>이름</th><th>팀</th><th>직급</th><th>입사일</th><th>생년월일</th><th>전자서명</th><th>재직상태</th></tr></thead><tbody>`;
-                for (let i = 0; i < rslt.length; i++){
+                for (let i = 0; i < rslt.length; i++) {
                     code += "<tr>"
                     code += `<td>${rslt[i].empId}</td>`;
                     code += `<td>${rslt[i].empName}</td>`;
@@ -307,7 +333,7 @@
                     code += `<td>${rslt[i].empJoinDate}</td>`;
                     code += `<td>${rslt[i].empBir}</td>`;
                     /* 개인서명 등록 유무 */
-                    rslt[i].empAssign == null? code += `<td>미등록</td>`: code += `<td>등록완료</td>`;
+                    rslt[i].empAssign == null ? code += `<td>미등록</td>` : code += `<td>등록완료</td>`;
                     code += `<td>${rslt[i].empStatus}</td>`;
                     code += "</tr>"
                 }
@@ -322,6 +348,7 @@
             }
         });
     }
+
     getEmpList();
 </script>
 </body>

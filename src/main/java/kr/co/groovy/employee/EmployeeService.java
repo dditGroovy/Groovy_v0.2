@@ -21,7 +21,7 @@ public class EmployeeService {
         mapper.initPassword(id, pw);
     }
 
-
-    ;
-
+    public int countEmp() {
+        return mapper.countEmp();
+    }
 }
