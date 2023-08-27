@@ -74,7 +74,7 @@ public class Weather {
         rd.close();
         conn.disconnect();
         String result = sb.toString();
-//        log.info(result);
+        log.info(result);
 
         return result;
     }
@@ -84,11 +84,15 @@ public class Weather {
 
         for (String baseTimeStr : baseTimes) {
             LocalTime baseTime = LocalTime.parse(baseTimeStr, DateTimeFormatter.ofPattern("HHmm"));
-            long difference = Math.abs(currentTime.until(baseTime, java.time.temporal.ChronoUnit.MINUTES));
 
-            if (difference < minDifference) {
-                minDifference = difference;
-                closestTime = baseTime;
+            // 현재 시간보다 크지 않은 시간으로
+            if (!baseTime.isAfter(currentTime)) {
+                long difference = Math.abs(currentTime.until(baseTime, java.time.temporal.ChronoUnit.MINUTES));
+
+                if (difference < minDifference) {
+                    minDifference = difference;
+                    closestTime = baseTime;
+                }
             }
         }
 
