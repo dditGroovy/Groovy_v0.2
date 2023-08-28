@@ -14,11 +14,11 @@
         <result property="empAddr" column="EMP_ADDR"/>
         <result property="empZip" column="EMP_ZIP"/>
         <result property="empMail" column="EMP_MAIL"/>
-        <result property="empTell" column="EMP_TELL"/>
+        <result property="empTel" column="EMP_TELL"/>
         <result property="empName" column="EMP_NAME"/>
         <result property="empPw" column="EMP_PW"/>
         <result property="empId" column="EMP_ID"/>
-        <result property="empSeq" column="EMP_SEQ"/>
+        <result property="empSign" column="EMP_Sign"/>
         <collection property="employeeAuthVOList" resultMap="employeeAuthMap"/>
     </resultMap>
 
@@ -29,21 +29,21 @@
     <select id="signIn" parameterType="String" resultMap="employeeDetailMap">
         SELECT A.EMP_ID,
                A.EMP_PW,
-               A.EMP_NAME,
-               A.EMP_TEL,
-               A.EMP_MAIL,
-               A.EMP_ZIP,
-               A.EMP_ADDR,
-               A.EMP_ADDR_DETAIL,
-               A.EMP_JOIN_DATE,
-               A.EMP_EDU,
-               A.EMP_BIR,
-               A.EMP_PROFILE,
-               A.EMP_STATUS,
-               A.POS_CODE,
-               A.DEP_CODE,
-               A.ENABLED,
-               A.EMP_SIGN,
+--                A.EMP_NAME,
+--                A.EMP_TEL,
+--                A.EMP_MAIL,
+--                A.EMP_ZIP,
+--                A.EMP_ADDR,
+--                A.EMP_ADDR_DETAIL,
+--                A.EMP_JOIN_DATE,
+--                A.EMP_EDU,
+--                A.EMP_BIR,
+--                A.EMP_PROFILE,
+--                A.EMP_STATUS,
+--                A.POS_CODE,
+--                A.DEP_CODE,
+--                A.ENABLED,
+--                A.EMP_SIGN,
                B.AUTH_CODE,
                B.EMP_ID
         FROM EMPLOYEE A,
@@ -104,4 +104,25 @@
                 #{enabled},
                 #{empSign})
     </insert>
+    <!--* 수정하기-->
+    <select id="loadEmpList" resultType="employeeVO">
+        SELECT EMP_ID,
+               EMP_PW,
+               EMP_NAME,
+               EMP_TEL,
+               EMP_MAIL,
+               EMP_ZIP,
+               EMP_ADDR,
+               EMP_ADDR_DETAIL,
+               EMP_JOIN_DATE,
+               EMP_EDU,
+               EMP_BIR,
+               EMP_PROFILE,
+               EMP_STATUS,
+               POS_CODE,
+               DEP_CODE,
+               ENABLED,
+               EMP_SIGN
+        FROM EMPLOYEE
+    </select>
 </mapper>

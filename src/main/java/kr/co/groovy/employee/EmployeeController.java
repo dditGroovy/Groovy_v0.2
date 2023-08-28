@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RequestMapping("/employee")
 @Controller
@@ -50,5 +52,12 @@ public class EmployeeController {
     public String inputEmp(EmployeeVO vo) {
         service.inputEmp(vo);
         return "redirect:/employee/manageEmp";
+    }
+
+    @ResponseBody
+    @GetMapping("/loadEmp")
+    public List<EmployeeVO> loadEmpList(){
+        log.info(service.loadEmpList().toString());
+        return service.loadEmpList();
     }
 }

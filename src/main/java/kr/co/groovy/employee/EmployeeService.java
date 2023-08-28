@@ -5,6 +5,9 @@ import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Slf4j
 @Service
 public class EmployeeService {
@@ -30,8 +33,12 @@ public class EmployeeService {
 
     public int inputEmp(EmployeeVO vo) {
         log.info("inputEmp" + vo);
+        // 암호화 추가 예정
 //        log.info(encoder.encode(vo.getEmpPw()));
 //        vo.setEmpPw(encoder.encode(vo.getEmpPw()));
         return mapper.inputEmp(vo);
+    }
+    public List<EmployeeVO> loadEmpList(){
+        return mapper.loadEmpList();
     }
 }

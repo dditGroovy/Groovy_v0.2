@@ -100,6 +100,8 @@
     </div>
 </div>
 <hr/>
+
+
 <h2>사원 조회 필터, 검색 및 정렬 -> 프론트로 처리할건지?</h2>
 <form action="backend-url-for-filter-sort" method="GET">
     <label>부서 필터</label>
@@ -111,11 +113,14 @@
         <option value="PRT">홍보팀</option>
         <option value="MAG">관리직</option>
     </select>
+
+
     <!-- 사원 검색 -->
     <form action="#" method="GET">
         <input type="text" name="keyword">
         <button type="submit">검색</button>
     </form>
+
     <label>정렬</label>
     <select name="sortBy">
         <option value="sortJoin">입사일</option>
@@ -124,7 +129,10 @@
     </select>
     <button type="submit">정렬</button>
 </form>
+
 <br/><br/>
+
+
 <!-- 사원 목록 -->
 <hr/>
 <h2>사원 조회 및 엑셀로 내보내기</h2>
@@ -132,52 +140,7 @@
     <button type="exportExc">엑셀로 내보내기</button>
 </form>
 <div id="emp-list">
-    <table border="1" style="width: 100%;">
-        <thead>
-        <tr>
-            <th>
-                <input type="checkbox" id="selectAll">
-            </th>
-            <th>사번</th>
-            <th>이름</th>
-            <th>팀</th>
-            <th>직급</th>
-            <th>입사일</th>
-            <th>생년월일</th>
-            <th>전자서명</th>
-            <th>재직상태</th>
-            <!-- 다른 테이블 헤더 추가 -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                <input type="checkbox" class="selectEmp">
-            </td>
-            <td>1</td>
-            <td>Buzz</td>
-            <td>인사팀</td>
-            <td>팀원</td>
-            <td>2023-07-04</td>
-            <td>1996-02-27</td>
-            <td>등록완료</td>
-            <td>재직</td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" class="selectEmp">
-            </td>
-            <td>2</td>
-            <td>Buzz</td>
-            <td>인사팀</td>
-            <td>팀원</td>
-            <td>2023-07-04</td>
-            <td>1996-02-27</td>
-            <td>등록완료</td>
-            <td>재직</td>
-        </tr>
-        </tbody>
-    </table>
+
 </div>
 
 
@@ -203,13 +166,6 @@
     const empList = document.querySelector("#emp-list");
     const enabled = document.querySelector("input[name=enabled]");
 
-    // 사원 리스트 - 전체 선택
-    document.getElementById("selectAll").addEventListener("change", function () {
-        const checked = document.querySelectorAll(".selectEmp");
-        checked.forEach(checkbox => {
-            checkbox.checked = this.checked;
-        });
-    });
 
     // 입사일 선택 - value 값 변경
     empJoinDate.addEventListener("change", function () {
@@ -308,46 +264,50 @@
 
     /*사원 목록 불러오기 */
     function getEmpList() {
-
         $.ajax({
             type: "get",
-            /* url 입력 */
-            url: "#",
+            url: "/employee/loadEmp",
             dataType: "json",
-            success: function (rslt) {
-                console.log("결과 확인 : " + rslt);
-                rslt.sort((a, b) => {
-                    return a.empSeq - b.empSeq;
-                })
-
+            success: function (res) {
+                console.log("loadEmp success");
                 let code = "<table border=1>";
                 code += `<thead><tr><th><input type="checkbox" id="selectAll"></th><th>사번</th><th>이름</th><th>팀</th><th>직급</th><th>입사일</th><th>생년월일</th><th>전자서명</th><th>재직상태</th></tr></thead><tbody>`;
-                for (let i = 0; i < rslt.length; i++) {
-                    code += "<tr>"
-                    code += `<td>${rslt[i].empId}</td>`;
-                    code += `<td>${rslt[i].empName}</td>`;
-                    code += `<td>${rslt[i].empDep}</td>`;
-                    code += `<td>${rslt[i].empPos}</td>`;
-                    code += `<td>${rslt[i].empJoinDate}</td>`;
-                    code += `<td>${rslt[i].empBir}</td>`;
+                for (let i = 0; i < res.length; i++) {
+                    code += "<tr>";
+                    code += `<td><input type="checkbox" class="selectEmp"></td>`;
+                    code += `<td>\${res[i].empId}</td>`;
+                    code += `<td>\${res[i].empName}</td>`;
+                    code += `<td>\${res[i].depCode}</td>`;
+                    code += `<td>\${res[i].posCode}</td>`;
+                    code += `<td>\${res[i].empJoinDate}</td>`;
+                    code += `<td>\${res[i].empBir}</td>`;
                     /* 개인서명 등록 유무 */
-                    rslt[i].empAssign == null ? code += `<td>미등록</td>` : code += `<td>등록완료</td>`;
-                    code += `<td>${rslt[i].empStatus}</td>`;
-                    code += "</tr>"
+                    code += `<td>\${res[i].empSign == null ? "미등록" : "등록완료"}</td>`;
+                    code += `<td>\${res[i].empStatus}</td>`;
+                    code += "</tr>";
                 }
-                code += "</table>";
+                code += "</tbody></table>";
 
-                empList.html(code);
+                empList.innerHTML = code;
             },
             error: function (xhr, status, error) {
-                console.log("code: " + xhr.status)
-                console.log("message: " + xhr.responseText)
+                console.log("code: " + xhr.status);
+                console.log("message: " + xhr.responseText);
                 console.log("error: " + error);
             }
         });
     }
 
     getEmpList();
+
+    // 사원 리스트 - 전체 선택
+    $(document).on("click", "#selectAll", function () {
+        const checked = document.querySelectorAll(".selectEmp");
+        checked.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
+
 </script>
 </body>
 </html>
