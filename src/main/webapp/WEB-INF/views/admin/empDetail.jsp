@@ -167,7 +167,7 @@
             empBir : empBir.value,
             empEdu : empEduIs,
             posCode : empPosIs,
-            empCode : empCode.value,
+            depCode : depCode.value,
             empJoinDate : empJoinDate.value,
             empMail : empMail.value,
             empStatus : empStatusIs
