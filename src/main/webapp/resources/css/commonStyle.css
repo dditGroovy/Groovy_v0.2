@@ -115,3 +115,10 @@
 .btn.active {background-color: var(--color-main); box-shadow: var(--clay-btn);}
 /* modal */
 .modal {background-color: var(--color-white); border-radius: var(--size-32); box-shadow: var(--shadow-modal); padding: var(--size-32);}
+
+/* tab */
+.tab {
+    font-size: var(--font-size-36);
+    color: var(--color-font-high);
+    font-weight: 600;
+}
