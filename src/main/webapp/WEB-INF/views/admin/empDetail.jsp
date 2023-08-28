@@ -11,13 +11,13 @@
 <div id="empDetail">
     <form action="#">
         <label>비밀번호</label>
-        <input type="text" name="empPw" required readonly><br />
+        <input type="password" name="empPw" required readonly><br />
 
         <label>이름</label>
         <input type="text" name="empName" required readonly><br />
 
         <label>휴대폰 번호</label>
-        <input type="tel" name="empTel" required readonly><br />
+        <input type="text" name="empTel" required readonly><br/>
 
         <label>우편번호</label>
         <input type="text" name="empZip" required readonly><br />
@@ -27,7 +27,7 @@
         <input type="text" name="empAddrDetail" required readonly><br />
 
         <label>생년월일</label>
-        <input type="text" name="empBir" required readonly><br />
+        <input type="date" value="2000-01-01" name="empBir" required readonly><br/>
 
         <label>최종학력</label>
         <input type="radio" name="empEdu" id="empEdu1" value="0" checked disabled>
@@ -40,25 +40,25 @@
         <label for="empEdu3">박사</label><br />
 
         <label>직급</label>
-        <input type="radio" name="empPos" id="empPos1" value="08" checked disabled>
+        <input type="radio" name="posCode" id="empPos1" value="08" checked disabled>
         <label for="empPos1">사원</label>
-        <input type="radio" name="empPos" id="empPos2" value="07" disabled>
+        <input type="radio" name="posCode" id="empPos2" value="07" disabled>
         <label for="empPos2">대리</label>
-        <input type="radio" name="empPos" id="empPos3" value="06" disabled>
+        <input type="radio" name="posCode" id="empPos3" value="06" disabled>
         <label for="empPos3">과장</label>
-        <input type="radio" name="empPos" id="empPos4" value="05" disabled>
+        <input type="radio" name="posCode" id="empPos4" value="05" disabled>
         <label for="empPos4">차장</label>
-        <input type="radio" name="empPos" id="empPos5" value="04" disabled>
+        <input type="radio" name="posCode" id="empPos5" value="04" disabled>
         <label for="empPos5">팀장</label>
-        <input type="radio" name="empPos" id="empPos6" value="03" disabled>
+        <input type="radio" name="posCode" id="empPos6" value="03" disabled>
         <label for="empPos6">부장</label>
-        <input type="radio" name="empPos" id="empPos7" value="02" disabled>
+        <input type="radio" name="posCode" id="empPos7" value="02" disabled>
         <label for="empPos7">이사</label>
-        <input type="radio" name="empPos" id="empPos8" value="01" disabled>
+        <input type="radio" name="posCode" id="empPos8" value="01" disabled>
         <label for="empPos8">대표</label> <br />
 
         <label>부서</label>
-        <select name="empDep" id="emp-department" disabled>
+        <select name="depCode" id="emp-department" disabled>
             <option value="HRT">인사팀</option>
             <option value="GAT">총무팀</option>
             <option value="AT">회계팀</option>
@@ -109,8 +109,8 @@
     const empEdu = document.querySelectorAll("input[name=empEdu]");
     const empBir = document.querySelector("input[name=empBir]");
     const empStatus = document.querySelectorAll("input[name=empStatus]");
-    const empPos = document.querySelectorAll("input[name=empPos]");
-    const empDep = document.querySelector("select[name=empDep]");
+    const posCode = document.querySelectorAll("input[name=posCode]");
+    const depCode = document.querySelector("select[name=depCode]");
     const empJoinDate = document.querySelector("input[name=joinDate]");
     const modifyBtn = document.querySelector("#btn-modify");
     const saveBtn = document.querySelector("#btn-save");
@@ -150,7 +150,7 @@
             }
         }
         /* 직급 */
-        for (const pos of empPos) {
+        for (const pos of posCode) {
             if(pos.checked){
                 empPosIs = pos.value;
                 break;
@@ -166,8 +166,8 @@
             empAddrDetail : empAddrDetail.value,
             empBir : empBir.value,
             empEdu : empEduIs,
-            empPos : empPosIs,
-            empDep : empDep.value,
+            posCode : empPosIs,
+            empCode : empCode.value,
             empJoinDate : empJoinDate.value,
             empMail : empMail.value,
             empStatus : empStatusIs
@@ -224,7 +224,7 @@
         }
     })
     listBtn.addEventListener("click",() => {
-        window.location.href = "manageEmp.html"
+        window.location.href = "manageEmp.jsp"
     })
 
 
