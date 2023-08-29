@@ -81,4 +81,19 @@ public class EmployeeController {
         return service.loadBirthday();
     }
 
+    @GetMapping("/myVacation")
+    public String myVacation() {
+        return "employee/myVacation";
+    }
+
+    @GetMapping("/vacationRecord")
+    public String vacationRecord() {
+        return "employee/vacationRecord";
+    }
+
+    @GetMapping("/mySalary")
+    public String mySalary() {
+        return "employee/mySalary";
+    }
+
 }

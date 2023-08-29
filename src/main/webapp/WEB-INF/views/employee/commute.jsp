@@ -30,11 +30,9 @@
             <th>목</th>
             <th>금</th>
         </tr>
-<%--        <c:forEach var="" begin="" end="">--%>
-            <tr>
-                <td></td>
-            </tr>
-<%--        </c:forEach>--%>
+        <tr>
+            <td></td>
+        </tr>
     </table>
 </div>
 
@@ -56,11 +54,9 @@
             <th>상태</th>
             <th>근무시간</th>
         </tr>
-<%--        <c:forEach var="" begin="" end="">--%>
-            <tr>
-                <td></td>
-            </tr>
-<%--        </c:forEach>--%>
+        <tr>
+            <td></td>
+        </tr>
     </table>
     <button type="button" value="확인"></button>
 </div>
