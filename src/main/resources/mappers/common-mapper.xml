@@ -33,4 +33,18 @@
             ORDER BY NOTI_DATE ${sortBy}
         </if>
     </select>
+    <select id="loadNoticeDetail" parameterType="int" resultType="noticeVO">
+            SELECT NOTI_SEQ,
+                   NOTI_TITLE,
+                   NOTI_CONTENT,
+                   NOTI_DATE,
+                   NOTI_RDCNT,
+                   NOTI_CTGRY_ICON_FILE_STRE_NM,
+                   COMMON_CODE_ESSNTL_REDNG
+            FROM NOTI
+            WHERE NOTI_SEQ = #{notiSeq}
+    </select>
+    <update id="modifyNoticeView" parameterType="int">
+        UPDATE NOTI SET NOTI_RDCNT=NOTI_RDCNT + 1 WHERE NOTI_SEQ = #{notiSeq}
+    </update>
 </mapper>

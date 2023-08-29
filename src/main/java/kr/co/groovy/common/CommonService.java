@@ -24,4 +24,14 @@ public class CommonService {
         return mapper.findNotice(paramMap);
 
     }
+
+    public NoticeVO loadNoticeDetail(int notiSeq) {
+        return mapper.loadNoticeDetail(notiSeq);
+    }
+
+
+    public void modifyNoticeView(int notiSeq) {
+        mapper.modifyNoticeView(notiSeq);
+    }
+
 }

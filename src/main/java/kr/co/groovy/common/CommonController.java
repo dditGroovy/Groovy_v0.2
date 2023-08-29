@@ -26,7 +26,6 @@ public class CommonController {
     @GetMapping("/loadNoticeList")
     public ModelAndView loadNoticeList(ModelAndView mav) {
         List<NoticeVO> list = service.loadNoticeList();
-        log.info(list.toString());
         mav.addObject("noticeList", list);
         mav.setViewName("common/companyNotice");
         return mav;
@@ -34,18 +33,21 @@ public class CommonController {
 
     @GetMapping("/findNotice")
     public ModelAndView findNotice(ModelAndView mav, @RequestParam(value = "keyword") String keyword, @RequestParam(value = "sortBy") String sortBy) {
-        log.info(sortBy);
-        log.info(keyword);
-
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("keyword", keyword);
         paramMap.put("sortBy", sortBy);
-
         List<NoticeVO> list = service.findNotice(paramMap);
-        log.info(list.toString());
-
         mav.addObject("noticeList", list);
         mav.setViewName("common/companyNotice");
+        return mav;
+    }
+
+    @GetMapping("/noticeDetail")
+    public ModelAndView loadNoticeDetail(ModelAndView mav, int notiSeq) {
+        service.modifyNoticeView(notiSeq);
+        NoticeVO vo = service.loadNoticeDetail(notiSeq);
+        mav.addObject("noticeDetail", vo);
+        mav.setViewName("common/companyNoticeDetail");
         return mav;
     }
 }
