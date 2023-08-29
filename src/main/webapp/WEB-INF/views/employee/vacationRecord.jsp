@@ -7,7 +7,7 @@
 </div>
 
 <div>
-    <h3>휴가 기록</h3>
+    <p>휴가 기록</p>
     <label><input type="checkbox"/>반려 기록만 보기</label>
     <select id="yearSelect">
         <option value="all">전체</option>

@@ -30,4 +30,16 @@
             <!--  지급 내역 목록 보여줄 곳  -->
         </div>
     </div>
+
+    <!-- 비밀번호 확인 pop -->
+    <div>
+        <div>
+            <p>비밀번호 확인</p>
+            <i></i>
+        </div>
+        <form>
+            <input type="password" placeholder="PASSWORD">
+            <input type="submit" value="확인">
+        </form>
+    </div>
 </div>

@@ -24,7 +24,7 @@
     <div>
         <div>
             <div>
-                <div><h3>휴가 기록</h3></div>
+                <div><p>휴가 기록</p></div>
                 <div><a href="/employee/vacationRecord">더보기</a></div>
             </div>
             <div>
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div>
-            <h3>구성원의 휴가(연락금지)</h3>
+            <p>구성원의 휴가(연락금지)</p>
             <table>
                 <tr>
                     <td>이혜진 | 연차 20XX년 XX월 XX일</td>
@@ -57,13 +57,16 @@
 
 <!-- 휴가기록 pop -->
 <div class="modal">
+    <div>
+        <p>연차</p>
+        <i></i>
+    </div>
     <form>
-        <h3>연차</h3>
-        <h3>휴가 일정</h3>
+        <p>휴가 일정</p>
         <input type="date" required><img/><input type="date" required>
-        <h3>휴가 내용</h3>
+        <p>휴가 내용</p>
         <textarea required></textarea><br/>
-        <h3>상세내용</h3>
+        <p>상세내용</p>
         <p>연속 휴가일 경우 마지막 연차 종류를 선택해주세요.</p>
         <label><input type="radio" name="option" value="오전 반차"/>오전 반차</label><br/>
         <label><input type="radio" name="option" value="오후 반차"/>오후 반차</label><br/>
@@ -76,15 +79,18 @@
 <!-- 구성원의휴가 pop -->
 <div class="modal">
     <div>
+        <p>연차</p>
+        <i></i>
+    </div>
+    <div>
         <img/>
         <p>이혜진</p>
     </div>
-    <h3>연차</h3>
-    <h3>휴가 일정</h3>
+    <p>휴가 일정</p>
     <input type="date" readonly><img/><input type="date" readonly>
-    <h3>휴가 내용</h3>
+    <p>휴가 내용</p>
     <textarea readonly></textarea><br/>
-    <h3>상세내용</h3>
+    <p>상세내용</p>
     <p>연속 휴가일 경우 마지막 연차 종류를 선택해주세요.</p>
     <label><input type="radio" name="option" value="오전 반차"/>오전 반차</label><br/>
     <label><input type="radio" name="option" value="오후 반차"/>오후 반차</label><br/>

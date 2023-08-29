@@ -47,7 +47,10 @@
 </div>
 
 <div class="modal">
-    <p>근태 현황</p>
+    <div>
+        <p>근태 현황</p>
+        <i></i>
+    </div>
     <table>
         <tr>
             <th>날짜</th>
