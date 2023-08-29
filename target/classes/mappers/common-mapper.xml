@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.groovy.common.CommonMapper">
+    <select id="loadNoticeList" parameterType="String" resultType="noticeVO">
+        SELECT NOTI_SEQ,
+               NOTI_TITLE,
+               NOTI_CONTENT,
+               NOTI_DATE,
+               NOTI_RDCNT,
+               NOTI_CTGRY_ICON_FILE_STRE_NM,
+               COMMON_CODE_ESSNTL_REDNG
+        FROM NOTI
+
+    </select>
+    <select id="findNotice" parameterType="map" resultType="noticeVO">
+        SELECT
+        NOTI_SEQ,
+        NOTI_TITLE,
+        NOTI_CONTENT,
+        NOTI_DATE,
+        NOTI_RDCNT,
+        NOTI_CTGRY_ICON_FILE_STRE_NM,
+        COMMON_CODE_ESSNTL_REDNG
+        FROM NOTI
+        WHERE 1 = 1
+        <if test="keyword!=null and keyword!=''">
+            AND (
+            NOTI_TITLE LIKE '%' || #{keyword} || '%' OR
+            NOTI_CONTENT LIKE '%' || #{keyword} || '%'
+            )
+        </if>
+        <if test="sortBy!=null and sortBy!=''">
+            ORDER BY NOTI_DATE ${sortBy}
+        </if>
+    </select>
+    <select id="loadNoticeDetail" parameterType="int" resultType="noticeVO">
+            SELECT NOTI_SEQ,
+                   NOTI_TITLE,
+                   NOTI_CONTENT,
+                   NOTI_DATE,
+                   NOTI_RDCNT,
+                   NOTI_CTGRY_ICON_FILE_STRE_NM,
+                   COMMON_CODE_ESSNTL_REDNG
+            FROM NOTI
+            WHERE NOTI_SEQ = #{notiSeq}
+    </select>
+    <update id="modifyNoticeView" parameterType="int">
+        UPDATE NOTI SET NOTI_RDCNT=NOTI_RDCNT + 1 WHERE NOTI_SEQ = #{notiSeq}
+    </update>
+</mapper>
