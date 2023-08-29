@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>login</title>
-    <link rel="stylesheet" href="/src/main/webapp/resources/css/common.css">
-    <link rel="stylesheet" href="/src/main/webapp/resources/css/commonStyle.css">
+    <link rel="stylesheet" href="/resources/css/common.css">
+    <link rel="stylesheet" href="/resources/css/commonStyle.css">
 </head>
 <body>
 <div class="container">

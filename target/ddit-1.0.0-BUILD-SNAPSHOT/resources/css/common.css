@@ -127,10 +127,9 @@ i.icon {
 }
 
 .logo-img {
-    width: calc((213 / var(--vw)) * 100vw);;
-    height: var(--vh-64);
+    width: calc((426 / var(--vw)) * 100vw);
+    height: calc((180 / var(--vh)) * 100vh);
     background: url("../images/logo.png") center / cover;
-    border: 1px solid black;
 }
 
 .login-div {
@@ -150,9 +149,14 @@ input[type="text"], input[type="submit"], input[type="password"] {
     width: calc((516 / var(--vw)) * 100vw);
     height: var(--vh-64);
     border-radius: var(--vw-32);
+}
+input[type="text"],  input[type="password"]{
     padding: var(--vw-24) var(--vh-24);
 }
-
+input[type="text"]::placeholder,  input[type="password"]::placeholder {
+    font-size: var(--font-size-14);
+    font-weight: 500;
+}
 .userId {
     margin-bottom: 24px;
 }
@@ -161,5 +165,20 @@ input[type="text"], input[type="submit"], input[type="password"] {
     text-align: right;
     font-size: 14px;
     width: 100%;
-    padding: 20px 0px 65px 20px;
+}
+.find-id-pw > a:hover {
+    color: vaR(--color-main);
+}
+.service-wrap {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 18px 0 64px;
+
+}
+.checkboxWrap {
+    display: flex;
+    width: 100%;
 }
