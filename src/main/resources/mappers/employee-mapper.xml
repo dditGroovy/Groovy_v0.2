@@ -125,4 +125,15 @@
                EMP_SIGN
         FROM EMPLOYEE
     </select>
+
+    <select id="findEmp" resultType="employeeVO">
+        SELECT *
+        FROM EMPLOYEE
+        WHERE 1 = 1
+          AND (
+                    DEP_CODE = #{depCode} AND
+                    EMP_NAME LIKE '%' || #{empName} || '%'
+            )
+        ORDER BY #{sortBy} DESC
+    </select>
 </mapper>

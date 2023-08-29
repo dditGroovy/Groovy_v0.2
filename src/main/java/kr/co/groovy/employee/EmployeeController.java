@@ -2,6 +2,7 @@ package kr.co.groovy.employee;
 
 import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,8 +57,14 @@ public class EmployeeController {
 
     @ResponseBody
     @GetMapping("/loadEmp")
-    public List<EmployeeVO> loadEmpList(){
+    public List<EmployeeVO> loadEmpList() {
         log.info(service.loadEmpList().toString());
         return service.loadEmpList();
+    }
+
+    @ResponseBody
+    @GetMapping("/findEmp")
+    public List<EmployeeVO> findEmp(@Param("empName")String empName, @Param("depCode") String depCode, @Param("sortBy")String sortBy) {
+        return service.findEmp(empName, depCode, sortBy);
     }
 }
