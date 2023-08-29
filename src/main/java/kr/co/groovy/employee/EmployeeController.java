@@ -3,6 +3,8 @@ package kr.co.groovy.employee;
 import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +17,12 @@ import java.util.List;
 public class EmployeeController {
     final
     EmployeeService service;
+    final
+    BCryptPasswordEncoder encoder;
 
-    public EmployeeController(EmployeeService service) {
+    public EmployeeController(EmployeeService service, BCryptPasswordEncoder encoder) {
         this.service = service;
+        this.encoder = encoder;
     }
 
     @GetMapping("/signIn")
@@ -52,6 +57,8 @@ public class EmployeeController {
 
     @PostMapping("/inputEmp")
     public String inputEmp(EmployeeVO vo) {
+        // 패스워드 암호화
+        vo.setEmplPassword(encoder.encode(vo.getEmplPassword()));
         service.inputEmp(vo);
         return "redirect:/employee/manageEmp";
     }

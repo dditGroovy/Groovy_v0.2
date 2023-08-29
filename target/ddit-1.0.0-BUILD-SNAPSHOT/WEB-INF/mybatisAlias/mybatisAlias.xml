@@ -8,5 +8,6 @@
     <typeAliases>
         <typeAlias type="kr.co.groovy.vo.EmployeeVO" alias="employeeVO" />
         <typeAlias type="kr.co.groovy.vo.EmployeeAuthVO" alias="employeeAuthVO" />
+        <typeAlias type="kr.co.groovy.vo.DietVO" alias="dietVO" />
     </typeAliases>
 </configuration>

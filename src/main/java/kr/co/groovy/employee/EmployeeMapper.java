@@ -21,6 +21,8 @@ public interface EmployeeMapper {
     List<EmployeeVO> loadEmpList();
     List<EmployeeVO> findEmp(@Param("depCode") String depCode, @Param("emplNm")String emplNm, @Param("sortBy")String sortBy);
 
+    EmployeeVO selectById(String id);
+
 
 }
 

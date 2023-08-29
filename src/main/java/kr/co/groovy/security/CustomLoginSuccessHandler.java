@@ -8,6 +8,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class CustomLoginSuccessHandler extends
         });
 
         log.info("role : " + roleNames);
-
+//        session.setAttribute("authInfo", authInfo);
         //신입사원(ROLE_NEW)
         if (roleNames.contains("ROLE_NEW")) {
             response.sendRedirect("/employee/initPassword");

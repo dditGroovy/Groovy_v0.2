@@ -34,10 +34,7 @@ public class EmployeeService {
     }
 
     public int inputEmp(EmployeeVO vo) {
-        log.info("inputEmp" + vo);
-        // 암호화 추가 예정
-//        log.info(encoder.encode(vo.getEmpPw()));
-//        vo.setEmpPw(encoder.encode(vo.getEmpPw()));
+        log.info("사원 등록 정보" + vo);
         return mapper.inputEmp(vo);
     }
 
