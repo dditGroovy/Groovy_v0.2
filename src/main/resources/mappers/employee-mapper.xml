@@ -2,137 +2,130 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.groovy.employee.EmployeeMapper">
     <resultMap type="employeeVO" id="employeeDetailMap">
+        <result property="emplId" column="EMPL_ID"/>
+        <result property="emplPassword" column="EMPL_PASSWORD"/>
+        <result property="emplNm" column="EMPL_NM"/>
+        <result property="emplTelno" column="EMPL_TELNO"/>
+        <result property="emplEmail" column="EMPL_EMAIL"/>
+        <result property="emplZip" column="EMPL_ZIP"/>
+        <result property="emplAdres" column="EMPL_ADRES"/>
+        <result property="emplDetailAdres" column="EMPL_DETAIL_ADRES"/>
+        <result property="emplEncpn" column="EMPL_ENCPN"/>
+        <result property="emplBrthdy" column="EMPL_BRTHDY"/>
         <result property="enabled" column="ENABLED"/>
-        <result property="depCode" column="DEP_CODE"/>
-        <result property="posCode" column="POS_CODE"/>
-        <result property="empStatus" column="EMP_STATUS"/>
-        <result property="empProfile" column="EMP_PROFILE"/>
-        <result property="empBir" column="EMP_BIR"/>
-        <result property="empEdu" column="EMP_EDU"/>
-        <result property="empJoinDate" column="EMP_JOIN_DATE"/>
-        <result property="empAddrDetail" column="EMP_ADDR_DETAIL"/>
-        <result property="empAddr" column="EMP_ADDR"/>
-        <result property="empZip" column="EMP_ZIP"/>
-        <result property="empMail" column="EMP_MAIL"/>
-        <result property="empTel" column="EMP_TELL"/>
-        <result property="empName" column="EMP_NAME"/>
-        <result property="empPw" column="EMP_PW"/>
-        <result property="empId" column="EMP_ID"/>
-        <result property="empSign" column="EMP_Sign"/>
+        <result property="commonCodeDept" column="COMMON_CODE_DEPT"/>
+        <result property="commonCodeClsf" column="COMMON_CODE_CLSF"/>
+        <result property="commonCodeHffcSttus" column="COMMON_CODE_HFFC_STTUS"/>
+        <result property="commonCodeLastAcdmcr" column="COMMON_CODE_LAST_ACDMCR"/>
         <collection property="employeeAuthVOList" resultMap="employeeAuthMap"/>
     </resultMap>
 
     <resultMap type="employeeAuthVO" id="employeeAuthMap">
         <result property="authCode" column="AUTH_CODE"/>
-        <result property="empId" column="EMP_ID"/>
+        <result property="authEmpId" column="AUTH_EMP_ID"/>
     </resultMap>
     <select id="signIn" parameterType="String" resultMap="employeeDetailMap">
-        SELECT A.EMP_ID,
-               A.EMP_PW,
---                A.EMP_NAME,
---                A.EMP_TEL,
---                A.EMP_MAIL,
---                A.EMP_ZIP,
---                A.EMP_ADDR,
---                A.EMP_ADDR_DETAIL,
---                A.EMP_JOIN_DATE,
---                A.EMP_EDU,
---                A.EMP_BIR,
---                A.EMP_PROFILE,
---                A.EMP_STATUS,
---                A.POS_CODE,
---                A.DEP_CODE,
---                A.ENABLED,
---                A.EMP_SIGN,
+        SELECT A.EMPL_ID,
+               A.EMPL_PASSWORD,
+               A.EMPL_NM,
+               A.EMPL_TELNO,
+               A.EMPL_EMAIL,
+               A.EMPL_ZIP,
+               A.EMPL_ADRES,
+               A.EMPL_DETAIL_ADRES,
+               A.EMPL_ENCPN,
+               A.EMPL_BRTHDY,
+               A.ENABLED,
+               A.COMMON_CODE_DEPT,
+               A.COMMON_CODE_CLSF,
+               A.COMMON_CODE_HFFC_STTUS,
+               A.COMMON_CODE_LAST_ACDMCR,
                B.AUTH_CODE,
-               B.EMP_ID
-        FROM EMPLOYEE A,
+               B.AUTH_EMP_ID
+        FROM EMPL A,
              AUTH B
-        WHERE A.EMP_ID = B.EMP_ID
-          AND A.EMP_ID = #{empId}
+        WHERE A.EMPL_ID = B.AUTH_EMP_ID
+          AND A.EMPL_ID = #{emplId}
     </select>
     <update id="initPassword">
         {call declare
         begin
-            UPDATE EMPLOYEE
-            SET EMP_PW = #{empPw}
-            WHERE EMP_ID = #{empId};
+            UPDATE EMPL
+            SET EMPL_PASSWORD = #{emplPassword}
+            WHERE EMPL_ID = #{emplId};
 
             UPDATE AUTH
             SET AUTH_CODE = 'ROLE_EMP'
-            WHERE EMP_ID = #{empId};
+            WHERE AUTH_EMP_ID = #{emplId};
         end}
     </update>
     <select id="countEmp" resultType="int">
         SELECT COUNT(*)
-        FROM EMPLOYEE
+        FROM EMPL
     </select>
     <insert id="inputEmp">
-        INSERT INTO EMPLOYEE
-        (EMP_ID,
-         EMP_PW,
-         EMP_NAME,
-         EMP_TEL,
-         EMP_MAIL,
-         EMP_ZIP,
-         EMP_ADDR,
-         EMP_ADDR_DETAIL,
-         EMP_JOIN_DATE,
-         EMP_EDU,
-         EMP_BIR,
-         EMP_PROFILE,
-         EMP_STATUS,
-         POS_CODE,
-         DEP_CODE,
+        {call declare
+        begin INSERT INTO EMPL
+        (EMPL_ID,
+         EMPL_PASSWORD,
+         EMPL_NM,
+         EMPL_TELNO,
+         EMPL_EMAIL,
+         EMPL_ZIP,
+         EMPL_ADRES,
+         EMPL_DETAIL_ADRES,
+         EMPL_ENCPN,
+         EMPL_BRTHDY,
          ENABLED,
-         EMP_SIGN)
-        VALUES (#{empId},
-                #{empPw},
-                #{empName},
-                #{empTel},
-                #{empMail},
-                #{empZip},
-                #{empAddr},
-                #{empAddrDetail},
-                #{empJoinDate},
-                #{empEdu},
-                #{empBir},
-                #{empProfile},
-                #{empStatus},
-                #{posCode},
-                #{depCode},
+         COMMON_CODE_DEPT,
+         COMMON_CODE_CLSF,
+         COMMON_CODE_HFFC_STTUS,
+         COMMON_CODE_LAST_ACDMCR)
+        VALUES (#{emplId},
+                #{emplPassword},
+                #{emplNm},
+                #{emplTelno},
+                #{emplEmail},
+                #{emplZip},
+                #{emplAdres},
+                #{emplDetailAdres},
+                #{emplEncpn},
+                #{emplBrthdy},
                 #{enabled},
-                #{empSign})
+                #{commonCodeDept},
+                #{commonCodeClsf},
+                #{commonCodeHffcSttus},
+                #{commonCodeLastAcdmcr});
+
+            INSERT INTO AUTH(AUTH_CODE, AUTH_EMP_ID) VALUES ('ROLE_NEW', #{emplId});
+        end}
     </insert>
-    <!--* 수정하기-->
     <select id="loadEmpList" resultType="employeeVO">
-        SELECT EMP_ID,
-               EMP_PW,
-               EMP_NAME,
-               EMP_TEL,
-               EMP_MAIL,
-               EMP_ZIP,
-               EMP_ADDR,
-               EMP_ADDR_DETAIL,
-               EMP_JOIN_DATE,
-               EMP_EDU,
-               EMP_BIR,
-               EMP_PROFILE,
-               EMP_STATUS,
-               POS_CODE,
-               DEP_CODE,
+        SELECT EMPL_ID,
+               EMPL_PASSWORD,
+               EMPL_NM,
+               EMPL_TELNO,
+               EMPL_EMAIL,
+               EMPL_ZIP,
+               EMPL_ADRES,
+               EMPL_DETAIL_ADRES,
+               EMPL_ENCPN,
+               EMPL_BRTHDY,
                ENABLED,
-               EMP_SIGN
-        FROM EMPLOYEE
+               COMMON_CODE_DEPT,
+               COMMON_CODE_CLSF,
+               COMMON_CODE_HFFC_STTUS,
+               COMMON_CODE_LAST_ACDMCR
+        FROM EMPL
     </select>
 
     <select id="findEmp" resultType="employeeVO">
         SELECT *
-        FROM EMPLOYEE
+        FROM EMPL
         WHERE 1 = 1
           AND (
-                    DEP_CODE = #{depCode} AND
-                    EMP_NAME LIKE '%' || #{empName} || '%'
+                    COMMON_CODE_DEPT = #{depCode} AND
+                    EMPL.EMPL_NM LIKE '%' || #{emplNm} || '%'
             )
         ORDER BY #{sortBy} DESC
     </select>

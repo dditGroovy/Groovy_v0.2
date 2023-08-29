@@ -16,7 +16,7 @@ public class CustomUser extends User{
 	}
 	
 	public CustomUser(EmployeeVO employeeVO) {
-		super(employeeVO.getEmpId()+"", employeeVO.getEmpPw(),
+		super(employeeVO.getEmplId()+"", employeeVO.getEmplPassword(),
 				employeeVO.getEmployeeAuthVOList().stream()
 			.map(auth->new SimpleGrantedAuthority(auth.getAuthCode()))
 			.collect(Collectors.toList())

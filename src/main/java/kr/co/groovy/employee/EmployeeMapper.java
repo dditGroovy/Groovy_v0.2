@@ -9,16 +9,17 @@ import java.util.List;
 
 @Mapper
 public interface EmployeeMapper {
-    EmployeeVO signIn(String empId);
+    EmployeeVO signIn(String emplId);
 
-    void initPassword(@Param("empId") String id, @Param("empPw") String pw);
+    void initPassword(@RequestParam("emplId") String id,
+                      @RequestParam("emplPassword") String pw);
 
     int countEmp();
 
     int inputEmp(EmployeeVO vo);
 
     List<EmployeeVO> loadEmpList();
-    List<EmployeeVO> findEmp(@Param("empName")String empName, @Param("depCode") String depCode, @Param("sortBy")String sortBy);
+    List<EmployeeVO> findEmp(@Param("depCode") String depCode, @Param("emplNm")String emplNm, @Param("sortBy")String sortBy);
 
 
 }

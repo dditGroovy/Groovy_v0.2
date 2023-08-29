@@ -57,8 +57,8 @@
         <form action="${pageContext.request.contextPath}/signIn" method="post">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-            <input type="text" class="userId" name="empId" placeholder="ID"/>
-            <input type="password" class="userPw" name="empPw" placeholder="PASSWORD"/>
+            <input type="text" class="userId" name="emplId" placeholder="ID"/>
+            <input type="password" class="userPw" name="emplPassword" placeholder="PASSWORD"/>
                         <div class="find-id-pw"><a href="#">비밀번호 찾기</a></div>
             <input type="submit" value="로그인">
         </form>

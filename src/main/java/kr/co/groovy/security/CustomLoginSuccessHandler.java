@@ -32,7 +32,7 @@ public class CustomLoginSuccessHandler extends
 
         //신입사원(ROLE_NEW)
         if (roleNames.contains("ROLE_NEW")) {
-            response.sendRedirect("/initPassword");
+            response.sendRedirect("/employee/initPassword");
         } else {
             response.sendRedirect("/");
         }

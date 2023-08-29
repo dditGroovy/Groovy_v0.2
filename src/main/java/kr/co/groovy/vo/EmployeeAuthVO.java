@@ -11,5 +11,5 @@ import java.util.Date;
 @ToString
 public class EmployeeAuthVO {
     private String authCode;
-    private String empId;
+    private String authEmpId;
 }

@@ -20,11 +20,12 @@ public class EmployeeService {
         this.mapper = mapper;
     }
 
-    public EmployeeVO signIn(String empId) {
-        return mapper.signIn(empId);
+    public EmployeeVO signIn(String emplId) {
+        return mapper.signIn(emplId);
     }
 
-    public void initPassword(@Param("empId") String id, @Param("empPw") String pw) {
+    public void initPassword(@RequestParam("emplId") String id,
+                             @RequestParam("emplPassword") String pw) {
         mapper.initPassword(id, pw);
     }
 
@@ -44,8 +45,8 @@ public class EmployeeService {
         return mapper.loadEmpList();
     }
 
-    public List<EmployeeVO> findEmp(@Param("empName")String empName, @Param("depCode") String depCode, @Param("sortBy")String sortBy) {
-        return mapper.findEmp(empName, depCode, sortBy);
+    public List<EmployeeVO> findEmp(@Param("depCode") String depCode, @Param("emplNm") String emplNm, @Param("sortBy") String sortBy) {
+        return mapper.findEmp(depCode, emplNm, sortBy);
     }
 
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Slf4j
@@ -35,8 +36,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/initPassword")
-    public String initPassword(@RequestParam("empId") String id,
-                               @RequestParam("empPw") String pw) {
+    public String initPassword(@RequestParam("emplId") String id,
+                               @RequestParam("emplPassword") String pw) {
         service.initPassword(id, pw);
         return "main/home";
     }
@@ -64,7 +65,7 @@ public class EmployeeController {
 
     @ResponseBody
     @GetMapping("/findEmp")
-    public List<EmployeeVO> findEmp(@Param("empName")String empName, @Param("depCode") String depCode, @Param("sortBy")String sortBy) {
-        return service.findEmp(empName, depCode, sortBy);
+    public List<EmployeeVO> findEmp( @Param("depCode") String depCode, @Param("emplNm")String emplNm, @Param("sortBy")String sortBy) {
+        return service.findEmp(depCode, emplNm, sortBy);
     }
 }

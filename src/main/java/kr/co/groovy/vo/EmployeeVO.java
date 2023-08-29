@@ -4,28 +4,27 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @ToString
 public class EmployeeVO {
-    private String empId;
-    private String empPw;
-    private String empName;
-    private String empTel;
-    private String empMail;
-    private String empZip;
-    private String empAddr;
-    private String empAddrDetail;
-    private String empJoinDate;
-    private String empEdu;
-    private String empBir;
-    private String empProfile;
-    private String empStatus;
-    private String posCode;
-    private String depCode;
+    private String emplId;
+    private String emplPassword;
+    private String emplNm;
+    private String emplTelno;
+    private String emplEmail;
+    private String emplZip;
+    private String emplAdres;
+    private String emplDetailAdres;
+    private Date emplEncpn; // 입사일
+    private Date emplBrthdy;
     private String enabled;
-    private String empSign;
+    private String commonCodeDept; // 부서구분
+    private String commonCodeClsf; // 직급구분
+    private String commonCodeHffcSttus; // 재직상태 (0: 재직 1: 휴직 2: 퇴사)
+    private String commonCodeLastAcdmcr; // 최종학력 (0: 고졸, 1: 학사, 2: 석사, 3: 박사)
     private List<EmployeeAuthVO> employeeAuthVOList;
 }
