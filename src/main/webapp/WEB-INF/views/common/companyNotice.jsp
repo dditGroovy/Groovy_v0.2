@@ -57,33 +57,34 @@
 </style>
 <h1 class="font-36 font-md color-font-high">공지사항</h1>
 <div class="box-sort-search">
-    <select name="sortOptions" id="" class="stroke">
-        <option value="최신순">최신순</option>
-        <option value="오래된순">오래된순</option>
+    <form action="/common/findNotice" method="get">
+        <select name="sortBy" id="" class="stroke">
+        <option value="DESC">최신순</option>
+        <option value="ASC">오래된순</option>
     </select>
     <div class="box-search border-radius-24 stroke">
         <i class="icon icon-search-24"></i>
-        <input type="text" placeholder="검색어를 입력하세요." size="50" class="input-search">
-        <input type="button" value="검색" class="btn-free-blue btn-search">
+        <input type="text" name="keyword" placeholder="검색어를 입력하세요." size="50" class="input-search" value="${param.keyword}"/>
+        <button type="submit" value="검색" class="btn-free-blue btn-search"></button>
     </div>
+    </form>
+
 </div>
 <div class="box-notices">
-        <c:forEach var="eachMonth" begin="1" end="12"> <!-- 12: 공지사항 개수(length) -->
-    <div class="box-notice card-df">
-        <p><i class="icon icon-category-40"></i></p>
-        <p>건강한 가정을 위한 실용적인 청소 요령</p>
-        <p>Lorem ipsum dolor sit amet consectetur. Nibh vitae adipiscing non aliquam porttitor eget. Laoreet
-            scelerisque rhoncus sed quisque praesent ornare nibh risus commodo. Mauris imperdiet viverra varius
-            quam. Quis vitae molestie pretium augue adipiscing vel urna.</p>
-        <div class="box-view-date">
-            <div class="box-view">
-                <i class="icon icon-view-24"></i>
-                <span class="text-view-count">15</span> view
-            </div>
-            <div class="box-date">
-                2023-08-13
+    <c:forEach var="noticeVO" items="${noticeList}" varStatus="stat"> <!-- 12: 공지사항 개수(length) -->
+        <div class="box-notice card-df">
+            <p><img src="/resources/images/${noticeVO.notiCtgryIconFileStreNm}"></p>
+            <p>${noticeVO.notiTitle}</p>
+            <p>${noticeVO.notiContent}</p>
+            <div class="box-view-date">
+                <div class="box-view">
+                    <i class="icon icon-view-24"></i>
+                    <span class="text-view-count">${noticeVO.notiRdcnt}</span> view
+                </div>
+                <div class="box-date">
+                        ${noticeVO.notiDate}
+                </div>
             </div>
         </div>
-    </div>
-        </c:forEach>
+    </c:forEach>
 </div>
