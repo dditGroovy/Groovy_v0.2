@@ -5,6 +5,7 @@ import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -38,7 +39,13 @@ public class EmployeeService {
 //        vo.setEmpPw(encoder.encode(vo.getEmpPw()));
         return mapper.inputEmp(vo);
     }
-    public List<EmployeeVO> loadEmpList(){
+
+    public List<EmployeeVO> loadEmpList() {
         return mapper.loadEmpList();
     }
+
+    public List<EmployeeVO> findEmp(@Param("empName")String empName, @Param("depCode") String depCode, @Param("sortBy")String sortBy) {
+        return mapper.findEmp(empName, depCode, sortBy);
+    }
+
 }
