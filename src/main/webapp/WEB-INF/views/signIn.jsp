@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/resources/css/commonStyle.css">
 </head>
 <body>
-<div class="container">
+<div class="container login">
     <h1 style="display: none">그루비 로그인</h1>
     <div class="logo-img"></div>
     <div class="login-div">

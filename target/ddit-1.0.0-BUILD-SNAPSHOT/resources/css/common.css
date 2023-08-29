@@ -118,7 +118,7 @@ i.icon {
 }
 
 /*  sign in */
-.container {
+.container.login {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -139,7 +139,7 @@ i.icon {
     margin-top: 64px;
 }
 
-form {
+.login form {
     display: flex;
     flex-direction: column;
     align-items: center;
