@@ -23,6 +23,8 @@ public interface EmployeeMapper {
 
     EmployeeVO selectById(String id);
 
+    List<EmployeeVO> loadBirthday();
+
 
 }
 

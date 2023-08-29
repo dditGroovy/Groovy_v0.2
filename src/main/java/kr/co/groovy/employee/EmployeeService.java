@@ -46,4 +46,8 @@ public class EmployeeService {
         return mapper.findEmp(depCode, emplNm, sortBy);
     }
 
+    public List<EmployeeVO> loadBirthday() {
+        return mapper.loadBirthday();
+    }
+
 }

@@ -119,6 +119,14 @@
         FROM EMPL
     </select>
 
+
+    <select id="loadBirthday" resultType="employeeVO">
+        SELECT EMPL_ID,
+               EMPL_NM
+        FROM EMPL
+        WHERE TO_CHAR(EMPL_BRTHDY, 'MM') = TO_CHAR(SYSDATE, 'MM')
+    </select>
+
     <select id="findEmp" resultType="employeeVO">
         SELECT *
         FROM EMPL
@@ -132,4 +140,5 @@
     <select id="selectById" resultType="employeeVO">
         SELECT * FROM EMPL WHERE EMPL_ID = #{emplId}
     </select>
+
 </mapper>

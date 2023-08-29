@@ -99,24 +99,9 @@
 <br/>
 <hr/>
 <h3>이번달 생일</h3>
-<table border="1" style="width: 50%;">
-    <thead>
-    <tr>
-        <th>사원번호</th>
-        <th>사원이름</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>202308001</td>
-        <td>강서주</td>
-    </tr>
-    <tr>
-        <td>202308001</td>
-        <td>강서주</td>
-    </tr>
-    </tbody>
-</table>
+<div id="birthdayWrap">
+
+</div>
 <br/>
 <hr/>
 <h3>날씨</h3>
@@ -240,6 +225,27 @@
                 }
             }) */
 
+        })
+
+        // 이번달 생일
+        $.ajax({
+            url: "/employee/loadBirthday",
+            type: "get",
+            success: function (data) {
+                code = `<table><tr><th>사원번호</th><th>사원이름</th></tr>`;
+
+                $.each(data, function(index, item){
+                    code += `<tr><td>\${item.emplId}<td>
+                             <td>\${item.emplNm}</td><tr>`
+                })
+
+                code += `</table>`
+
+                $("#birthdayWrap").html(code);
+            },
+            error: function (xhr, status, error) {
+                console.log("code: " + xhr.status)
+            }
         })
 
         // 오늘의 식단

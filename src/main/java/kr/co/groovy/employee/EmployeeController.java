@@ -73,4 +73,12 @@ public class EmployeeController {
     public List<EmployeeVO> findEmp( @Param("depCode") String depCode, @Param("emplNm")String emplNm, @Param("sortBy")String sortBy) {
         return service.findEmp(depCode, emplNm, sortBy);
     }
+
+    @ResponseBody
+    @GetMapping("/loadBirthday")
+    public List<EmployeeVO> loadBirthday() {
+        log.info(service.loadBirthday().toString());
+        return service.loadBirthday();
+    }
+
 }
