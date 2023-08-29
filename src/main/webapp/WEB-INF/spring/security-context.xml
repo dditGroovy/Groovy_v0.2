@@ -13,6 +13,7 @@
           class="kr.co.groovy.security.CustomNoOpPasswordEncoder"/>
     <bean id="customUserDetailsService"
           class="kr.co.groovy.security.CustomUserDetailsService"/>
+    <bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="passwordEncoder"/>
 
     <security:http auto-config="true">
         <security:form-login
@@ -37,7 +38,7 @@
 
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="customUserDetailsService">
-            <security:password-encoder ref="customPasswordEncoder"/>
+            <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 </beans>
