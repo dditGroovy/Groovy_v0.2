@@ -1,5 +1,5 @@
 package kr.co.groovy.enums;
 
-public enum NoticeEssentialReading {
+public enum NoticeKind {
     ESSENTIAL, NORMAL
 }
