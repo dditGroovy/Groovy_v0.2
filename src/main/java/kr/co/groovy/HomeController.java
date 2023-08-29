@@ -33,6 +33,11 @@ public class HomeController {
 		return "employee/commute";
 	}
 
+	@GetMapping("/test/myInfo")
+	public String myInfo() {
+		return "main/myInfo";
+	}
+
 	@GetMapping("/test/test1")
 	public String test1() {
 		return "test/test1";
