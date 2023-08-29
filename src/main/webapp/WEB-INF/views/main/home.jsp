@@ -235,8 +235,8 @@
                 code = `<table><tr><th>사원번호</th><th>사원이름</th></tr>`;
 
                 $.each(data, function(index, item){
-                    code += `<tr><td>\${item.emplId}<td>
-                             <td>\${item.emplNm}</td><tr>`
+                    code += `<tr><td>\${item.emplId}</td>
+                             <td>\${item.emplNm}</td></tr>`
                 })
 
                 code += `</table>`

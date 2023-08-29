@@ -121,9 +121,7 @@
 
 
     <select id="loadBirthday" resultType="employeeVO">
-        SELECT EMPL_ID,
-               EMPL_NM
-        FROM EMPL
+        SELECT * FROM EMPL
         WHERE TO_CHAR(EMPL_BRTHDY, 'MM') = TO_CHAR(SYSDATE, 'MM')
     </select>
 
