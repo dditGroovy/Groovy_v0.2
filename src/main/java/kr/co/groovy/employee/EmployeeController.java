@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class EmployeeController {
     }
 
     @ResponseBody
-    @GetMapping("/loadEmp")
+    @GetMapping("/loadEmpList")
     public List<EmployeeVO> loadEmpList() {
         log.info(service.loadEmpList().toString());
         return service.loadEmpList();
@@ -77,10 +78,15 @@ public class EmployeeController {
     @ResponseBody
     @GetMapping("/loadBirthday")
     public List<EmployeeVO> loadBirthday() {
-        log.info(service.loadBirthday().toString());
         return service.loadBirthday();
     }
-
+    @GetMapping("/loadEmp/{emplId}")
+    public ModelAndView loadEmp(ModelAndView mav, @PathVariable String emplId){
+        EmployeeVO vo = service.loadEmp(emplId);
+        mav.addObject("empVO", vo);
+        mav.setViewName("admin/employeeDetail");
+        return mav;
+    }
     @GetMapping("/myVacation")
     public String myVacation() {
         return "employee/myVacation";
@@ -95,5 +101,4 @@ public class EmployeeController {
     public String mySalary() {
         return "employee/mySalary";
     }
-
 }

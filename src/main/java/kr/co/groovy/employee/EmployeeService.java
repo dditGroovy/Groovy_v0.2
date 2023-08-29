@@ -50,4 +50,7 @@ public class EmployeeService {
         return mapper.loadBirthday();
     }
 
+    public EmployeeVO loadEmp(String emplId) {
+        return mapper.loadEmp(emplId);
+    }
 }

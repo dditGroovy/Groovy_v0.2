@@ -232,7 +232,7 @@
         function getEmpList() {
             $.ajax({
                 type: "get",
-                url: "/employee/loadEmp",
+                url: "/employee/loadEmpList",
                 dataType: "json",
                 success: function (res) {
                     console.log("loadEmp success");
@@ -244,7 +244,7 @@
                         for (let i = 0; i < res.length; i++) {
                             code += "<tr>";
                             code += `<td><input type="checkbox" class="selectEmp"></td>`;
-                            code += `<td>\${res[i].emplId}</td>`;
+                            code += `<td><a href="/employee/loadEmp/\${res[i].emplId}">\${res[i].emplId}</a></td>`;
                             code += `<td>\${res[i].emplNm}</td>`;
                             code += `<td>\${res[i].commonCodeDept}</td>`;
                             code += `<td>\${res[i].commonCodeClsf}</td>`;

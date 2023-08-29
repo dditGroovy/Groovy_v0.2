@@ -19,11 +19,15 @@ public interface EmployeeMapper {
     int inputEmp(EmployeeVO vo);
 
     List<EmployeeVO> loadEmpList();
-    List<EmployeeVO> findEmp(@Param("depCode") String depCode, @Param("emplNm")String emplNm, @Param("sortBy")String sortBy);
+
+    List<EmployeeVO> findEmp(@Param("depCode") String depCode, @Param("emplNm") String emplNm, @Param("sortBy") String sortBy);
 
     EmployeeVO selectById(String id);
 
     List<EmployeeVO> loadBirthday();
+
+    EmployeeVO loadEmp(String emplId);
+
 
 
 }

@@ -9,8 +9,10 @@ import java.util.Map;
 @Mapper
 public interface CommonMapper {
     List<NoticeVO> loadNoticeList();
+
     List<NoticeVO> findNotice(Map<String, Object> paramMap);
+
     NoticeVO loadNoticeDetail(int notiSeq);
 
-     void modifyNoticeView(int notiSeq);
+    void modifyNoticeView(int notiSeq);
 }
