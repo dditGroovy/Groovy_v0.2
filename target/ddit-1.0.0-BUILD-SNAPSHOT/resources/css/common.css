@@ -116,3 +116,50 @@ i.icon {
     height:  var(--vw-18);
     margin-right: var(--vw-12);
 }
+
+/*  sign in */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.logo-img {
+    width: calc((213 / var(--vw)) * 100vw);;
+    height: var(--vh-64);
+    background: url("../images/logo.png") center / cover;
+    border: 1px solid black;
+}
+
+.login-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 64px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="text"], input[type="submit"], input[type="password"] {
+    width: calc((516 / var(--vw)) * 100vw);
+    height: var(--vh-64);
+    border-radius: var(--vw-32);
+    padding: var(--vw-24) var(--vh-24);
+}
+
+.userId {
+    margin-bottom: 24px;
+}
+
+.find-id-pw {
+    text-align: right;
+    font-size: 14px;
+    width: 100%;
+    padding: 20px 0px 65px 20px;
+}
