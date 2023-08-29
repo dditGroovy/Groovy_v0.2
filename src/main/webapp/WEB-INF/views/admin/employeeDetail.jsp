@@ -224,7 +224,7 @@
         }
     })
     listBtn.addEventListener("click",() => {
-        window.location.href = "manageEmp.jsp"
+        window.location.href = "manageEmployee.jsp"
     })
 
 

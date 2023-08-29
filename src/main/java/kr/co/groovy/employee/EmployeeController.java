@@ -3,12 +3,10 @@ package kr.co.groovy.employee;
 import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.List;
 
 @Slf4j
@@ -32,7 +30,7 @@ public class EmployeeController {
 
     @GetMapping("/manageEmp")
     public String manageEmp() {
-        return "admin/manageEmp";
+        return "admin/manageEmployee";
     }
 
     @GetMapping("/initPassword")
