@@ -27,7 +27,6 @@ public class HomeController {
 		
 		return "main/home";
 	}
-
 	@GetMapping("/test/commute")
 	public String commute() {
 		return "employee/commute";
@@ -47,7 +46,18 @@ public class HomeController {
 //	public String login() {
 //		return "login";
 //	}
-
+	@GetMapping("/mail")
+	public String allMail() {
+		return "mail/allMail";
+	}
+	@GetMapping("/mail/receiveMail")
+	public String receiveMail() {
+		return "mail/receiveMail";
+	}
+	@GetMapping("/mail/sendMail")
+	public String sendMail() {
+		return "mail/sendMail";
+	}
 	@GetMapping("/test/company-notice")
 	public String companyNotice() {
 		return "companyNotice";

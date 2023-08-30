@@ -30,7 +30,7 @@
         </div>
         <div class="gat">
             <ul class="depth1">
-                <li class="department nav-list"><a href="#">총무팀 <i class="icon i-arr-btt"></i></a></li>
+                <li class="department nav-list"><a href="#">총무팀 <i class="icon i-arr-bt"></i></a></li>
                 <ul>
                     <li class="nav-list"><a href="#" ><i class="icon icon6"></i>결재 관리</a></li>
                     <li class="nav-list"><a href="#"><i class="icon icon7"></i>공지사항 관리</a></li>
