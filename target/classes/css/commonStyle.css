@@ -1,3 +1,4 @@
+@import "reset.css";
 /* root */
 :root {
     --color-main: #5796F3;
@@ -139,3 +140,8 @@
     color: var(--color-font-high);
     font-weight: 600;
 }
+
+/* icon */
+.icon { width: var(--vw-24); height: var(--vw-24); background-size: cover; background-position: center; display: inline-block; vertical-align: middle;}
+.i-arr-bt{background-image: url("../images/i-arr-bt.svg");}
+.i-arr-up{background-image: url("../images/i-arr-up.svg");}
