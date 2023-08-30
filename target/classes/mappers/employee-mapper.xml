@@ -47,7 +47,7 @@
         WHERE A.EMPL_ID = B.AUTH_EMP_ID
           AND A.EMPL_ID = #{emplId}
     </select>
-    <update id="initPassword">
+    <update id="initPassword" parameterType="map">
         {call declare
         begin
             UPDATE EMPL
@@ -153,8 +153,8 @@
             )
         ORDER BY #{sortBy} DESC
     </select>
-    <!--    <select id="selectById" resultType="employeeVO">-->
-    <!--        SELECT * FROM EMPL WHERE EMPL_ID = #{emplId}-->
-    <!--    </select>-->
+        <select id="findById" parameterType="String" resultType="employeeVO">
+            SELECT * FROM EMPL WHERE EMPL_ID = #{emplId}
+        </select>
 
 </mapper>

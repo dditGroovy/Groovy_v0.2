@@ -2,17 +2,15 @@ package kr.co.groovy.employee;
 
 import kr.co.groovy.vo.EmployeeVO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EmployeeMapper {
     EmployeeVO signIn(String emplId);
 
-    void initPassword(@RequestParam("emplId") String id,
-                      @RequestParam("emplPassword") String pw);
+    void initPassword(Map<String, Object> paramMap);
 
     int countEmp();
 
@@ -20,9 +18,9 @@ public interface EmployeeMapper {
 
     List<EmployeeVO> loadEmpList();
 
-    List<EmployeeVO> findEmp(@Param("depCode") String depCode, @Param("emplNm") String emplNm, @Param("sortBy") String sortBy);
+    List<EmployeeVO> findEmp( String depCode, String emplNm,  String sortBy);
 
-    EmployeeVO selectById(String id);
+    EmployeeVO findById(String id);
 
     List<EmployeeVO> loadBirthday();
 

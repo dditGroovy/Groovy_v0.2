@@ -1,20 +1,18 @@
 package kr.co.groovy.employee;
 
-import kr.co.groovy.security.CustomNoOpPasswordEncoder;
 import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
 public class EmployeeService {
     final
     EmployeeMapper mapper;
-    CustomNoOpPasswordEncoder encoder;
 
     public EmployeeService(EmployeeMapper mapper) {
         this.mapper = mapper;
@@ -24,9 +22,8 @@ public class EmployeeService {
         return mapper.signIn(emplId);
     }
 
-    public void initPassword(@RequestParam("emplId") String id,
-                             @RequestParam("emplPassword") String pw) {
-        mapper.initPassword(id, pw);
+    public void initPassword(Map<String, Object> paramMap) {
+        mapper.initPassword(paramMap);
     }
 
     public int countEmp() {
@@ -52,4 +49,9 @@ public class EmployeeService {
     public EmployeeVO loadEmp(String emplId) {
         return mapper.loadEmp(emplId);
     }
+    public EmployeeVO findById(String emplId) {
+        return mapper.findById(emplId);
+    }
+
+
 }

@@ -9,18 +9,20 @@
           class="kr.co.groovy.security.CustomAccessDeniedHandler"/>
     <bean id="customLoginSuccess"
           class="kr.co.groovy.security.CustomLoginSuccessHandler"/>
-    <bean id="customPasswordEncoder"
-          class="kr.co.groovy.security.CustomNoOpPasswordEncoder"/>
+    <bean id="customAuthFailureHandler"
+          class="kr.co.groovy.security.CustomAuthFailureHandler"/>
     <bean id="customUserDetailsService"
           class="kr.co.groovy.security.CustomUserDetailsService"/>
     <bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="passwordEncoder"/>
 
     <security:http auto-config="true">
         <security:form-login
+                login-page="/employee/signIn"
                 username-parameter="emplId"
                 password-parameter="emplPassword"
                 login-processing-url="/signIn"
                 authentication-success-handler-ref="customLoginSuccess"
+                authentication-failure-handler-ref="customAuthFailureHandler"
         />
         <security:logout
                 logout-url="/signOut"
@@ -28,6 +30,13 @@
                 invalidate-session="true"
                 delete-cookies="true"
         />
+<!--        <security:remember-me-->
+<!--                user-service-ref="customUserDetailsService"-->
+<!--                remember-me-parameter="rememberMe"-->
+<!--                token-validity-seconds="2592000"-->
+
+
+<!--        />-->
         <security:access-denied-handler ref="customAccessDenied"/>
         <!--csrf : 테스트 위해 잠시 비활성화 -->
         <security:intercept-url pattern="/resources/**" access="permitAll"/>

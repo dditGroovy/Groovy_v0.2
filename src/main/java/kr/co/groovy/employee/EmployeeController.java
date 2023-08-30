@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RequestMapping("/employee")
@@ -31,6 +33,13 @@ public class EmployeeController {
         return "signIn";
     }
 
+    @GetMapping("/signInFail")
+    public ModelAndView signInFail(ModelAndView mav, String exception) {
+        mav.addObject("message", exception);
+        mav.setViewName("signIn");
+        return mav;
+    }
+
     @GetMapping("/manageEmp")
     public String manageEmp() {
         return "admin/manageEmployee";
@@ -42,12 +51,15 @@ public class EmployeeController {
     }
 
     @PostMapping("/initPassword")
-    public String initPassword(@RequestParam("emplId") String id,
-                               @RequestParam("emplPassword") String pw) {
-        service.initPassword(id, pw);
+    public String initPassword(@RequestParam("emplId") String emplId,
+                               @RequestParam("emplPassword") String emplPassword) {
+        Map<String, Object> paramMap = new HashMap<>();
+        String encodePw = encoder.encode(emplPassword);
+        paramMap.put("emplId", emplId);
+        paramMap.put("emplPassword", encodePw);
+        service.initPassword(paramMap);
         return "main/home";
     }
-
     @ResponseBody
     @GetMapping("/countEmp")
     public String countEmp() {
@@ -57,7 +69,6 @@ public class EmployeeController {
 
     @PostMapping("/inputEmp")
     public String inputEmp(EmployeeVO vo) {
-        // 패스워드 암호화
         vo.setEmplPassword(encoder.encode(vo.getEmplPassword()));
         service.inputEmp(vo);
         return "redirect:/employee/manageEmp";
@@ -67,18 +78,18 @@ public class EmployeeController {
     @GetMapping("/loadEmpList")
     public List<EmployeeVO> loadEmpList() {
         List<EmployeeVO> list = service.loadEmpList();
-        for(EmployeeVO vo : list){
-          vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
-          vo.setCommonCodeClsf(ClassOfPosition.valueOf(vo.getCommonCodeClsf()).label());
+        for (EmployeeVO vo : list) {
+            vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
+            vo.setCommonCodeClsf(ClassOfPosition.valueOf(vo.getCommonCodeClsf()).label());
         }
         return list;
     }
 
     @ResponseBody
     @GetMapping("/findEmp")
-    public List<EmployeeVO> findEmp( @Param("depCode") String depCode, @Param("emplNm")String emplNm, @Param("sortBy")String sortBy) {
+    public List<EmployeeVO> findEmp(@Param("depCode") String depCode, @Param("emplNm") String emplNm, @Param("sortBy") String sortBy) {
         List<EmployeeVO> list = service.findEmp(depCode, emplNm, sortBy);
-        for(EmployeeVO vo : list){
+        for (EmployeeVO vo : list) {
             vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
             vo.setCommonCodeClsf(ClassOfPosition.valueOf(vo.getCommonCodeClsf()).label());
         }
@@ -91,13 +102,15 @@ public class EmployeeController {
     public List<EmployeeVO> loadBirthday() {
         return service.loadBirthday();
     }
+
     @GetMapping("/loadEmp/{emplId}")
-    public ModelAndView loadEmp(ModelAndView mav, @PathVariable String emplId){
+    public ModelAndView loadEmp(ModelAndView mav, @PathVariable String emplId) {
         EmployeeVO vo = service.loadEmp(emplId);
         mav.addObject("empVO", vo);
         mav.setViewName("admin/employeeDetail");
         return mav;
     }
+
     @GetMapping("/myVacation")
     public String myVacation() {
         return "employee/myVacation";
