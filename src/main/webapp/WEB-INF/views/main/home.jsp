@@ -307,9 +307,6 @@
                     if (category === 'PTY') {
                         switch (fcstValue) {
                             case '1':
-                                sky = '비';
-                                imgSrc = '/resources/images/weather/heavyRain.png';
-                                break;
                             case '2':
                                 sky = '비';
                                 imgSrc = '/resources/images/weather/heavyRain.png';

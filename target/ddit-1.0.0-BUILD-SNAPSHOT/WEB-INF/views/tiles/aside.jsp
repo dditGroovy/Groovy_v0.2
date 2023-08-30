@@ -28,7 +28,7 @@
     <div class="personal">
       <span class="nav-cate">개인</span>
       <ul>
-        <li class="nav-list"><a href="#" class="active"><i class="icon icon1"></i>홈</a></li>
+        <li class="nav-list"><a href="#" class="active"><i class="icon i-board"></i>홈</a></li>
         <li class="nav-list"><a href="#"><i class="icon icon2"></i>출 · 퇴근</a></li>
         <li class="nav-list"><a href="/employee/myVacation"><i class="icon icon3"></i>휴가 · 급여</a></li>
         <li class="nav-list"><a href="#"><i class="icon icon4"></i>내 할 일</a></li>
