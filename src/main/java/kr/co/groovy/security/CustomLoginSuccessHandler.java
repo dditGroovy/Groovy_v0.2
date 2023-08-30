@@ -6,9 +6,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,21 @@ public class CustomLoginSuccessHandler extends
                                         HttpServletResponse response, Authentication auth)
             throws ServletException, IOException {
         log.warn("Authentication Successful");
+
         User customUser = (User) auth.getPrincipal();
+        String username = customUser.getUsername();
+
+        // 아이디 기억하기 쿠키 생성
+        boolean rememberIdChecked = request.getParameter("rememberId") != null;
+        log.info("rememberIdChecked" + rememberIdChecked);
+        if (rememberIdChecked) {
+            Cookie idCookie = new Cookie("emplId", username);
+            idCookie.setMaxAge(60 * 60 * 24 * 7); // 쿠키 유효기간 7일
+            idCookie.setPath("/");
+            response.addCookie(idCookie);
+        }
+
+
         log.info("username : " + customUser.getUsername());
         List<String> roleNames = new ArrayList<String>();
         auth.getAuthorities().forEach(authority -> {
@@ -30,7 +44,7 @@ public class CustomLoginSuccessHandler extends
         });
 
         log.info("role : " + roleNames);
-//        session.setAttribute("authInfo", authInfo);
+
         //신입사원(ROLE_NEW)
         if (roleNames.contains("ROLE_NEW")) {
             response.sendRedirect("/employee/initPassword");

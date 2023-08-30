@@ -26,17 +26,10 @@
         />
         <security:logout
                 logout-url="/signOut"
-                logout-success-url="/"
+                logout-success-url="/employee/signIn"
                 invalidate-session="true"
-                delete-cookies="true"
+                delete-cookies="false"
         />
-<!--        <security:remember-me-->
-<!--                user-service-ref="customUserDetailsService"-->
-<!--                remember-me-parameter="rememberMe"-->
-<!--                token-validity-seconds="2592000"-->
-
-
-<!--        />-->
         <security:access-denied-handler ref="customAccessDenied"/>
         <!--csrf : 테스트 위해 잠시 비활성화 -->
         <security:intercept-url pattern="/resources/**" access="permitAll"/>
@@ -50,6 +43,8 @@
             <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
+
+
 </beans>
 
 
