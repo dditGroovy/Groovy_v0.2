@@ -125,4 +125,7 @@ public class EmployeeController {
     public String mySalary() {
         return "employee/mySalary";
     }
+
+    @GetMapping("/myChat")
+    public String myChat(){return "employee/myChat";}
 }
