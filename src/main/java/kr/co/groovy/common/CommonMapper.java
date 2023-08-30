@@ -1,5 +1,6 @@
 package kr.co.groovy.common;
 
+import kr.co.groovy.vo.EmployeeVO;
 import kr.co.groovy.vo.NoticeVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,4 +16,6 @@ public interface CommonMapper {
     NoticeVO loadNoticeDetail(int notiSeq);
 
     void modifyNoticeView(int notiSeq);
+
+    List<EmployeeVO> loadOrgChart (String depCode);
 }

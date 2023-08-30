@@ -1,5 +1,8 @@
 package kr.co.groovy.common;
 
+import kr.co.groovy.enums.ClassOfPosition;
+import kr.co.groovy.enums.Department;
+import kr.co.groovy.vo.EmployeeVO;
 import kr.co.groovy.vo.NoticeVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,11 +55,22 @@ public class CommonController {
         return mav;
     }
 
+    // 조직도 불러오기
     @GetMapping("/loadOrgChart")
     public ModelAndView loadOrgChart(ModelAndView mav, String depCode) {
+        List<String> departmentCodes = Arrays.asList("DEPT010", "DEPT011", "DEPT012", "DEPT013", "DEPT014", "DEPT015");
 
-//        mav.addObject("noticeDetail", vo);
-//        mav.setViewName("common/companyNoticeDetail");
+        for (String deptCode : departmentCodes) {
+            List<EmployeeVO> deptEmployees = service.loadOrgChart(deptCode);
+            log.info(deptEmployees.toString());
+            for (EmployeeVO vo : deptEmployees) {
+                vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
+                vo.setCommonCodeClsf(ClassOfPosition.valueOf(vo.getCommonCodeClsf()).label());
+            }
+            mav.addObject(deptCode + "List", deptEmployees);
+        }
+        mav.setViewName("common/orgChart");
         return mav;
     }
 }
+

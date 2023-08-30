@@ -1,5 +1,6 @@
 package kr.co.groovy.common;
 
+import kr.co.groovy.vo.EmployeeVO;
 import kr.co.groovy.vo.NoticeVO;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,10 @@ public class CommonService {
 
     public void modifyNoticeView(int notiSeq) {
         mapper.modifyNoticeView(notiSeq);
+    }
+
+    public List<EmployeeVO> loadOrgChart(String depCode) {
+        return mapper.loadOrgChart(depCode);
     }
 
 }
