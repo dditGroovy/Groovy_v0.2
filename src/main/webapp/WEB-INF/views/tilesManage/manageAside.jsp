@@ -54,9 +54,9 @@
     </nav>
 
 </div>
-
 <script>
     const depth1 = $(".depth1");
+    console.log(depth1);
     let depth2Li = $(".depth1.active ul li a");
     depth1.on("click",function(){
         depth1.removeClass("active");
