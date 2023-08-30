@@ -128,11 +128,9 @@
 
             //수정 버튼 숨김
             $(this).hide();
-
-
         })
     });
 
-</script>
+</script>ㅌㅈㅈ
 </body>
 </html>

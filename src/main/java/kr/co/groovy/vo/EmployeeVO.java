@@ -26,5 +26,6 @@ public class EmployeeVO {
     private String commonCodeClsf; // 직급구분
     private String commonCodeHffcSttus; // 재직상태 (0: 재직 1: 휴직 2: 퇴사)
     private String commonCodeLastAcdmcr; // 최종학력 (0: 고졸, 1: 학사, 2: 석사, 3: 박사)
+    private String proflPhotoFileStreNm; // 프로필사진 (PROFL 테이블)
     private List<EmployeeAuthVO> employeeAuthVOList;
 }

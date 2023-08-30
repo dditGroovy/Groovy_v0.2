@@ -18,6 +18,7 @@
         <ol>
             <c:forEach var="dept010" items="${DEPT010List}" varStatus="stat">
                 <li>
+                    <img src="/resources/images/${dept010.proflPhotoFileStreNm}" width="50px;">
                     <div>
                         <h3>${dept010.emplNm}</h3> <span>${dept010.commonCodeClsf}</span>
                     </div>
@@ -35,6 +36,7 @@
         <ol>
             <c:forEach var="dept011" items="${DEPT011List}" varStatus="stat">
                 <li>
+                    <img src="/resources/images/${dept011.proflPhotoFileStreNm}" width="50px;">
                     <div>
                         <h3>${dept011.emplNm}</h3> <span>${dept011.commonCodeClsf}</span>
                     </div>

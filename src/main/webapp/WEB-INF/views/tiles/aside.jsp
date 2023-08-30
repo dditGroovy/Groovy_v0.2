@@ -19,7 +19,7 @@
       </div>
       <div class="btn-wrap">
         <button id="logout" class="font-11 btn-free-white color-font-md">로그아웃<i class="ic-logout icon"></i></button>
-        <button id="videoConference" class="font-11 btn-free-white"><span class="btn-detail">화상회의</span></button>
+        <button id="videoConference" class="font-11 btn-free-white"><a href="/employee/manageEmp"><span class="btn-detail">사원관리</span></a></button>
         <button id="reservation" class="font-11 btn-free-white"><span class="btn-detail">예약</span></button>
       </div>
     </div>
@@ -30,7 +30,7 @@
       <ul>
         <li class="nav-list"><a href="#" class="active"><i class="icon icon1"></i>홈</a></li>
         <li class="nav-list"><a href="#"><i class="icon icon2"></i>출 · 퇴근</a></li>
-        <li class="nav-list"><a href="#"><i class="icon icon3"></i>휴가 · 급여</a></li>
+        <li class="nav-list"><a href="/employee/myVacation"><i class="icon icon3"></i>휴가 · 급여</a></li>
         <li class="nav-list"><a href="#"><i class="icon icon4"></i>내 할 일</a></li>
         <li class="nav-list"><a href="#"><i class="icon icon5"></i>결재함</a></li>
       </ul>
@@ -47,7 +47,7 @@
       <ul>
         <li class="nav-list"><a href="${pageContext.request.contextPath}/common/loadNoticeList"><i class="icon icon8"></i>공지사항</a></li>
         <li class="nav-list"><a href="#"><i class="icon icon9"></i>동호회</a></li>
-        <li class="nav-list"><a href="${pageContext.request.contextPath}/common/loadOrgChart""><i class="icon icon10"></i>조직도</a></li>
+        <li class="nav-list"><a href="${pageContext.request.contextPath}/common/loadOrgChart"><i class="icon icon10"></i>조직도</a></li>
       </ul>
     </div>
   </nav>
