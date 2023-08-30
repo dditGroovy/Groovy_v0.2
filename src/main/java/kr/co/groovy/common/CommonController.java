@@ -70,5 +70,11 @@ public class CommonController {
         mav.setViewName("common/orgChart");
         return mav;
     }
+    // 동호회
+    @GetMapping("/club")
+    public String club(){
+        return "common/club";
+    }
+
 }
 
