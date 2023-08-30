@@ -47,4 +47,16 @@
     <update id="modifyNoticeView" parameterType="int">
         UPDATE NOTI SET NOTI_RDCNT=NOTI_RDCNT + 1 WHERE NOTI_SEQ = #{notiSeq}
     </update>
+    <select id="loadOrgChart" parameterType="String" resultType="employeeVO">
+        SELECT E.EMPL_ID,
+               E.EMPL_NM,
+               E.EMPL_EMAIL,
+               E.COMMON_CODE_DEPT,
+               E.COMMON_CODE_CLSF,
+               P.PROFL_PHOTO_FILE_STRE_NM
+        FROM EMPL E,
+             PROFL P
+        WHERE E.EMPL_ID = PROFL_EMPL_ID AND
+            E.COMMON_CODE_DEPT = #{depCode}
+    </select>
 </mapper>

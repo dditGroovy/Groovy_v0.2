@@ -39,55 +39,53 @@
         <%-- commonCodeLastAcdmcr --%>
         <label>최종학력</label>
         <input type="radio" name="commonCodeLastAcdmcr" id="empEdu1"
-               value="0" ${empVO.commonCodeLastAcdmcr == '0' ? 'checked' : ''}>
-        <label for="empEdu1">고졸이하</label>
+               value="LAST_ACDMCR010" ${empVO.commonCodeLastAcdmcr == 'LAST_ACDMCR010' ? 'checked' : ''}>
+        <label for="empEdu1">고졸</label>
         <input type="radio" name="commonCodeLastAcdmcr" id="empEdu2"
-               value="1" ${empVO.commonCodeLastAcdmcr == '1' ? 'checked' : ''}>
-        <label for="empEdu2">대졸</label>
+               value="LAST_ACDMCR011" ${empVO.commonCodeLastAcdmcr == 'LAST_ACDMCR011' ? 'checked' : ''}>
+        <label for="empEdu2">학사</label>
         <input type="radio" name="commonCodeLastAcdmcr" id="empEdu3"
-               value="2" ${empVO.commonCodeLastAcdmcr == '2' ? 'checked' : ''}>
+               value="LAST_ACDMCR012" ${empVO.commonCodeLastAcdmcr == 'LAST_ACDMCR012' ? 'checked' : ''}>
         <label for="empEdu3">석사</label>
         <input type="radio" name="commonCodeLastAcdmcr" id="empEdu4"
-               value="3" ${empVO.commonCodeLastAcdmcr == '3' ? 'checked' : ''}>
+               value="LAST_ACDMCR013" ${empVO.commonCodeLastAcdmcr == 'LAST_ACDMCR013' ? 'checked' : ''}>
         <label for="empEdu4">박사</label><br/>
 
         <%-- commonCodeClsf --%>
         <label>직급</label>
         <input type="radio" name="commonCodeClsf" id="empPos1"
-               value="08" ${empVO.commonCodeClsf == '08' ? 'checked' : ''}>
+               value="CLSF016" ${empVO.commonCodeClsf == 'CLSF016' ? 'checked' : ''}>
         <label for="empPos1">사원</label>
         <input type="radio" name="commonCodeClsf" id="empPos2"
-               value="07" ${empVO.commonCodeClsf == '07' ? 'checked' : ''}>
+               value="CLSF015" ${empVO.commonCodeClsf == 'CLSF015' ? 'checked' : ''}>
         <label for="empPos2">대리</label>
         <input type="radio" name="commonCodeClsf" id="empPos3"
-               value="06" ${empVO.commonCodeClsf == '06' ? 'checked' : ''}>
+               value="CLSF014" ${empVO.commonCodeClsf == 'CLSF014' ? 'checked' : ''}>
         <label for="empPos3">과장</label>
         <input type="radio" name="commonCodeClsf" id="empPos4"
-               value="05" ${empVO.commonCodeClsf == '05' ? 'checked' : ''}>
+               value="CLSF013" ${empVO.commonCodeClsf == 'CLSF013' ? 'checked' : ''}>
         <label for="empPos4">차장</label>
         <input type="radio" name="commonCodeClsf" id="empPos5"
-               value="04" ${empVO.commonCodeClsf == '04' ? 'checked' : ''}>
+               value="CLSF012" ${empVO.commonCodeClsf == 'CLSF012' ? 'checked' : ''}>
         <label for="empPos5">팀장</label>
         <input type="radio" name="commonCodeClsf" id="empPos6"
-               value="03" ${empVO.commonCodeClsf == '03' ? 'checked' : ''}>
+               value="CLSF011" ${empVO.commonCodeClsf == 'CLSF011' ? 'checked' : ''}>
         <label for="empPos6">부장</label>
         <input type="radio" name="commonCodeClsf" id="empPos7"
-               value="02" ${empVO.commonCodeClsf == '02' ? 'checked' : ''}>
-        <label for="empPos7">이사</label>
-        <input type="radio" name="commonCodeClsf" id="empPos8"
-               value="01" ${empVO.commonCodeClsf == '01' ? 'checked' : ''}>
-        <label for="empPos8">대표</label><br/>
+               value="CLSF010" ${empVO.commonCodeClsf == 'CLSF010' ? 'checked' : ''}>
+        <label for="empPos7">대표이사</label>
+
 
         <%-- commonCodeDept --%>
         <%--        <c:if test="${data.condition=='신규도서'}">checked</c:if>--%>
         <label>부서</label>
         <select name="commonCodeDept" id="emp-department">
-            <option value="HRT" ${empVO.commonCodeDept == 'HRT' ? 'selected' : ''}>인사팀</option>
-            <option value="GAT" ${empVO.commonCodeDept == 'GAT' ? 'selected' : ''}>총무팀</option>
-            <option value="AT" ${empVO.commonCodeDept == 'AT' ? 'selected' : ''}>회계팀</option>
-            <option value="ST" ${empVO.commonCodeDept == 'ST' ? 'selected' : ''}>영업팀</option>
-            <option value="PRT" ${empVO.commonCodeDept == 'PRT' ? 'selected' : ''}>홍보팀</option>
-            <option value="CEO" ${empVO.commonCodeDept == 'CEO' ? 'selected' : ''}>관리직</option>
+            <option value="DEPT010" ${empVO.commonCodeDept == 'DEPT010' ? 'selected' : ''}>인사팀</option>
+            <option value="DEPT011" ${empVO.commonCodeDept == 'DEPT011' ? 'selected' : ''}>회계팀</option>
+            <option value="DEPT012" ${empVO.commonCodeDept == 'DEPT012' ? 'selected' : ''}>영업팀</option>
+            <option value="DEPT013" ${empVO.commonCodeDept == 'DEPT013' ? 'selected' : ''}>홍보팀</option>
+            <option value="DEPT014" ${empVO.commonCodeDept == 'DEPT014' ? 'selected' : ''}>총무팀</option>
+            <option value="DEPT015" ${empVO.commonCodeDept == 'DEPT015' ? 'selected' : ''}>관리직</option>
         </select><br/>
 
         <label>입사일</label>
@@ -99,13 +97,13 @@
 
         <label>재직 상태 설정</label>
         <input type="radio" name="commonCodeHffcSttus" id="office"
-               value="0" ${empVO.commonCodeHffcSttus == '0' ? 'checked' : ''}>
+               value="HFFC010" ${empVO.commonCodeHffcSttus == 'HFFC010' ? 'checked' : ''}>
         <label for="office">재직</label>
         <input type="radio" name="commonCodeHffcSttus" id="leave"
-               value="1" ${empVO.commonCodeHffcSttus == '1' ? 'checked' : ''}>
+               value="HFFC011" ${empVO.commonCodeHffcSttus == 'HFFC011' ? 'checked' : ''}>
         <label for="leave">휴직</label>
         <input type="radio" name="commonCodeHffcSttus" id="quit"
-               value="2" ${empVO.commonCodeHffcSttus == '2' ? 'checked' : ''}>
+               value="HFFC012" ${empVO.commonCodeHffcSttus == 'HFFC012' ? 'checked' : ''}>
         <label for="quit">퇴사</label>
         <br/><br/>
         <button type="button" id="btn-modify">수정</button>

@@ -47,7 +47,7 @@
       <ul>
         <li class="nav-list"><a href="${pageContext.request.contextPath}/common/loadNoticeList"><i class="icon icon8"></i>공지사항</a></li>
         <li class="nav-list"><a href="#"><i class="icon icon9"></i>동호회</a></li>
-        <li class="nav-list"><a href="#"><i class="icon icon10"></i>조직도</a></li>
+        <li class="nav-list"><a href="${pageContext.request.contextPath}/common/loadOrgChart""><i class="icon icon10"></i>조직도</a></li>
       </ul>
     </div>
   </nav>

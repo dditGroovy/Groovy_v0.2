@@ -1,5 +1,6 @@
 package kr.co.groovy.employee;
 
+import kr.co.groovy.enums.ClassOfPosition;
 import kr.co.groovy.enums.Department;
 import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
@@ -70,6 +71,7 @@ public class EmployeeController {
         List<EmployeeVO> list = service.loadEmpList();
         for(EmployeeVO vo : list){
           vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
+          vo.setCommonCodeClsf(ClassOfPosition.valueOf(vo.getCommonCodeClsf()).label());
         }
         return list;
     }
@@ -80,6 +82,7 @@ public class EmployeeController {
         List<EmployeeVO> list = service.findEmp(depCode, emplNm, sortBy);
         for(EmployeeVO vo : list){
             vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
+            vo.setCommonCodeClsf(ClassOfPosition.valueOf(vo.getCommonCodeClsf()).label());
         }
         return list;
 

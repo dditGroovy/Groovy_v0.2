@@ -39,43 +39,41 @@
 
             <%-- commonCodeLastAcdmcr --%>
             <label>최종학력</label>
-            <input type="radio" name="commonCodeLastAcdmcr" id="empEdu1" value="0" checked>
-            <label for="empEdu1">고졸이하</label>
-            <input type="radio" name="commonCodeLastAcdmcr" id="empEdu2" value="1">
-            <label for="empEdu2">대졸</label>
-            <input type="radio" name="commonCodeLastAcdmcr" id="empEdu3" value="2">
+            <input type="radio" name="commonCodeLastAcdmcr" id="empEdu1" value="LAST_ACDMCR010" checked>
+            <label for="empEdu1">고졸</label>
+            <input type="radio" name="commonCodeLastAcdmcr" id="empEdu2" value="LAST_ACDMCR011">
+            <label for="empEdu2">학사</label>
+            <input type="radio" name="commonCodeLastAcdmcr" id="empEdu3" value="LAST_ACDMCR012">
             <label for="empEdu3">석사</label>
-            <input type="radio" name="commonCodeLastAcdmcr" id="empEdu4" value="3">
+            <input type="radio" name="commonCodeLastAcdmcr" id="empEdu4" value="LAST_ACDMCR013">
             <label for="empEdu3">박사</label><br/>
 
             <%-- commonCodeClsf --%>
             <label>직급</label>
-            <input type="radio" name="commonCodeClsf" id="empPos1" value="08" checked>
+            <input type="radio" name="commonCodeClsf" id="empPos1" value="CLSF016" checked>
             <label for="empPos1">사원</label>
-            <input type="radio" name="commonCodeClsf" id="empPos2" value="07">
+            <input type="radio" name="commonCodeClsf" id="empPos2" value="CLSF015">
             <label for="empPos2">대리</label>
-            <input type="radio" name="commonCodeClsf" id="empPos3" value="06">
+            <input type="radio" name="commonCodeClsf" id="empPos3" value="CLSF014">
             <label for="empPos3">과장</label>
-            <input type="radio" name="commonCodeClsf" id="empPos4" value="05">
+            <input type="radio" name="commonCodeClsf" id="empPos4" value="CLSF013">
             <label for="empPos4">차장</label>
-            <input type="radio" name="commonCodeClsf" id="empPos5" value="04">
+            <input type="radio" name="commonCodeClsf" id="empPos5" value="CLSF012">
             <label for="empPos5">팀장</label>
-            <input type="radio" name="commonCodeClsf" id="empPos6" value="03">
+            <input type="radio" name="commonCodeClsf" id="empPos6" value="CLSF011">
             <label for="empPos6">부장</label>
-            <input type="radio" name="commonCodeClsf" id="empPos7" value="02">
-            <label for="empPos7">이사</label>
-            <input type="radio" name="commonCodeClsf" id="empPos8" value="01">
-            <label for="empPos8">대표</label> <br/>
+            <input type="radio" name="commonCodeClsf" id="empPos7" value="CLSF010">
+            <label for="empPos7">대표이사</label>
 
             <%-- commonCodeDept --%>
             <label>부서</label>
             <select name="commonCodeDept" id="emp-department">
-                <option value="HRT">인사팀</option>
-                <option value="GAT">총무팀</option>
-                <option value="AT">회계팀</option>
-                <option value="ST">영업팀</option>
-                <option value="PRT">홍보팀</option>
-                <option value="CEO">관리직</option>
+                <option value="DEPT010">인사팀</option>
+                <option value="DEPT011">회계팀</option>
+                <option value="DEPT012">영업팀</option>
+                <option value="DEPT013">홍보팀</option>
+                <option value="DEPT014">총무팀</option>
+                <option value="DEPT015">경영자</option>
             </select><br/>
 
             <label>입사일</label>
@@ -108,12 +106,12 @@
 <form action="#" method="GET">
     <label>부서 필터</label>
     <select name="searchDepCode">
-        <option value="HRT">인사팀</option>
-        <option value="GAT">총무팀</option>
-        <option value="AT">회계팀</option>
-        <option value="ST">영업팀</option>
-        <option value="PRT">홍보팀</option>
-        <option value="CEO">관리직</option>
+        <option value="DEPT010">인사팀</option>
+        <option value="DEPT011">회계팀</option>
+        <option value="DEPT012">영업팀</option>
+        <option value="DEPT013">홍보팀</option>
+        <option value="DEPT014">총무팀</option>
+        <option value="DEPT015">경영자</option>
     </select>
     <label>
         <input type="text" name="searchName">
@@ -181,7 +179,7 @@
                             /* 개인서명 등록 유무 */
                             // code += `<td>\${res[i].empSign == null ? "미등록" : "등록완료"}</td>`;
                             code += `<td>\${res[i].emplDetailAdres}</td>`;
-                            code += `<td>\${(res[i].commonCodeHffcSttus == '0') ? "재직" : (res[i].commonCodeHffcSttus == '1') ? "휴직" : "퇴직"}</td>`;
+                            code += `<td>\${(res[i].commonCodeHffcSttus == 'HFFC010') ? "재직" : (res[i].commonCodeHffcSttus == 'HFFC011') ? "휴직" : "퇴직"}</td>`;
                             code += "</tr>";
                         }
                     }
@@ -251,7 +249,7 @@
                             /* 개인서명 등록 유무 */
                             // code += `<td>\${res[i].empSign == null ? "미등록" : "등록완료"}</td>`;
                             code += `<td>\${res[i].emplDetailAdres}</td>`;
-                            code += `<td>\${(res[i].commonCodeHffcSttus == '0') ? "재직" : (res[i].commonCodeHffcSttus == '1') ? "휴직" : "퇴직"}</td>`;
+                            code += `<td>\${(res[i].commonCodeHffcSttus == 'HFFC010') ? "재직" : (res[i].commonCodeHffcSttus == 'HFFC011') ? "휴직" : "퇴직"}</td>`;
                             code += "</tr>";
                         }
                     }
