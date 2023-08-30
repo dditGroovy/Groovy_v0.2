@@ -1,7 +1,7 @@
 package kr.co.groovy.enums;
 
 public enum Department {
-    HRT("인사"), AT("회계"), ST("영업"), PRT("홍보"), GAT("총무"), CEO("경영진");
+    DEPT010("인사"), DEPT011("회계"), DEPT012("영업"), DEPT013("홍보"), DEPT014("총무"), DEPT015("경영자");
     private final String label;
 
     Department(String label) {

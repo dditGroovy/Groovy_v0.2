@@ -50,4 +50,12 @@ public class CommonController {
         mav.setViewName("common/companyNoticeDetail");
         return mav;
     }
+
+    @GetMapping("/loadOrgChart")
+    public ModelAndView loadOrgChart(ModelAndView mav, String depCode) {
+
+//        mav.addObject("noticeDetail", vo);
+//        mav.setViewName("common/companyNoticeDetail");
+        return mav;
+    }
 }

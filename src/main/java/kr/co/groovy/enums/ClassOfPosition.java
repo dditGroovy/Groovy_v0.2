@@ -1,7 +1,7 @@
 package kr.co.groovy.enums;
 
 public enum ClassOfPosition {
-    대표("01"), 이사("02"), 부장("03"), 팀장("04"), 차장("05"), 과장("06"), 대리("07"), 사원("08");
+    CLSF010("대표"), CLSF011("부장"), CLSF012("팀장"), CLSF013("차장"), CLSF014("과장"), CLSF015("대리"), CLSF016("사원");
 
     private final String label;
 
