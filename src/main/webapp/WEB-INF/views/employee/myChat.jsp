@@ -1,16 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/common.css">
-    <style>
-        #createChat input[type=text] {width: 90%; padding: 10px;}
-    </style>
-</head>
-<body>
     <h1>채팅방 개설</h1>
     <form action="#" method="post">
         <table border="1" style="width: 50%" id="createChat">
@@ -120,5 +110,3 @@
             </form>
 
         </div>
-</body>
-</html>
