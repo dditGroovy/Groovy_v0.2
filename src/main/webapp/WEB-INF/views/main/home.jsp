@@ -277,7 +277,7 @@
                 const items = data.response.body.items.item;
                 let sky = '';
                 let temperature = '';
-                let imgSrc = "/resources/images/";
+                let imgSrc = "/resources/images/weather/";
 
                 for (let i = 0; i < items.length; i++) {
                     let jsonObj = items[i];
@@ -301,6 +301,22 @@
                             case '4':
                                 sky += '흐림 ';
                                 imgSrc += 'cloudSun.png';
+                                break;
+                        }
+                    }
+                    if (category === 'PTY') {
+                        switch (fcstValue) {
+                            case '1':
+                                sky = '비';
+                                imgSrc = '/resources/images/weather/heavyRain.png';
+                                break;
+                            case '2':
+                                sky = '비';
+                                imgSrc = '/resources/images/weather/heavyRain.png';
+                                break;
+                            case '3':
+                                sky += '눈';
+                                imgSrc += '/resources/images/weather/snowfall.png';
                                 break;
                         }
                     }
