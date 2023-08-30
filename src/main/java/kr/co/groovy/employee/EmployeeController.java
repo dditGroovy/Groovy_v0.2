@@ -52,7 +52,6 @@ public class EmployeeController {
     @GetMapping("/countEmp")
     public String countEmp() {
         int result = service.countEmp();
-        log.info("countEmp " + result);
         return Integer.toString(service.countEmp());
     }
 
@@ -67,7 +66,6 @@ public class EmployeeController {
     @ResponseBody
     @GetMapping("/loadEmpList")
     public List<EmployeeVO> loadEmpList() {
-        log.info(service.loadEmpList().toString());
         List<EmployeeVO> list = service.loadEmpList();
         for(EmployeeVO vo : list){
           vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());

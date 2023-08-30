@@ -87,11 +87,11 @@
             <input type="email" name="emplEmail" id="emplEmail" required><br/>
 
             <label>재직 상태 설정</label>
-            <input type="radio" name="commonCodeHffcSttus" id="office" value="0" checked>
+            <input type="radio" name="commonCodeHffcSttus" id="office" value="HFFC010" checked>
             <label for="office">재직</label>
-            <input type="radio" name="commonCodeHffcSttus" id="leave" value="1">
+            <input type="radio" name="commonCodeHffcSttus" id="leave" value="HFFC011">
             <label for="leave">휴직</label>
-            <input type="radio" name="commonCodeHffcSttus" id="quit" value="2">
+            <input type="radio" name="commonCodeHffcSttus" id="quit" value="HFFC012">
             <label for="quit">퇴사</label>
             <br/><br/>
             <button type="submit" id="insert">등록</button>

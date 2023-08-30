@@ -20,9 +20,9 @@
                     <input type="checkbox"  name="rememberId" id="rememberId" class="checkBox">
                     <label for="rememberId" class="checkBoxLabel">아이디 기억하기</label>
                 </div>
-                <div class="find-id-pw"><a href="#" class="font-14 color-font-row">비밀번호 찾기</a></div>
+                <div class="find-id-pw"><a href="#" class="font-14 color-font-row">비밀번호를 잊으셨나요?</a></div>
             </div>
-            <input type="submit" class="btn-free-blue" id="loginBtn" value="로그인">
+            <input type="submit" class="btn-free-blue" id="loginBtn" value="LOGIN">
         </form>
     </div>
 </div>
