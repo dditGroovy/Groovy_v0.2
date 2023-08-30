@@ -6,8 +6,12 @@
     <title>login</title>
     <link rel="stylesheet" href="/resources/css/common.css">
     <link rel="stylesheet" href="/resources/css/commonStyle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+
 </head>
 <body>
+
 <div class="container login">
     <h1 style="display: none">그루비 로그인</h1>
     <div class="logo-img"></div>
@@ -15,11 +19,12 @@
         <form action="${pageContext.request.contextPath}/signIn" method="post">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-            <input type="text" class="userId btn-free-white" name="emplId" placeholder="ID"/>
-            <input type="password" class="userPw btn-free-white" name="emplPassword" placeholder="PASSWORD"/>
+            <input type="text" class="userId btn-free-white" name="emplId" id="empl-id" placeholder="ID" value=""/>
+            <input type="password" class="userPw btn-free-white" name="emplPassword" id="empl-password"
+                   placeholder="PASSWORD"/>
             <div class="service-wrap">
                 <div class="checkboxWrap">
-                    <input type="checkbox" name="rememberMe" id="rememberId" class="checkBox" />
+                    <input type="checkbox" name="rememberId" id="rememberId" class="checkBox"/>
                     <label for="rememberId" class="checkBoxLabel">아이디 기억하기</label>
                 </div>
                 <div class="find-id-pw"><a href="#" class="font-14 color-font-row">비밀번호를 잊으셨나요?</a></div>
@@ -33,5 +38,21 @@
         </form>
     </div>
 </div>
+<script>
+    $(function () {
+        let emplIdCookie = Cookies.get("emplId");
+        if (emplIdCookie != null) {
+            $("#empl-id").val(emplIdCookie);
+            $("#rememberId").prop("checked", true); //
+        }
+
+        $("#rememberId").change(function () {
+            if (!this.checked) {
+                $("#empl-id").val("");
+                Cookies.remove("emplId", {path: '/'});
+            }
+        });
+    });
+</script>
 </body>
 </html>
