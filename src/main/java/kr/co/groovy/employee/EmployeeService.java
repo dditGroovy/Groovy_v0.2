@@ -34,7 +34,6 @@ public class EmployeeService {
     }
 
     public int inputEmp(EmployeeVO vo) {
-        log.info("사원 등록 정보" + vo);
         return mapper.inputEmp(vo);
     }
 

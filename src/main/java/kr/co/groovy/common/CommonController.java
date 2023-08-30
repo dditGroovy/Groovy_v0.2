@@ -59,10 +59,8 @@ public class CommonController {
     @GetMapping("/loadOrgChart")
     public ModelAndView loadOrgChart(ModelAndView mav, String depCode) {
         List<String> departmentCodes = Arrays.asList("DEPT010", "DEPT011", "DEPT012", "DEPT013", "DEPT014", "DEPT015");
-
         for (String deptCode : departmentCodes) {
             List<EmployeeVO> deptEmployees = service.loadOrgChart(deptCode);
-            log.info(deptEmployees.toString());
             for (EmployeeVO vo : deptEmployees) {
                 vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
                 vo.setCommonCodeClsf(ClassOfPosition.valueOf(vo.getCommonCodeClsf()).label());

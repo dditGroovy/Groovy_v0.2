@@ -21,7 +21,6 @@ public class MainController {
     @ResponseBody
     @GetMapping(value = "/{today}")
     public DietVO loadMenu(@PathVariable String today) {
-        log.info(today);
         return service.loadDiet(today);
     }
 }
