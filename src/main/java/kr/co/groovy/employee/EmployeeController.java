@@ -1,5 +1,6 @@
 package kr.co.groovy.employee;
 
+import kr.co.groovy.enums.Department;
 import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
@@ -66,13 +67,22 @@ public class EmployeeController {
     @GetMapping("/loadEmpList")
     public List<EmployeeVO> loadEmpList() {
         log.info(service.loadEmpList().toString());
-        return service.loadEmpList();
+        List<EmployeeVO> list = service.loadEmpList();
+        for(EmployeeVO vo : list){
+          vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
+        }
+        return list;
     }
 
     @ResponseBody
     @GetMapping("/findEmp")
     public List<EmployeeVO> findEmp( @Param("depCode") String depCode, @Param("emplNm")String emplNm, @Param("sortBy")String sortBy) {
-        return service.findEmp(depCode, emplNm, sortBy);
+        List<EmployeeVO> list = service.findEmp(depCode, emplNm, sortBy);
+        for(EmployeeVO vo : list){
+            vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
+        }
+        return list;
+
     }
 
     @ResponseBody

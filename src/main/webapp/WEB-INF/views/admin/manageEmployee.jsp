@@ -181,7 +181,7 @@
                             /* 개인서명 등록 유무 */
                             // code += `<td>\${res[i].empSign == null ? "미등록" : "등록완료"}</td>`;
                             code += `<td>\${res[i].emplDetailAdres}</td>`;
-                            code += `<td>\${res[i].commonCodeHffcSttus}</td>`;
+                            code += `<td>\${(res[i].commonCodeHffcSttus == '0') ? "재직" : (res[i].commonCodeHffcSttus == '1') ? "휴직" : "퇴직"}</td>`;
                             code += "</tr>";
                         }
                     }
@@ -202,7 +202,6 @@
             joinDateVal = this.value;
             console.log(joinDateVal);
         });
-
         // 사번 생성 버튼 클릭 이벤트
         document.querySelector("#generateId").addEventListener("click", function () {
             // 사원 수 + 1 인덱스 처리
@@ -227,7 +226,6 @@
                 }
             })
         })
-
         /*사원 목록 불러오기 */
         function getEmpList() {
             $.ajax({
@@ -253,7 +251,7 @@
                             /* 개인서명 등록 유무 */
                             // code += `<td>\${res[i].empSign == null ? "미등록" : "등록완료"}</td>`;
                             code += `<td>\${res[i].emplDetailAdres}</td>`;
-                            code += `<td>\${res[i].commonCodeHffcSttus}</td>`;
+                            code += `<td>\${(res[i].commonCodeHffcSttus == '0') ? "재직" : (res[i].commonCodeHffcSttus == '1') ? "휴직" : "퇴직"}</td>`;
                             code += "</tr>";
                         }
                     }
@@ -268,7 +266,6 @@
                 }
             });
         }
-
         getEmpList();
 
         // 사원 리스트 - 전체 선택

@@ -66,36 +66,36 @@
     <insert id="inputEmp">
         {call declare
         begin INSERT INTO EMPL
-        (EMPL_ID,
-         EMPL_PASSWORD,
-         EMPL_NM,
-         EMPL_TELNO,
-         EMPL_EMAIL,
-         EMPL_ZIP,
-         EMPL_ADRES,
-         EMPL_DETAIL_ADRES,
-         EMPL_ENCPN,
-         EMPL_BRTHDY,
-         ENABLED,
-         COMMON_CODE_DEPT,
-         COMMON_CODE_CLSF,
-         COMMON_CODE_HFFC_STTUS,
-         COMMON_CODE_LAST_ACDMCR)
-        VALUES (#{emplId},
-                #{emplPassword},
-                #{emplNm},
-                #{emplTelno},
-                #{emplEmail},
-                #{emplZip},
-                #{emplAdres},
-                #{emplDetailAdres},
-                #{emplEncpn},
-                #{emplBrthdy},
-                #{enabled},
-                #{commonCodeDept},
-                #{commonCodeClsf},
-                #{commonCodeHffcSttus},
-                #{commonCodeLastAcdmcr});
+              (EMPL_ID,
+               EMPL_PASSWORD,
+               EMPL_NM,
+               EMPL_TELNO,
+               EMPL_EMAIL,
+               EMPL_ZIP,
+               EMPL_ADRES,
+               EMPL_DETAIL_ADRES,
+               EMPL_ENCPN,
+               EMPL_BRTHDY,
+               ENABLED,
+               COMMON_CODE_DEPT,
+               COMMON_CODE_CLSF,
+               COMMON_CODE_HFFC_STTUS,
+               COMMON_CODE_LAST_ACDMCR)
+              VALUES (#{emplId},
+                      #{emplPassword},
+                      #{emplNm},
+                      #{emplTelno},
+                      #{emplEmail},
+                      #{emplZip},
+                      #{emplAdres},
+                      #{emplDetailAdres},
+                      #{emplEncpn},
+                      #{emplBrthdy},
+                      #{enabled},
+                      #{commonCodeDept},
+                      #{commonCodeClsf},
+                      #{commonCodeHffcSttus},
+                      #{commonCodeLastAcdmcr});
 
             INSERT INTO AUTH(AUTH_CODE, AUTH_EMP_ID) VALUES ('ROLE_NEW', #{emplId});
         end}
@@ -118,7 +118,25 @@
                COMMON_CODE_LAST_ACDMCR
         FROM EMPL
     </select>
-
+    <select id="loadEmp" parameterType="String" resultType="employeeVO">
+        SELECT EMPL_ID,
+               EMPL_PASSWORD,
+               EMPL_NM,
+               EMPL_TELNO,
+               EMPL_EMAIL,
+               EMPL_ZIP,
+               EMPL_ADRES,
+               EMPL_DETAIL_ADRES,
+               EMPL_ENCPN,
+               EMPL_BRTHDY,
+               ENABLED,
+               COMMON_CODE_DEPT,
+               COMMON_CODE_CLSF,
+               COMMON_CODE_HFFC_STTUS,
+               COMMON_CODE_LAST_ACDMCR
+        FROM EMPL
+        WHERE EMPL_ID =  #{emplId}
+    </select>
 
     <select id="loadBirthday" resultType="employeeVO">
         SELECT * FROM EMPL
@@ -135,8 +153,8 @@
             )
         ORDER BY #{sortBy} DESC
     </select>
-    <select id="selectById" resultType="employeeVO">
-        SELECT * FROM EMPL WHERE EMPL_ID = #{emplId}
-    </select>
+    <!--    <select id="selectById" resultType="employeeVO">-->
+    <!--        SELECT * FROM EMPL WHERE EMPL_ID = #{emplId}-->
+    <!--    </select>-->
 
 </mapper>

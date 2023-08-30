@@ -234,7 +234,7 @@
             success: function (data) {
                 code = `<table><tr><th>사원번호</th><th>사원이름</th></tr>`;
 
-                $.each(data, function(index, item){
+                $.each(data, function (index, item) {
                     code += `<tr><td>\${item.emplId}</td>
                              <td>\${item.emplNm}</td></tr>`
                 })
@@ -253,14 +253,14 @@
             url: `/main/\${today}`,
             type: 'GET',
             success: function (data) {
-                let code = `<p>\${data.dietRice}</p>
+                let dietRes = `<p>\${data.dietRice}</p>
                             <p>\${data.dietSoup}</p>
                             <p>\${data.dietDish1}</p>
                             <p>\${data.dietDish2}</p>
                             <p>\${data.dietDish3}</p>
                             <p>\${data.dietDessert}</p>
                             `
-                $("#dietWrap").html(code);
+                $("#dietWrap").html(dietRes);
 
             },
             error: function (xhr, status, error) {
