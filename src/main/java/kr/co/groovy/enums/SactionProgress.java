@@ -1,5 +1,5 @@
 package kr.co.groovy.enums;
 
-public enum SactionStatus {
+public enum SactionProgress {
     CONSENT, RETURN, RESERVATION, RETIREVAL
 }
