@@ -132,4 +132,12 @@ public class EmployeeController {
 
     @GetMapping("/teamCommunity")
     public String teamCommunity(){return "employee/teamCommunity";}
+    @GetMapping("/myInfo")
+    public String myInfo(){return "employee/myInfo";}
+
+    @GetMapping("/modifyProfile")
+    public String modifyProfile(String emplId, String fileName, String originalFileName ){
+        service.modifyProfile(emplId,fileName, originalFileName);
+        return "redirect:/employee/myInfo";
+    }
 }

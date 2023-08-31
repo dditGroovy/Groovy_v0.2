@@ -16,8 +16,8 @@ import java.util.Map;
 public class EmployeeService {
     final
     EmployeeMapper mapper;
-  final
-  BCryptPasswordEncoder encoder;
+    final
+    BCryptPasswordEncoder encoder;
 
     public EmployeeService(EmployeeMapper mapper, BCryptPasswordEncoder encoder) {
         this.mapper = mapper;
@@ -63,8 +63,17 @@ public class EmployeeService {
     public EmployeeVO loadEmp(String emplId) {
         return mapper.loadEmp(emplId);
     }
+
     public EmployeeVO findById(String emplId) {
         return mapper.findById(emplId);
+    }
+
+    public void modifyProfile(String emplId, String fileName, String originalFileName) {
+        Map<String, String> map = new HashMap<>();
+        map.put("emplId", emplId);
+        map.put("fileName", fileName);
+        map.put("originalFileName", originalFileName);
+        mapper.modifyProfile(map);
     }
 
 

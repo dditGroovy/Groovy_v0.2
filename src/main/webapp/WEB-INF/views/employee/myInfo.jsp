@@ -49,7 +49,10 @@
     <h3>프로필 변경</h3>
     <p>프로필 사진을 변경합니다.</p>
     <label for="empProflPhotoFile">사진</label> <!-- 톱니 모양 -->
-    <input type="file" name="empProflPhotoFile" id="empProflPhotoFile" style="display: none;"/>
+<%--<sec:authorize access="isAuthenticated()">--%>
+<%--    <sec:authentication property="principal" var="CustomUser" />--%>
+<%--    <img id="userProfile" src = "/resources/images/${CustomUser.employeeVO.proflPhotoFileStreNm}" />--%>
+    <input type="file" name="proflPhotoFileStreNm" id="empProflPhotoFile" style="display: none;"/>
     <button type="button" id="pCancel">취소</button>
     <button type="button" id="pSave">저장</button>
 </form>

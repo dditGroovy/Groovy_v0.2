@@ -26,6 +26,7 @@ public interface EmployeeMapper {
 
     EmployeeVO loadEmp(String emplId);
 
+    void modifyProfile(Map<String, String> paramMap);
 
 
 }

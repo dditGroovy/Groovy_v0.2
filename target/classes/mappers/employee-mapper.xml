@@ -163,5 +163,7 @@
         <select id="findById" parameterType="String" resultType="employeeVO">
             SELECT * FROM EMPL WHERE EMPL_ID = #{emplId}
         </select>
+    <update id="updateProfileFileName" parameterType="map">
 
+    </update>
 </mapper>
