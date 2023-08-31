@@ -41,13 +41,9 @@ public class EmployeeService {
         return mapper.signIn(emplId);
     }
 
-    public void initPassword(@RequestParam("emplId") String emplId,
-                             @RequestParam("emplPassword") String emplPassword) {
-        Map<String, Object> paramMap = new HashMap<>();
+    public void initPassword(String emplId, String emplPassword) {
         String encodePw = encoder.encode(emplPassword);
-        paramMap.put("emplId", emplId);
-        paramMap.put("emplPassword", encodePw);
-        mapper.initPassword(paramMap);
+        mapper.initPassword(emplId, encodePw);
     }
 
     public int countEmp() {
@@ -68,7 +64,7 @@ public class EmployeeService {
         return list;
     }
 
-    public List<EmployeeVO> findEmp(@Param("depCode") String depCode, @Param("emplNm") String emplNm, @Param("sortBy") String sortBy) {
+    public List<EmployeeVO> findEmp(String depCode, String emplNm, String sortBy) {
         List<EmployeeVO> list = mapper.findEmp(depCode, emplNm, sortBy);
         for (EmployeeVO vo : list) {
             vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
@@ -110,7 +106,7 @@ public class EmployeeService {
             map.put("emplId", emplId);
             map.put("fileName", newFileName);
             map.put("originalFileName", originalFileName);
-            mapper.modifyProfile(map);
+            mapper.modifyProfile(emplId, newFileName, originalFileName);
             log.info("Profile image uploaded successfully");
         } catch (Exception e) {
             log.error("Error uploading profile image");

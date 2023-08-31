@@ -2,6 +2,8 @@ package kr.co.groovy.employee;
 
 import kr.co.groovy.vo.EmployeeVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +12,7 @@ import java.util.Map;
 public interface EmployeeMapper {
     EmployeeVO signIn(String emplId);
 
-    void initPassword(Map<String, Object> paramMap);
+    void initPassword(@Param("emplId")String emplId, @Param("emplPassword")String emplPassword);
 
     int countEmp();
 
@@ -18,7 +20,7 @@ public interface EmployeeMapper {
 
     List<EmployeeVO> loadEmpList();
 
-    List<EmployeeVO> findEmp( String depCode, String emplNm,  String sortBy);
+    List<EmployeeVO> findEmp(@Param("depCode") String depCode, @Param("emplNm") String emplNm, @Param("sortBy") String sortBy);
 
     EmployeeVO findById(String id);
 
@@ -26,7 +28,7 @@ public interface EmployeeMapper {
 
     EmployeeVO loadEmp(String emplId);
 
-    void modifyProfile(Map<String, String> paramMap);
+    void modifyProfile(@Param("depCode") String emplId, @Param("fileName") String fileName, @Param("originalFileName") String originalFileName);
 
 
 }

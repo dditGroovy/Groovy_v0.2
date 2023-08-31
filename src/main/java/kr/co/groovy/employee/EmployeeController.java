@@ -71,7 +71,7 @@ public class EmployeeController {
 
     @ResponseBody
     @GetMapping({"/findEmp"})
-    public List<EmployeeVO> findEmp(@Param("depCode") String depCode, @Param("emplNm") String emplNm, @Param("sortBy") String sortBy) {
+    public List<EmployeeVO> findEmp(String depCode, String emplNm, String sortBy) {
         return service.findEmp(depCode, emplNm, sortBy);
     }
 
