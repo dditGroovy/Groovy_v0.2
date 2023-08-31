@@ -2,25 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.groovy.common.CommonMapper">
     <select id="loadNoticeList" parameterType="String" resultType="noticeVO">
-        SELECT NOTI_SEQ,
-               NOTI_TITLE,
-               NOTI_CONTENT,
-               NOTI_DATE,
-               NOTI_RDCNT,
-               NOTI_CTGRY_ICON_FILE_STRE_NM,
-               COMMON_CODE_ESSNTL_REDNG
+        SELECT
+            NOTI_ETPR_CODE,
+            NOTI_TITLE,
+            NOTI_CONTENT,
+            NOTI_DATE,
+            NOTI_CTGRY_ICON_FILE_STRE_NM,
+            COMMON_CODE_NOTI_KIND
         FROM NOTI
 
     </select>
     <select id="findNotice" parameterType="map" resultType="noticeVO">
         SELECT
-        NOTI_SEQ,
+        NOTI_ETPR_CODE,
         NOTI_TITLE,
         NOTI_CONTENT,
         NOTI_DATE,
-        NOTI_RDCNT,
         NOTI_CTGRY_ICON_FILE_STRE_NM,
-        COMMON_CODE_ESSNTL_REDNG
+        COMMON_CODE_NOTI_KIND
         FROM NOTI
         WHERE 1 = 1
         <if test="keyword!=null and keyword!=''">
@@ -34,18 +33,17 @@
         </if>
     </select>
     <select id="loadNoticeDetail" parameterType="int" resultType="noticeVO">
-            SELECT NOTI_SEQ,
-                   NOTI_TITLE,
-                   NOTI_CONTENT,
-                   NOTI_DATE,
-                   NOTI_RDCNT,
-                   NOTI_CTGRY_ICON_FILE_STRE_NM,
-                   COMMON_CODE_ESSNTL_REDNG
+            SELECT   NOTI_ETPR_CODE,
+                     NOTI_TITLE,
+                     NOTI_CONTENT,
+                     NOTI_DATE,
+                     NOTI_CTGRY_ICON_FILE_STRE_NM,
+                     COMMON_CODE_NOTI_KIND
             FROM NOTI
-            WHERE NOTI_SEQ = #{notiSeq}
+            WHERE NOTI_ETPR_CODE = #{notiEtprCode}
     </select>
     <update id="modifyNoticeView" parameterType="int">
-        UPDATE NOTI SET NOTI_RDCNT=NOTI_RDCNT + 1 WHERE NOTI_SEQ = #{notiSeq}
+        UPDATE NOTI SET NOTI_RDCNT=NOTI_RDCNT + 1 WHERE NOTI_ETPR_CODE = #{notiEtprCode}
     </update>
     <select id="loadOrgChart" parameterType="String" resultType="employeeVO">
         SELECT E.EMPL_ID,

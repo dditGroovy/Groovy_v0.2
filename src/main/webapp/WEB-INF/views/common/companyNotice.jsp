@@ -75,7 +75,7 @@
     <c:forEach var="noticeVO" items="${noticeList}" varStatus="stat"> <!-- 12: 공지사항 개수(length) -->
 
         <div class="box-notice card-df">
-            <a href="/common/noticeDetail?notiSeq=${noticeVO.notiSeq}">
+            <a href="/common/noticeDetail?notiEtprCode=${noticeVO.notiEtprCode}">
                 <p><img src="/resources/images/${noticeVO.notiCtgryIconFileStreNm}"></p>
                 <p>${noticeVO.notiTitle}</p>
                 <p>${noticeVO.notiContent}</p>

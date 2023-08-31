@@ -47,9 +47,9 @@ public class CommonController {
     }
 
     @GetMapping("/noticeDetail")
-    public ModelAndView loadNoticeDetail(ModelAndView mav, int notiSeq) {
-        service.modifyNoticeView(notiSeq);
-        NoticeVO vo = service.loadNoticeDetail(notiSeq);
+    public ModelAndView loadNoticeDetail(ModelAndView mav, int notiEtprCode) {
+        service.modifyNoticeView(notiEtprCode);
+        NoticeVO vo = service.loadNoticeDetail(notiEtprCode);
         mav.addObject("noticeDetail", vo);
         mav.setViewName("common/companyNoticeDetail");
         return mav;

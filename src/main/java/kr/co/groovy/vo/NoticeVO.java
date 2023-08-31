@@ -9,12 +9,13 @@ import java.sql.Date;
 @Setter
 @ToString
 public class NoticeVO {
-    private int notiSeq;
+    private String notiEtprCode;
     private String notiTitle;
     private String notiContent;
     private Date notiDate;
     private int notiRdcnt;
     private String notiCtgryIconFileStreNm;
-    private String commonCodeEssntlRedng;
+    private String commonCodeNotiKind;
+
 
 }
