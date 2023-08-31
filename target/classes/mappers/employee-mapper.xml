@@ -17,6 +17,8 @@
         <result property="commonCodeClsf" column="COMMON_CODE_CLSF"/>
         <result property="commonCodeHffcSttus" column="COMMON_CODE_HFFC_STTUS"/>
         <result property="commonCodeLastAcdmcr" column="COMMON_CODE_LAST_ACDMCR"/>
+        <result property="signPhotoFileStreNm" column="SIGN_FILE_NAME"/>
+        <result property="proflPhotoFileStreNm" column="PROFILE_FILE_NAME"/>
         <collection property="employeeAuthVOList" resultMap="employeeAuthMap"/>
     </resultMap>
 
@@ -41,11 +43,16 @@
                A.COMMON_CODE_HFFC_STTUS,
                A.COMMON_CODE_LAST_ACDMCR,
                B.AUTH_CODE,
-               B.AUTH_EMP_ID
-        FROM EMPL A,
-             AUTH B
-        WHERE A.EMPL_ID = B.AUTH_EMP_ID
-          AND A.EMPL_ID = #{emplId}
+               B.AUTH_EMP_ID,
+               UF.UPLOAD_FILE_STRE_NM AS PROFILE_FILE_NAME,
+               UF2.UPLOAD_FILE_STRE_NM AS SIGN_FILE_NAME
+        FROM EMPL A
+                 JOIN AUTH B ON A.EMPL_ID = B.AUTH_EMP_ID
+                 JOIN PROFL P ON A.EMPL_ID = P.PROFL_EMPL_ID
+                 JOIN UPLOAD_FILE UF ON P.PROFL_ETPR_CODE = UF.UPLOAD_FILE_ETPR_CODE
+                 JOIN SIGN S ON B.AUTH_EMP_ID = S.SIGN_EMPL_ID
+                 JOIN UPLOAD_FILE UF2 ON S.SIGN_ETPR_CODE = UF2.UPLOAD_FILE_ETPR_CODE
+        WHERE A.EMPL_ID = #{emplId}
     </select>
     <update id="initPassword" parameterType="map">
         {call declare

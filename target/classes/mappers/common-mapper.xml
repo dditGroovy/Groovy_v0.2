@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.groovy.common.CommonMapper">
+
+    <resultMap type="employeeVO" id="employeeWithPhoto">
+        <result property="emplId" column="EMPL_ID"/>
+        <result property="emplNm" column="EMPL_NM"/>
+        <result property="emplTelno" column="EMPL_TELNO"/>
+        <result property="emplEmail" column="EMPL_EMAIL"/>
+        <result property="emplBrthdy" column="EMPL_BRTHDY"/>
+        <result property="commonCodeDept" column="COMMON_CODE_DEPT"/>
+        <result property="commonCodeClsf" column="COMMON_CODE_CLSF"/>
+        <result property="commonCodeHffcSttus" column="COMMON_CODE_HFFC_STTUS"/>
+        <result property="proflPhotoFileStreNm" column="UPLOAD_FILE_STRE_NM"/>
+    </resultMap>
+
     <select id="loadNoticeList" parameterType="String" resultType="noticeVO">
-        SELECT NOTI_SEQ,
-               NOTI_TITLE,
-               NOTI_CONTENT,
-               NOTI_DATE,
-               NOTI_RDCNT,
-               NOTI_CTGRY_ICON_FILE_STRE_NM,
-               COMMON_CODE_ESSNTL_REDNG
+        SELECT
+            NOTI_ETPR_CODE,
+            NOTI_TITLE,
+            NOTI_CONTENT,
+            NOTI_DATE,
+            NOTI_CTGRY_ICON_FILE_STRE_NM,
+            COMMON_CODE_NOTI_KIND
         FROM NOTI
 
     </select>
     <select id="findNotice" parameterType="map" resultType="noticeVO">
         SELECT
-        NOTI_SEQ,
+        NOTI_ETPR_CODE,
         NOTI_TITLE,
         NOTI_CONTENT,
         NOTI_DATE,
-        NOTI_RDCNT,
         NOTI_CTGRY_ICON_FILE_STRE_NM,
-        COMMON_CODE_ESSNTL_REDNG
+        COMMON_CODE_NOTI_KIND
         FROM NOTI
         WHERE 1 = 1
         <if test="keyword!=null and keyword!=''">
@@ -34,29 +46,24 @@
         </if>
     </select>
     <select id="loadNoticeDetail" parameterType="int" resultType="noticeVO">
-            SELECT NOTI_SEQ,
-                   NOTI_TITLE,
-                   NOTI_CONTENT,
-                   NOTI_DATE,
-                   NOTI_RDCNT,
-                   NOTI_CTGRY_ICON_FILE_STRE_NM,
-                   COMMON_CODE_ESSNTL_REDNG
+            SELECT   NOTI_ETPR_CODE,
+                     NOTI_TITLE,
+                     NOTI_CONTENT,
+                     NOTI_DATE,
+                     NOTI_CTGRY_ICON_FILE_STRE_NM,
+                     COMMON_CODE_NOTI_KIND
             FROM NOTI
-            WHERE NOTI_SEQ = #{notiSeq}
+            WHERE NOTI_ETPR_CODE = #{notiEtprCode}
     </select>
     <update id="modifyNoticeView" parameterType="int">
-        UPDATE NOTI SET NOTI_RDCNT=NOTI_RDCNT + 1 WHERE NOTI_SEQ = #{notiSeq}
+        UPDATE NOTI SET NOTI_RDCNT=NOTI_RDCNT + 1 WHERE NOTI_ETPR_CODE = #{notiEtprCode}
     </update>
-    <select id="loadOrgChart" parameterType="String" resultType="employeeVO">
-        SELECT E.EMPL_ID,
-               E.EMPL_NM,
-               E.EMPL_EMAIL,
-               E.COMMON_CODE_DEPT,
-               E.COMMON_CODE_CLSF,
-               P.PROFL_PHOTO_FILE_STRE_NM
-        FROM EMPL E,
-             PROFL P
-        WHERE E.EMPL_ID = PROFL_EMPL_ID AND
-            E.COMMON_CODE_DEPT = #{depCode}
+    <select id="loadOrgChart" parameterType="String" resultMap="employeeWithPhoto">
+        SELECT UF.UPLOAD_FILE_STRE_NM,
+               E.*
+        FROM UPLOAD_FILE UF
+                 JOIN PROFL P ON UF.UPLOAD_FILE_ETPR_CODE = P.PROFL_ETPR_CODE
+                 JOIN EMPL E ON P.PROFL_EMPL_ID = E.EMPL_ID
+        WHERE E.COMMON_CODE_DEPT = #{depCode}
     </select>
 </mapper>

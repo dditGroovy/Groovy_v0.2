@@ -5,15 +5,13 @@
 <div id="sideBar">
   <header id="header">
     <div id="profile">
-      <img id="userProfile" src = "http://placehold.it/120X120" />
+      <sec:authorize access="isAuthenticated()">
+      <sec:authentication property="principal" var="CustomUser" />
+      <img id="userProfile" src = "/resources/images/${CustomUser.employeeVO.proflPhotoFileStreNm}" />
     </div>
     <div class="user">
       <div class="user-info">
-
-        <sec:authorize access="isAuthenticated()">
-          <sec:authentication property="principal" var="CustomUser" />
           <span id="userName" class="font-24 font-md" >${CustomUser.employeeVO.emplNm}</span>
-
         <span id="userHierarchy" class="font-14 font-md">${CustomUser.employeeVO.commonCodeClsf}</span></sec:authorize>
       </div>
       <div class="user-service">

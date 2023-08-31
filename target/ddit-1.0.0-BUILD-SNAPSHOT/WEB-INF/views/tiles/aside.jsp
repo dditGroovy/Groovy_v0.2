@@ -5,15 +5,14 @@
 <div id="sideBar">
   <header id="header">
     <div id="profile">
-      <img id="userProfile" src = "http://placehold.it/120X120" />
+      <sec:authorize access="isAuthenticated()">
+      <sec:authentication property="principal" var="CustomUser" />
+<%--        120/120--%>
+      <img id="userProfile" src = "/resources/images/${CustomUser.employeeVO.proflPhotoFileStreNm}" />
     </div>
     <div class="user">
       <div class="user-info">
-
-        <sec:authorize access="isAuthenticated()">
-          <sec:authentication property="principal" var="CustomUser" />
           <span id="userName" class="font-24 font-md" >${CustomUser.employeeVO.emplNm}</span>
-
         <span id="userHierarchy" class="font-14 font-md">${CustomUser.employeeVO.commonCodeClsf}</span></sec:authorize>
       </div>
       <div class="user-service">
@@ -44,7 +43,7 @@
       <span class="nav-cate">팀</span>
       <ul>
         <li class="nav-list"><a href="#"><i class="icon icon6"></i>캘린더</a></li>
-        <li class="nav-list"><a href="#"><i class="icon icon7"></i>팀 커뮤니티</a></li>
+        <li class="nav-list"><a href="${pageContext.request.contextPath}/employee/teamCommunity"><i class="icon icon7"></i>팀 커뮤니티</a></li>
       </ul>
     </div>
     <div class="company">
