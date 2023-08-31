@@ -28,9 +28,9 @@ public interface EmployeeMapper {
 
     EmployeeVO loadEmp(String emplId);
 
-    void modifyProfile(@Param("depCode") String emplId, @Param("fileName") String fileName, @Param("originalFileName") String originalFileName);
+    void modifyProfile(@Param("emplId") String emplId, @Param("fileName") String fileName, @Param("originalFileName") String originalFileName);
     void modifyPassword(@Param("emplId")String emplId, @Param("emplPassword")String emplPassword);
-
+    void modifySign(@Param("emplId") String emplId, @Param("fileName") String fileName, @Param("originalFileName") String originalFileName);
 
 }
 

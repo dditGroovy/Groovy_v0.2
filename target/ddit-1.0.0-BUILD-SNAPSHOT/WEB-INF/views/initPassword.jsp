@@ -20,7 +20,7 @@
     <label for="emplId">아이디</label>
     <sec:authorize access="isAuthenticated()">
         <sec:authentication property="principal.username" var="emplId"/>
-        <input type="text" name="emplId" id="emplId" readonly value="${emplId}"><br/></sec:authorize>
+        <input type="hidden" name="emplId" id="emplId" readonly value="${emplId}"><br/></sec:authorize>
     <br/>
     <label for="empPass">비밀번호</label>
     <input type="password" name="emplPassword" id="empPass"> <br/>

@@ -5,19 +5,15 @@ import kr.co.groovy.enums.Department;
 import kr.co.groovy.security.CustomUser;
 import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
@@ -102,18 +98,46 @@ public class EmployeeService {
             EmployeeVO employeeVO = customUser.getEmployeeVO();
             employeeVO.setProflPhotoFileStreNm(newFileName);
 
-            Map<String, String> map = new HashMap<>();
-            map.put("emplId", emplId);
-            map.put("fileName", newFileName);
-            map.put("originalFileName", originalFileName);
             mapper.modifyProfile(emplId, newFileName, originalFileName);
             log.info("프로필 사진 변경 성공");
         } catch (Exception e) {
             log.info("프로필 사진 변경 실패");
         }
     }
+
     public void modifyPassword(String emplId, String emplPassword) {
         String encodePw = encoder.encode(emplPassword);
         mapper.modifyPassword(emplId, encodePw);
     }
+
+    public void modifySign(String emplId, MultipartFile signPhotoFile) {
+        try {
+            String path = "/Users/seojukang/IdeaProjects/Groovy_v0.2.4/src/main/webapp/resources/images/sign";
+            log.debug("왜?1");
+
+            String originalFileName = signPhotoFile.getOriginalFilename();
+            String extension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+            String newFileName = UUID.randomUUID() + "." + extension; // 나중에 처리해도 됨(테스트 기간에는 X)
+            log.debug("왜?2");
+
+            File saveFile = new File(path, newFileName);
+            signPhotoFile.transferTo(saveFile);
+            log.debug("왜?3");
+
+            // 로그인한 유저의 서명 사진 변수 값 변경
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            CustomUser customUser = (CustomUser) authentication.getPrincipal();
+            EmployeeVO employeeVO = customUser.getEmployeeVO();
+            employeeVO.setSignPhotoFileStreNm(newFileName);
+            log.debug("왜?4");
+            log.info(emplId);
+            log.info(signPhotoFile + "service");
+
+            mapper.modifySign(emplId, newFileName, originalFileName);
+            log.info("서명 변경 성공");
+        } catch (Exception e) {
+            log.info("서명 변경 실패");
+        }
+    }
 }
+

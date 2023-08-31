@@ -190,7 +190,7 @@
         FROM EMPL
         WHERE EMPL_ID = #{emplId}
     </select>
-    <update id="modifyProfile" parameterType="map">
+    <update id="modifyProfile" parameterType="String">
         UPDATE UPLOAD_FILE
         SET UPLOAD_FILE_STRE_NM   = #{fileName},
             UPLOAD_FILE_ORGINL_NM = #{originalFileName}
@@ -203,5 +203,15 @@
         UPDATE EMPL
         SET EMPL_PASSWORD = #{emplPassword}
         WHERE EMPL_ID = #{emplId}
+    </update>
+    
+    <update id="modifySign" parameterType="String">
+        UPDATE UPLOAD_FILE
+        SET UPLOAD_FILE_STRE_NM   = #{fileName},
+            UPLOAD_FILE_ORGINL_NM = #{originalFileName}
+        WHERE UPLOAD_FILE_ETPR_CODE = (SELECT S.SIGN_ETPR_CODE
+                                       FROM EMPL E
+                                                JOIN SIGN S ON E.EMPL_ID = S.SIGN_EMPL_ID
+                                       WHERE E.EMPL_ID = #{emplId})
     </update>
 </mapper>

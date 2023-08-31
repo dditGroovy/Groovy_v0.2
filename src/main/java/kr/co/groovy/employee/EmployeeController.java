@@ -1,7 +1,6 @@
 package kr.co.groovy.employee;
 
 import kr.co.groovy.vo.EmployeeVO;
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -12,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@RequestMapping({"/employee"})
+@RequestMapping("/employee")
 @Controller
 public class EmployeeController {
     private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
@@ -22,66 +21,66 @@ public class EmployeeController {
         this.service = service;
     }
 
-    @GetMapping({"/signIn"})
+    @GetMapping("/signIn")
     public String singInForm(Authentication auth) {
         return auth != null ? "main/home" : "signIn";
     }
 
-    @GetMapping({"/signInFail"})
+    @GetMapping("/signInFail")
     public ModelAndView signInFail(ModelAndView mav, String exception) {
         mav.addObject("message", exception);
         mav.setViewName("signIn");
         return mav;
     }
 
-    @GetMapping({"/manageEmp"})
+    @GetMapping("/manageEmp")
     public String manageEmp() {
         return "admin/manageEmployee";
     }
 
-    @GetMapping({"/initPassword"})
+    @GetMapping("/initPassword")
     public String initPasswordForm() {
         return "initPassword";
     }
 
-    @PostMapping({"/initPassword"})
+    @PostMapping("/initPassword")
     public String initPassword(@RequestParam("emplId") String emplId, @RequestParam("emplPassword") String emplPassword) {
         this.service.initPassword(emplId, emplPassword);
         return "main/home";
     }
 
     @ResponseBody
-    @GetMapping({"/countEmp"})
+    @GetMapping("/countEmp")
     public String countEmp() {
         int result = this.service.countEmp();
         return Integer.toString(this.service.countEmp());
     }
 
-    @PostMapping({"/inputEmp"})
+    @PostMapping("/inputEmp")
     public String inputEmp(EmployeeVO vo) {
         this.service.inputEmp(vo);
         return "redirect:/employee/manageEmp";
     }
 
     @ResponseBody
-    @GetMapping({"/loadEmpList"})
+    @GetMapping("/loadEmpList")
     public List<EmployeeVO> loadEmpList() {
         return service.loadEmpList();
     }
 
     @ResponseBody
-    @GetMapping({"/findEmp"})
+    @GetMapping("/findEmp")
     public List<EmployeeVO> findEmp(String depCode, String emplNm, String sortBy) {
         return service.findEmp(depCode, emplNm, sortBy);
     }
 
     @ResponseBody
-    @GetMapping({"/loadBirthday"})
+    @GetMapping("/loadBirthday")
     public List<EmployeeVO> loadBirthday() {
         return service.loadBirthday();
     }
 
-    @GetMapping({"/loadEmp/{emplId}"})
+    @GetMapping("/loadEmp/{emplId}")
     public ModelAndView loadEmp(ModelAndView mav, @PathVariable String emplId) {
         EmployeeVO vo = this.service.loadEmp(emplId);
         mav.addObject("empVO", vo);
@@ -89,42 +88,42 @@ public class EmployeeController {
         return mav;
     }
 
-    @GetMapping({"/myVacation"})
+    @GetMapping("/myVacation")
     public String myVacation() {
         return "employee/myVacation";
     }
 
-    @GetMapping({"/vacationRecord"})
+    @GetMapping("/vacationRecord")
     public String vacationRecord() {
         return "employee/vacationRecord";
     }
 
-    @GetMapping({"/mySalary"})
+    @GetMapping("/mySalary")
     public String mySalary() {
         return "employee/mySalary";
     }
 
-    @GetMapping({"/myChat"})
+    @GetMapping("/myChat")
     public String myChat() {
         return "employee/myChat";
     }
 
-    @GetMapping({"/commute"})
+    @GetMapping("/commute")
     public String commute() {
         return "employee/commute";
     }
 
-    @GetMapping({"/teamCommunity"})
+    @GetMapping("/teamCommunity")
     public String teamCommunity() {
         return "employee/teamCommunity";
     }
 
-    @GetMapping({"/myInfo"})
+    @GetMapping("/myInfo")
     public String myInfo() {
         return "employee/myInfo";
     }
 
-    @PostMapping({"/modifyProfile"})
+    @PostMapping("/modifyProfile")
     public String modifyProfile(String emplId, MultipartFile profileFile) {
         service.modifyProfile(emplId, profileFile);
         return "redirect:/employee/myInfo";
@@ -135,6 +134,14 @@ public class EmployeeController {
         service.modifyPassword(emplId, emplPassword);
         return "redirect:/employee/myInfo";
 
+    }
+
+    @PostMapping("/modifySign")
+    public String modifySign(@RequestParam("emplId")String emplId, @RequestParam("signPhotoFile")MultipartFile signPhotoFile) {
+        log.info(emplId);
+        log.info(signPhotoFile + "");
+        service.modifySign(emplId, signPhotoFile);
+        return "employee/myInfo";
     }
 }
 

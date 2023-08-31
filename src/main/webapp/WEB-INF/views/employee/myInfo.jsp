@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="sec"
-           uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <style>
     .toggle {
@@ -56,7 +55,7 @@
     <sec:authentication property="principal" var="CustomUser"/>
 <img id="userProfile" src="/resources/images/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
 
-<form action="${pageContext.request.contextPath}/employee/modifyProfile" enctype="multipart/form-data" method="post" >
+<form action="${pageContext.request.contextPath}/employee/modifyProfile" enctype="multipart/form-data" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="text" name="emplId" id="emplId" readonly
            value="${CustomUser.employeeVO.emplId}"><br/></sec:authorize>
@@ -79,33 +78,35 @@
     <sec:authorize access="isAuthenticated()">
         <sec:authentication property="principal.username" var="emplId"/>
         <input type="hidden" name="emplId" id="emplId" readonly value="${emplId}"><br/></sec:authorize>
-<%--    <h3>정보 변경</h3>--%>
-<%--    <label for="emplTelNo">휴대폰 번호</label>--%>
-<%--    <input type="text" name="emplTelNo" id="emplTelNo" placeholder="010-1234-1234"/>--%>
-<%--    <label for="emplZip">우편번호</label> <!-- 나중에 display:none -->--%>
-<%--    <input type="text" name="emplZip" id="emplZip" placeholder="12345"/>--%>
-<%--    <label for="emplAdres">주소</label>--%>
-<%--    <input type="text" name="emplAdres" id="emplAdres" placeholder="경기도 성남시 분당구 새마을로 38"/>--%>
+
     <button type="reset" id="iCancel">취소</button>
     <button type="submit" id="iSave">저장</button>
 </form>
 
+
 <hr/>
-<form action="">
-    <h2>내 정보 관리</h2>
-    <h3>서명 설정/변경</h3>
-    <p>전자결재에 필요한 서명을 설정 · 변경합니다.</p>
-    <div id="emplSignFilePreview"></div>
-    <!-- 미리보기 -->
-    <p>서명</p>
-    <label for="emplSignFile">등록</label> <!-- 등록 버튼 -->
-    <input type="file" name="emplSignFile" id="emplSignFile" style="display: none;"/>
+<h2>내 정보 관리</h2>
+<h3>서명 설정/변경</h3>
+<p>전자결재에 필요한 서명을 설정 · 변경합니다.</p>
+<div id="emplSignFilePreview"></div>
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="CustomUser"/>
+<img id="userSignProfile" src="/resources/images/sign/${CustomUser.employeeVO.signPhotoFileStreNm}"/>
+<!-- 미리보기 -->
+<p>서명</p>
+<label for="emplSignFile">등록</label> <!-- 등록 버튼 -->
+
+
+<form action="${pageContext.request.contextPath}/employee/modifySign" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input type="text" name="emplId"  readonly
+           value="${CustomUser.employeeVO.emplId}"><br/>
+    <input type="file" name="signPhotoFile" id="emplSignFile"/>
     <button type="button">삭제</button>
-
-    <button type="button" id="sCancel">취소</button>
-    <button type="button" id="sSave">저장</button>
+    <button type="reset" id="sCancel">취소</button>
+    <button type="submit" id="sSave">저장</button>
 </form>
-
+</sec:authorize>
 <hr/>
 
 <form action="">
@@ -165,3 +166,11 @@
     <button type="button">취소</button>
     <button type="button">저장</button>
 </form>
+
+<%--    <h3>정보 변경</h3>--%>
+<%--    <label for="emplTelNo">휴대폰 번호</label>--%>
+<%--    <input type="text" name="emplTelNo" id="emplTelNo" placeholder="010-1234-1234"/>--%>
+<%--    <label for="emplZip">우편번호</label> <!-- 나중에 display:none -->--%>
+<%--    <input type="text" name="emplZip" id="emplZip" placeholder="12345"/>--%>
+<%--    <label for="emplAdres">주소</label>--%>
+<%--    <input type="text" name="emplAdres" id="emplAdres" placeholder="경기도 성남시 분당구 새마을로 38"/>--%>
