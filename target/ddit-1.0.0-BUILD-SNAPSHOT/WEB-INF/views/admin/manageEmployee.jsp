@@ -16,7 +16,8 @@
             <!-- seoju : csrf 토큰 추가-->
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="enabled" value="1"/>
-
+            <input type="hidden" name="proflPhotoFileStreNm" value="groovy_noProfile.png"/>
+            <input type="hidden" name="signPhotoFileStreNm" value="groovy_noSign.png"/>
             <label>비밀번호</label>
             <input type="password" name="emplPassword" required><br/>
 

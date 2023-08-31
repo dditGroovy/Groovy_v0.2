@@ -105,7 +105,29 @@
                     #{commonCodeHffcSttus},
                     #{commonCodeLastAcdmcr});
 
-            INSERT INTO AUTH(AUTH_CODE, AUTH_EMP_ID) VALUES ('ROLE_NEW', #{emplId});
+            INSERT INTO AUTH(AUTH_CODE,
+                             AUTH_EMP_ID)
+            VALUES ('ROLE_NEW', #{emplId});
+
+            INSERT INTO UPLOAD_FILE(UPLOAD_FILE_SN, UPLOAD_FILE_ETPR_CODE, UPLOAD_FILE_ORGINL_NM, UPLOAD_FILE_STRE_NM,
+                                    UPLOAD_FILE_SIZE,
+                                    UPLOAD_FILE_RGSDE)
+            VALUES (UPLOAD_FILE_SEQ.nextval,
+                    'PROFL-' || PROFL_SEQ.nextval || '-' || #{emplId},
+                    'default', #{proflPhotoFileStreNm}, 0, sysdate);
+
+            INSERT INTO PROFL(PROFL_ETPR_CODE, PROFL_EMPL_ID)
+            VALUES ('PROFL-' || PROFL_SEQ.nextval || '-' || #{emplId}, #{emplId});
+
+            INSERT INTO UPLOAD_FILE(UPLOAD_FILE_SN, UPLOAD_FILE_ETPR_CODE, UPLOAD_FILE_ORGINL_NM, UPLOAD_FILE_STRE_NM,
+                                    UPLOAD_FILE_SIZE,
+                                    UPLOAD_FILE_RGSDE)
+            VALUES (UPLOAD_FILE_SEQ.nextval,
+                    'SIGN-' || SIGN_SEQ.nextval || '-' || #{emplId},
+                    'default', #{signPhotoFileStreNm}, 0, sysdate);
+            INSERT INTO SIGN(SIGN_ETPR_CODE, SIGN_EMPL_ID)
+            VALUES ('SIGN-' || SIGN_SEQ.nextval || '-' || #{emplId}, #{emplId});
+
         end}
     </insert>
     <select id="loadEmpList" resultType="employeeVO">
