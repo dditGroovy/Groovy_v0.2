@@ -15,37 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "main/home";
-	}
-	@GetMapping("/test/commute")
-	public String commute() {
-		return "employee/commute";
+	public String home() {
+		return "signIn";
 	}
 
-	@GetMapping("/test/myInfo")
-	public String myInfo() {
-		return "main/myInfo";
-	}
 
-	@GetMapping("/test/test1")
-	public String test1() {
-		return "test/test1";
-	}
-
-//	@GetMapping("/login")
-//	public String login() {
-//		return "login";
-//	}
 	@GetMapping("/mail")
 	public String allMail() {
 		return "mail/allMail";
@@ -57,10 +31,6 @@ public class HomeController {
 	@GetMapping("/mail/sendMail")
 	public String sendMail() {
 		return "mail/sendMail";
-	}
-	@GetMapping("/test/company-notice")
-	public String companyNotice() {
-		return "companyNotice";
 	}
 
 

@@ -23,4 +23,9 @@ public class MainController {
     public DietVO loadMenu(@PathVariable String today) {
         return service.loadDiet(today);
     }
+
+    @GetMapping("/home")
+    public String comebackHome(){
+        return "main/home";
+    }
 }

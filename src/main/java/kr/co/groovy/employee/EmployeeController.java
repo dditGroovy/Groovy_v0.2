@@ -5,14 +5,11 @@ import kr.co.groovy.enums.Department;
 import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @RequestMapping("/employee")
@@ -20,12 +17,9 @@ import java.util.Map;
 public class EmployeeController {
     final
     EmployeeService service;
-    final
-    BCryptPasswordEncoder encoder;
 
-    public EmployeeController(EmployeeService service, BCryptPasswordEncoder encoder) {
+    public EmployeeController(EmployeeService service) {
         this.service = service;
-        this.encoder = encoder;
     }
 
     @GetMapping("/signIn")
@@ -53,13 +47,10 @@ public class EmployeeController {
     @PostMapping("/initPassword")
     public String initPassword(@RequestParam("emplId") String emplId,
                                @RequestParam("emplPassword") String emplPassword) {
-        Map<String, Object> paramMap = new HashMap<>();
-        String encodePw = encoder.encode(emplPassword);
-        paramMap.put("emplId", emplId);
-        paramMap.put("emplPassword", encodePw);
-        service.initPassword(paramMap);
+        service.initPassword(emplId, emplPassword);
         return "main/home";
     }
+
     @ResponseBody
     @GetMapping("/countEmp")
     public String countEmp() {
@@ -69,7 +60,6 @@ public class EmployeeController {
 
     @PostMapping("/inputEmp")
     public String inputEmp(EmployeeVO vo) {
-        vo.setEmplPassword(encoder.encode(vo.getEmplPassword()));
         service.inputEmp(vo);
         return "redirect:/employee/manageEmp";
     }
@@ -127,5 +117,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/myChat")
-    public String myChat(){return "employee/myChat";}
+    public String myChat() {
+        return "employee/myChat";
+    }
+
+    @GetMapping("/commute")
+    public String commute() {
+        return "employee/commute";
+    }
 }
