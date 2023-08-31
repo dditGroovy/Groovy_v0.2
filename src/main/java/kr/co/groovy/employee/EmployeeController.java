@@ -5,6 +5,7 @@ import kr.co.groovy.enums.Department;
 import kr.co.groovy.vo.EmployeeVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +24,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/signIn")
-    public String singInForm() {
+    public String singInForm(Authentication auth) {
+        if(auth != null){
+            return "main/home";
+        }
         return "signIn";
     }
 
