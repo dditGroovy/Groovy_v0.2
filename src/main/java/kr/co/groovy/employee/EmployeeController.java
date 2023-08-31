@@ -129,4 +129,7 @@ public class EmployeeController {
     public String commute() {
         return "employee/commute";
     }
+
+    @GetMapping("/teamCommunity")
+    public String teamCommunity(){return "employee/teamCommunity";}
 }
