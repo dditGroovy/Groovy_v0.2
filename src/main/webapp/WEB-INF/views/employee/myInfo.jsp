@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="sec"
+           uri="http://www.springframework.org/security/tags" %>
+<html>
 <style>
     .toggle {
         position: relative;
@@ -44,18 +46,26 @@
         transform: translateX(26px);
     }
 </style>
-<form action="">
-    <h2>내 정보 관리</h2>
-    <h3>프로필 변경</h3>
-    <p>프로필 사진을 변경합니다.</p>
-    <label for="empProflPhotoFile">사진</label> <!-- 톱니 모양 -->
-<%--<sec:authorize access="isAuthenticated()">--%>
-<%--    <sec:authentication property="principal" var="CustomUser" />--%>
-<%--    <img id="userProfile" src = "/resources/images/${CustomUser.employeeVO.proflPhotoFileStreNm}" />--%>
-    <input type="file" name="proflPhotoFileStreNm" id="empProflPhotoFile" style="display: none;"/>
-    <button type="button" id="pCancel">취소</button>
-    <button type="button" id="pSave">저장</button>
+
+
+<h2>내 정보 관리</h2>
+<h3>프로필 변경</h3>
+<p>프로필 사진을 변경합니다.</p>
+<label for="empProflPhotoFile">사진</label> <!-- 톱니 모양 -->
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="CustomUser"/>
+<img id="userProfile" src="/resources/images/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
+
+<form action="${pageContext.request.contextPath}/employee/modifyProfile" enctype="multipart/form-data" method="post" >
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input type="text" name="emplId" id="emplId" readonly
+           value="${CustomUser.employeeVO.emplId}"><br/></sec:authorize>
+    <%--style="display: none;"--%>
+    <input type="file" name="profileFile" id="empProflPhotoFile"/>
+    <button type="reset" id="pCancel">취소</button>
+    <button type="submit" id="pSave">저장</button>
 </form>
+
 
 <hr/>
 <form action="">

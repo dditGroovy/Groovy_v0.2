@@ -146,6 +146,7 @@
         WHERE EMPL_ID = #{emplId}
     </select>
 
+    <!--프로필 사진 추가-->
     <select id="loadBirthday" resultType="employeeVO">
         SELECT *
         FROM EMPL
@@ -169,7 +170,7 @@
     </select>
     <update id="modifyProfile" parameterType="map">
         UPDATE UPLOAD_FILE
-        SET UPLOAD_FILE_STRE_NM   = #{ileName},
+        SET UPLOAD_FILE_STRE_NM   = #{fileName},
             UPLOAD_FILE_ORGINL_NM = #{originalFileName}
         WHERE UPLOAD_FILE_ETPR_CODE = (SELECT P.PROFL_ETPR_CODE
                                        FROM EMPL E

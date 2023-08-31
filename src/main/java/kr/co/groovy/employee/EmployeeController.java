@@ -1,143 +1,136 @@
 package kr.co.groovy.employee;
 
-import kr.co.groovy.enums.ClassOfPosition;
-import kr.co.groovy.enums.Department;
 import kr.co.groovy.vo.EmployeeVO;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Slf4j
-@RequestMapping("/employee")
+@RequestMapping({"/employee"})
 @Controller
 public class EmployeeController {
-    final
-    EmployeeService service;
+    private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
+    final EmployeeService service;
 
     public EmployeeController(EmployeeService service) {
         this.service = service;
     }
 
-    @GetMapping("/signIn")
+    @GetMapping({"/signIn"})
     public String singInForm(Authentication auth) {
-        if(auth != null){
-            return "main/home";
-        }
-        return "signIn";
+        return auth != null ? "main/home" : "signIn";
     }
 
-    @GetMapping("/signInFail")
+    @GetMapping({"/signInFail"})
     public ModelAndView signInFail(ModelAndView mav, String exception) {
         mav.addObject("message", exception);
         mav.setViewName("signIn");
         return mav;
     }
 
-    @GetMapping("/manageEmp")
+    @GetMapping({"/manageEmp"})
     public String manageEmp() {
         return "admin/manageEmployee";
     }
 
-    @GetMapping("/initPassword")
+    @GetMapping({"/initPassword"})
     public String initPasswordForm() {
         return "initPassword";
     }
 
-    @PostMapping("/initPassword")
-    public String initPassword(@RequestParam("emplId") String emplId,
-                               @RequestParam("emplPassword") String emplPassword) {
-        service.initPassword(emplId, emplPassword);
+    @PostMapping({"/initPassword"})
+    public String initPassword(@RequestParam("emplId") String emplId, @RequestParam("emplPassword") String emplPassword) {
+        this.service.initPassword(emplId, emplPassword);
         return "main/home";
     }
 
     @ResponseBody
-    @GetMapping("/countEmp")
+    @GetMapping({"/countEmp"})
     public String countEmp() {
-        int result = service.countEmp();
-        return Integer.toString(service.countEmp());
+        int result = this.service.countEmp();
+        return Integer.toString(this.service.countEmp());
     }
 
-    @PostMapping("/inputEmp")
+    @PostMapping({"/inputEmp"})
     public String inputEmp(EmployeeVO vo) {
-        service.inputEmp(vo);
+        this.service.inputEmp(vo);
         return "redirect:/employee/manageEmp";
     }
 
     @ResponseBody
-    @GetMapping("/loadEmpList")
+    @GetMapping({"/loadEmpList"})
     public List<EmployeeVO> loadEmpList() {
-        List<EmployeeVO> list = service.loadEmpList();
-        for (EmployeeVO vo : list) {
-            vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
-            vo.setCommonCodeClsf(ClassOfPosition.valueOf(vo.getCommonCodeClsf()).label());
-        }
-        return list;
+    return service.loadEmpList();
     }
 
     @ResponseBody
-    @GetMapping("/findEmp")
+    @GetMapping({"/findEmp"})
     public List<EmployeeVO> findEmp(@Param("depCode") String depCode, @Param("emplNm") String emplNm, @Param("sortBy") String sortBy) {
-        List<EmployeeVO> list = service.findEmp(depCode, emplNm, sortBy);
-        for (EmployeeVO vo : list) {
-            vo.setCommonCodeDept(Department.valueOf(vo.getCommonCodeDept()).label());
-            vo.setCommonCodeClsf(ClassOfPosition.valueOf(vo.getCommonCodeClsf()).label());
-        }
-        return list;
-
+        return service.findEmp(depCode, emplNm, sortBy);
     }
 
     @ResponseBody
-    @GetMapping("/loadBirthday")
+    @GetMapping({"/loadBirthday"})
     public List<EmployeeVO> loadBirthday() {
         return service.loadBirthday();
     }
 
-    @GetMapping("/loadEmp/{emplId}")
+    @GetMapping({"/loadEmp/{emplId}"})
     public ModelAndView loadEmp(ModelAndView mav, @PathVariable String emplId) {
-        EmployeeVO vo = service.loadEmp(emplId);
+        EmployeeVO vo = this.service.loadEmp(emplId);
         mav.addObject("empVO", vo);
         mav.setViewName("admin/employeeDetail");
         return mav;
     }
 
-    @GetMapping("/myVacation")
+    @GetMapping({"/myVacation"})
     public String myVacation() {
         return "employee/myVacation";
     }
 
-    @GetMapping("/vacationRecord")
+    @GetMapping({"/vacationRecord"})
     public String vacationRecord() {
         return "employee/vacationRecord";
     }
 
-    @GetMapping("/mySalary")
+    @GetMapping({"/mySalary"})
     public String mySalary() {
         return "employee/mySalary";
     }
 
-    @GetMapping("/myChat")
+    @GetMapping({"/myChat"})
     public String myChat() {
         return "employee/myChat";
     }
 
-    @GetMapping("/commute")
+    @GetMapping({"/commute"})
     public String commute() {
         return "employee/commute";
     }
 
-    @GetMapping("/teamCommunity")
-    public String teamCommunity(){return "employee/teamCommunity";}
-    @GetMapping("/myInfo")
-    public String myInfo(){return "employee/myInfo";}
+    @GetMapping({"/teamCommunity"})
+    public String teamCommunity() {
+        return "employee/teamCommunity";
+    }
 
-    @GetMapping("/modifyProfile")
-    public String modifyProfile(String emplId, String fileName, String originalFileName ){
-        service.modifyProfile(emplId,fileName, originalFileName);
+    @GetMapping({"/myInfo"})
+    public String myInfo() {
+        return "employee/myInfo";
+    }
+
+    @PostMapping({"/modifyProfile"})
+    public String modifyProfile(@Param("emplId") String emplId, @Param("profileFile") MultipartFile profileFile) {
+        log.info("filename={}", profileFile.getOriginalFilename());
+        log.info("filesize={}", profileFile.getSize());
+        log.info("MIME type={}", profileFile.getContentType());
+        this.service.modifyProfile(emplId, profileFile);
         return "redirect:/employee/myInfo";
     }
 }
+
