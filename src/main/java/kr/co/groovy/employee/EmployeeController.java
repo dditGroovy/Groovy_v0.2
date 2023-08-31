@@ -66,7 +66,7 @@ public class EmployeeController {
     @ResponseBody
     @GetMapping({"/loadEmpList"})
     public List<EmployeeVO> loadEmpList() {
-    return service.loadEmpList();
+        return service.loadEmpList();
     }
 
     @ResponseBody
@@ -125,12 +125,16 @@ public class EmployeeController {
     }
 
     @PostMapping({"/modifyProfile"})
-    public String modifyProfile(@Param("emplId") String emplId, @Param("profileFile") MultipartFile profileFile) {
-        log.info("filename={}", profileFile.getOriginalFilename());
-        log.info("filesize={}", profileFile.getSize());
-        log.info("MIME type={}", profileFile.getContentType());
-        this.service.modifyProfile(emplId, profileFile);
+    public String modifyProfile(String emplId, MultipartFile profileFile) {
+        service.modifyProfile(emplId, profileFile);
         return "redirect:/employee/myInfo";
+    }
+
+    @PostMapping("/modifyPassword")
+    public String modifyPassword(String emplId, String emplPassword) {
+        service.modifyPassword(emplId, emplPassword);
+        return "redirect:/employee/myInfo";
+
     }
 }
 

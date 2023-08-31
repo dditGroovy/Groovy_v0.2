@@ -68,30 +68,26 @@
 
 
 <hr/>
-<form action="">
+<form action="${pageContext.request.contextPath}/employee/modifyPassword" method="post">
     <h2>내 정보 관리</h2>
     <h3>비밀번호 변경</h3>
     <label for="emplPassword">현재 비밀번호 입력</label>
-    <input type="password" name="emplPassword" id="emplPassword" placeholder="현재 비밀번호를 입력하세요."/>
+    <input type="password" name="currentPassword" id="emplPassword" placeholder="현재 비밀번호를 입력하세요."/>
     <label for="emplPasswordCheck1">새로운 비밀번호 입력</label>
-    <input type="password" name="emplPasswordCheck1" id="emplPasswordCheck1" placeholder="새로운 비밀번호를 입력하세요."/>
-    <input type="password" name="emplPasswordCheck2" id="" placeholder="새로운 비밀번호를 입력하세요."/>
-
-</form>
-
-<hr/>
-<form action="">
-    <h3>정보 변경</h3>
-    <label for="emplEmail">이메일</label>
-    <input type="text" name="emplEmail" id="emplEmail" placeholder="kim123@naver.com"/>
-    <label for="emplEmail">휴대폰 번호</label>
-    <input type="text" name="emplTelNo" id="emplTelNo" placeholder="010-1234-1234"/>
-    <label for="emplZip">우편번호</label> <!-- 나중에 display:none -->
-    <input type="text" name="emplZip" id="emplZip" placeholder="12345"/>
-    <label for="emplAdres">주소</label>
-    <input type="text" name="emplAdres" id="emplAdres" placeholder="경기도 성남시 분당구 새마을로 38"/>
-    <button type="button" id="iCancel">취소</button>
-    <button type="button" id="iSave">저장</button>
+    <input type="password" name="emplPassword" id="emplPasswordCheck1" placeholder="새로운 비밀번호를 입력하세요."/>
+    <input type="password" name="reEmplPassword" id="" placeholder="새로운 비밀번호를 입력하세요."/>
+    <sec:authorize access="isAuthenticated()">
+        <sec:authentication property="principal.username" var="emplId"/>
+        <input type="hidden" name="emplId" id="emplId" readonly value="${emplId}"><br/></sec:authorize>
+<%--    <h3>정보 변경</h3>--%>
+<%--    <label for="emplTelNo">휴대폰 번호</label>--%>
+<%--    <input type="text" name="emplTelNo" id="emplTelNo" placeholder="010-1234-1234"/>--%>
+<%--    <label for="emplZip">우편번호</label> <!-- 나중에 display:none -->--%>
+<%--    <input type="text" name="emplZip" id="emplZip" placeholder="12345"/>--%>
+<%--    <label for="emplAdres">주소</label>--%>
+<%--    <input type="text" name="emplAdres" id="emplAdres" placeholder="경기도 성남시 분당구 새마을로 38"/>--%>
+    <button type="reset" id="iCancel">취소</button>
+    <button type="submit" id="iSave">저장</button>
 </form>
 
 <hr/>

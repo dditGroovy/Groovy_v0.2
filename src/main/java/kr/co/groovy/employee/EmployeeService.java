@@ -107,10 +107,13 @@ public class EmployeeService {
             map.put("fileName", newFileName);
             map.put("originalFileName", originalFileName);
             mapper.modifyProfile(emplId, newFileName, originalFileName);
-            log.info("Profile image uploaded successfully");
+            log.info("프로필 사진 변경 성공");
         } catch (Exception e) {
-            log.error("Error uploading profile image");
+            log.info("프로필 사진 변경 실패");
         }
-
+    }
+    public void modifyPassword(String emplId, String emplPassword) {
+        String encodePw = encoder.encode(emplPassword);
+        mapper.modifyPassword(emplId, encodePw);
     }
 }

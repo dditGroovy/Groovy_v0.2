@@ -54,7 +54,7 @@
                  JOIN UPLOAD_FILE UF2 ON S.SIGN_ETPR_CODE = UF2.UPLOAD_FILE_ETPR_CODE
         WHERE A.EMPL_ID = #{emplId}
     </select>
-    <update id="initPassword" parameterType="map">
+    <update id="initPassword" parameterType="String">
         {call declare
         begin
             UPDATE EMPL
@@ -73,6 +73,7 @@
     <insert id="inputEmp">
         {call declare
         begin
+            -- 회원 정보 입력
             INSERT INTO EMPL
             (EMPL_ID,
              EMPL_PASSWORD,
@@ -104,30 +105,29 @@
                     #{commonCodeClsf},
                     #{commonCodeHffcSttus},
                     #{commonCodeLastAcdmcr});
+            INSERT INTO AUTH(AUTH_CODE, AUTH_EMP_ID) VALUES ('ROLE_NEW', #{emplId});
 
-            INSERT INTO AUTH(AUTH_CODE,
-                             AUTH_EMP_ID)
-            VALUES ('ROLE_NEW', #{emplId});
+            INSERT INTO PROFL(PROFL_ETPR_CODE, PROFL_EMPL_ID) VALUES ('PROFL-' || PROFL_SEQ.nextval || '-' || #{emplId}, #{emplId});
+
+            INSERT INTO SIGN(SIGN_ETPR_CODE, SIGN_EMPL_ID) VALUES ('SIGN-' || SIGN_SEQ.nextval || '-' || #{emplId}, #{emplId});
 
             INSERT INTO UPLOAD_FILE(UPLOAD_FILE_SN, UPLOAD_FILE_ETPR_CODE, UPLOAD_FILE_ORGINL_NM, UPLOAD_FILE_STRE_NM,
                                     UPLOAD_FILE_SIZE,
                                     UPLOAD_FILE_RGSDE)
             VALUES (UPLOAD_FILE_SEQ.nextval,
-                    'PROFL-' || PROFL_SEQ.nextval || '-' || #{emplId},
+                    (SELECT PROFL_ETPR_CODE
+                     FROM PROFL
+                     WHERE PROFL_EMPL_ID = #{emplId}),
                     'default', #{proflPhotoFileStreNm}, 0, sysdate);
 
-            INSERT INTO PROFL(PROFL_ETPR_CODE, PROFL_EMPL_ID)
-            VALUES ('PROFL-' || PROFL_SEQ.nextval || '-' || #{emplId}, #{emplId});
-
             INSERT INTO UPLOAD_FILE(UPLOAD_FILE_SN, UPLOAD_FILE_ETPR_CODE, UPLOAD_FILE_ORGINL_NM, UPLOAD_FILE_STRE_NM,
                                     UPLOAD_FILE_SIZE,
                                     UPLOAD_FILE_RGSDE)
             VALUES (UPLOAD_FILE_SEQ.nextval,
-                    'SIGN-' || SIGN_SEQ.nextval || '-' || #{emplId},
+                    (SELECT SIGN_ETPR_CODE
+                     FROM SIGN
+                     WHERE SIGN_EMPL_ID = #{emplId}),
                     'default', #{signPhotoFileStreNm}, 0, sysdate);
-            INSERT INTO SIGN(SIGN_ETPR_CODE, SIGN_EMPL_ID)
-            VALUES ('SIGN-' || SIGN_SEQ.nextval || '-' || #{emplId}, #{emplId});
-
         end}
     </insert>
     <select id="loadEmpList" resultType="employeeVO">
@@ -198,5 +198,10 @@
                                        FROM EMPL E
                                                 JOIN PROFL P ON E.EMPL_ID = P.PROFL_EMPL_ID
                                        WHERE E.EMPL_ID = #{emplId})
+    </update>
+    <update id="modifyPassword" parameterType="String">
+        UPDATE EMPL
+        SET EMPL_PASSWORD = #{emplPassword}
+        WHERE EMPL_ID = #{emplId}
     </update>
 </mapper>
