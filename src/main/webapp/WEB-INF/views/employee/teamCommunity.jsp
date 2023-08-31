@@ -1,51 +1,77 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>팀 커뮤니티</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-</head>
-<body>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <h1>팀 커뮤니티</h1>
 <h4>인사팀만을 위한 공간입니다.</h4>
 
 <h2>포스트 등록</h2>
 <form name="insertPost" id="insertPost" enctype="application/x-www-form-urlencoded">
-    <textarea name="postContent" id="postContent" cols="30" rows="10"></textarea> <br />
-    <input type="file" name="postFile" id="postFile"><br />
+    <table border="1">
+        <tr>
+            <th>글 전사적 코드</th>
+            <td><input type="text" name="sntncEtprCode" id="sntncEtprCode"></td>
+        </tr>
+        <tr>
+            <th>글 작성 사원 아이디</th>
+            <td><input type="text" name="sntncwrtingEmplId" id="sntncwrtingEmplId"></td>
+        </tr>
+        <tr>
+            <th>글 제목</th>
+            <td><input type="text" name="sntncSj" id="sntncSj"></td>
+        </tr>
+        <tr>
+            <th>글 내용</th>
+            <td><textarea name="sntncCn" id="sntncCn" cols="50" rows="10"></textarea></td>
+        </tr>
+        <tr>
+            <th>글 작성날짜</th>
+            <td><input type="text" name="sntncWritingDate" id="sntncWritingDate"></td>
+        </tr>
+        <tr>
+            <th>글 파일첨부</th>
+            <td> <input type="file" name="postFile" id="postFile"><br /></td>
+        </tr>
+        <tr>
+            <th>글 종류 구분</th>
+            <td> <input type="text" name="commonCodeSntncCtgry" id="commonCodeSntncCtgry" value="SNTNC011"><br /></td>
+        </tr>
+    </table>
+
     <button type="button" id="insertPostBtn">등록</button>
 </form>
 <hr /><br />
 <h2>포스트 불러오기</h2>
 <form>
     <table border="1" style="width: 80%;">
-        <thead>
         <tr>
             <td>글번호</td>
-            <td>사원 이름</td>
-            <td>등록일</td>
-            <td>포스트 내용</td>
-            <td>좋아요</td>
-            <td>댓글 수</td>
-            <td>수정/삭제</td>
+            <td><input type="text" name="getSntncEtprCode" id="getSntncEtprCode" value="1"></td>
         </tr>
-        </thead>
-        <tbody>
         <tr>
-            <td>1</td>
-            <td>강서주</td>
-            <td>2023/08/08 21:42:00</td>
-            <td>Lorem ipsum dolor sit amet consectetur. In malesuada sed vitae pharetra id. Cras cong</td>
+            <td>사원 이름</td>
+            <td><input type="text" name="getSntncWritingEmplId" id="getWritingEmplId" value="강서주"></td>
+        </tr>
+        <tr>
+            <td>등록일</td>
+            <td><input type="text" name="getSntncWritingDate" id="getWritingDate" value="2023/08/08 21:42:00"></td>
+        </tr>
+        <tr>
+            <td>포스트 내용</td>
+            <td><textarea name="getSntncCn" id="getSntncCn" cols="50" rows="10">Lorem ipsum dolor sit amet consectetur. In malesuada sed vitae pharetra id. Cras cong</textarea></td>
+        </tr>
+        <tr>
+            <td>좋아요</td>
             <td>0</td>
+        </tr>
+        <tr>
+            <td>댓글 수</td>
             <td>0</td>
-            <!-- 만약에 등록 사원 아이디와 로그인한 사원 아이디가 일치할 때 노출-->
+        </tr>
+        <tr>
+            <td>수정/삭제</td>
             <td>
                 <button type="button" id="modifyBtn">수정</button>
                 <button type="button" id="deleteBtn">삭제</button>
             </td>
         </tr>
-        </tbody>
     </table>
     <hr /><br />
     <h2>포스트에 등록한 댓글 불러오기</h2>
@@ -78,6 +104,49 @@
     </table>
 </form>
 <hr /><br />
+<h2>댓글 등록하기</h2>
+<form action="#" method="post">
+    <table>
+        <tr>
+            <th>글 전사적코드</th>
+            <td><input type="text" name="answerSntncEtprCode" id="answerSntncEtprCode"></td>
+        </tr>
+        <tr>
+            <th>댓글 작성 사원 아이디</th>
+            <td><input type="text" name="answerWrtingEmplId" id="answerWrtingEmplId"></td>
+        </tr>
+        <tr>
+            <th>댓글 내용</th>
+            <td><textarea name="answerCn" id="answerCn" cols="50" rows="10"></textarea></td>
+        </tr>
+        <tr>
+            <th>댓글 날짜</th>
+            <td><input type="text" name="answerDate" id="answerDate"></td>
+        </tr>
+    </table>
+    <button>댓글 등록하기</button>
+</form>
+<br /><hr />
+<h2>좋아요 누르깅</h2>
+<form action="#" method="get">
+    <table>
+        <tr>
+            <th>글 전사적 코드</th>
+            <td><input type="text" name="recomendSntncEtprCode" id="recomendSntncEtprCode"></td>
+        </tr>
+        <tr>
+            <th>추천 사원 아이디</th>
+            <td><input type="text" name="recomendEmplId" id="recomendEmplId"></td>
+        </tr>
+        <tr>
+            <th>추천 사원 여부 구분</th>
+            <td><input type="text" name="commonCodeRecomendAt" id="commonCodeRecomendAt" value="RECOMEND011"></td>
+        </tr>
+    </table>
+    <button type="button">좋아요 누르기</button>
+</form>
+<br /><hr />
+
 <h2>투표 추가하기 <= 누르면 추가하기 모달 밑에 추가</h2>
 <button type="button" id="addVote">투표 추가하기</button>
 <div id="modal-insert-vote" style="display: none;">
@@ -141,6 +210,7 @@
         <th>등록 사원 아이디와 로그인 아이디가 일치할 때 노출 =></th>
         <td>
             <button type="button" class="modifyVote">수정</button>
+            <button type="button" class="updateVote" style="display: none">저장</button>
             <button type="button" class="deleteVote">삭제</button>
         </td>
     </tr>
@@ -150,13 +220,13 @@
         <!-- input name에 투표 항목 번호가 들어오게  -->
         <td>등록된 옵션</td>
         <td><div class="optionWrap">
-            <input type="radio" name="voteRegist1Option1" id="voteRegist1Option1" readonly checked>
+            <input type="radio" name="voteRegist1Option1" id="voteRegist1Option1" disabled checked>
             <label for="voteRegist1Option1">삼겹살</label>
-            <input type="radio" name="voteRegist1Option2" id="voteRegist1Option2" readonly>
+            <input type="radio" name="voteRegist1Option2" id="voteRegist1Option2" disabled>
             <label for="voteRegist1Option1">마라탕</label>
-            <input type="radio" name="voteRegist1Option3" id="voteRegist1Option3" readonly>
+            <input type="radio" name="voteRegist1Option3" id="voteRegist1Option3" disabled>
             <label for="voteRegist1Option3">찐옥수수</label>
-            <input type="radio" name="voteRegist1Option4" id="voteRegist1Option4" readonly>
+            <input type="radio" name="voteRegist1Option4" id="voteRegist1Option4" disabled>
             <label for="voteRegist1Option4">곱창</label>
         </div></td>
     </tr>
@@ -174,104 +244,63 @@
 
     </tbody>
 </table>
-<table border="1" style="width: 50%;" id="voteRegistId2" class="voteList">
-    <thead>
-    <tr>
-        <th>투표등록 번호 </th>
-        <td>
-            <input type="text" name="vote2"  value="VOTE_REGIST_SEQ 값" style="width: 90%;" readonly> </td> <!-- name -> VOTE_REGIST_SEQ -->
-    </tr>
-    <tr>
-        <th>투표 제목</th>
-        <td> <input type="text" name="vote2RegistTitle" value="회식 뭐먹을까요?"  style="width: 90%;" readonly> </td>
-    </tr>
-    <tr>
-        <th>투표 시작일 </th>
-        <td>
-            <input type="text" name="vote2RegistStartDate"  value="2023-08-23"  style="width: 90%;" readonly>
-        </td>
-    </tr>
-    <tr>
-        <th>투표 종료일 </th>
-        <td>
-            <input type="text" name="vote2RegistEndtDate" id="vote2RegistEndtDate" value="2023-08-28"  style="width: 90%;" readonly>
-        </td>
-    </tr>
-    <tr>
-        <th>투표 등록 사원 아이디 </th>
-        <td>
-            <input type="text" name="vote2RegistEmpId" id="vote2RegistEmpId" value="20230827"  style="width: 90%;" readonly>
-        </td>
-    </tr>
-    <!-- 만약에 등록 사원 아이디와 로그인한 사원 아이디가 일치할 때 노출-->
-    <tr>
-        <th>등록 사원 아이디와 로그인 아이디가 일치할 때 노출 =></th>
-        <td>
-            <button type="button" class="modifyVote">수정</button>
-            <button type="button" class="deleteVote">삭제</button>
-        </td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <!-- input name에 투표 항목 번호가 들어오게  -->
-        <td>등록된 옵션</td>
-        <td><div class="optionWrap">
-            <div class="option"><input type="radio" name="voteRegist2Option1" id="voteRegist2Option1" readonly checked>
-                <label for="voteRegist2Option1">삼겹살</label></div>
-            <div class="option"><input type="radio" name="voteRegist2Option2" id="voteRegist2Option2" readonly>
-                <label for="voteRegist2Option2">마라탕</label>></div>
-            <div class="option"><input type="radio" name="voteRegist2Option3" id="voteRegist2Option3" readonly>
-                <label for="voteRegist2Option3">찐옥수수</label></div>
-            <div class="option"><input type="radio" name="voteRegist2Option4" id="voteRegist2Option4" readonly>
-                <label for="voteRegist2Option4">곱창</label></div>
-        </div></td>
-    </tr>
-    <tr>
-        <td>투표 인원 수</td>
-        <td>
-            <ul>
-                <li>삼겹살 : 1 (명)</li>
-                <li>마라탕 : 1 (명)</li>
-                <li>찐옥수수 : 2 (명)</li>
-                <li>곱창 : 4 (명)</li>
-            </ul>
-        </td>
-    </tr>
-
-    </tbody>
-</table>
+<br /><hr />
+<h2>투표하기</h2>
+<form action="#" method="post">
+    <table>
+        <tr>
+            <th>투표참여사원아이디</th>
+            <td><input type="text" name="voteParcpinEmpId" id="voteParcpinEmpId"></td>
+        </tr>
+        <tr>
+            <th>투표등록번호</th>
+            <td><input type="text" name="parcpinVoteRegistSeq" id="parcpinVoteRegistSeq"></td>
+        </tr>
+        <tr>
+            <th>투표항목번호</th>
+            <td><input type="text" name="parcpinVoteOptionSeq" id="parcpinVoteOptionSeq"></td>
+        </tr>
+    </table>
+    <button type="button">투표하기</button>
+</form>
+<!--
 <div id="modifyVoteModal" class="modal" style="display: none">
-    <div class="modal-content">
-        <h3>수정 모달창</h3>
-        <form action="#">
-            <label for="modifyVoteTitle">투표 제목</label> <br />
-            <input type="text" name="modifyVoteTitle" id="modifyVoteTitle"> <br />
-            <label for="modifyOption">옵션 추가</label>
-            <button type="button" id="modifyOption">옵션 추가 +</button>
-            <div class="modifyOptions"></div>
-            <label for="modifyStartVodeDate">시작날짜</label>
-            <input type="date" name="modifyStartVodeDate" id="modifyStartVodeDate">
-            <label for="modifyEndVodeDate">마감날짜</label>
-            <input type="date" name="modifyEndVodeDate" id="modifyEndVodeDate"> <br />
-            <button type="button" id="updateVote">투표 수정</button>
-        </form>
-    </div>
+<div class="modal-content">
+<h3>수정 모달창</h3>
+<form action="#">
+<label for="modifyVoteTitle">투표 제목</label> <br />
+<input type="text" name="modifyVoteTitle" id="modifyVoteTitle"> <br />
+<label for="modifyOption">옵션 추가</label>
+<button type="button" id="modifyOption">옵션 추가 +</button>
+<div class="modifyOptions"></div>
+<label for="modifyStartVodeDate">시작날짜</label>
+<input type="date" name="modifyStartVodeDate" id="modifyStartVodeDate">
+<label for="modifyEndVodeDate">마감날짜</label>
+<input type="date" name="modifyEndVodeDate" id="modifyEndVodeDate"> <br />
+<button type="button" id="updateVote">투표 수정</button>
+</form>
 </div>
+</div>-->
 <br /><hr />
 <h2>팀 공지</h2>
 <button type="button" id="addTeamNotice">팀 공지 추가하기</button>
-<div id="modal-insert-notice" style="display: none;">
+<div id="modal-insert-notice">
     <form action="#" enctype="application/x-www-form-urlencoded">
-        <label for="emplId">글쓴이</label> <br />
-        <input type="text" name="emplId" id="emplId"> <br />
-        <label for="sntncSj">공지 제목</label> <br />
-        <input type="text" name="sntncSj" id="sntncSj"> <br />
-        <label for="sntncCn">공지 내용</label><br />
+        <label for="notiSntncEtprCode">글 전사적 코드</label> <br />
+        <input type="text" name="notisntncEtprCode" id="notisntncEtprCode"> <br />
+        <label for="notisntncWritingEmplId">글작성 사원아이디</label> <br />
+        <input type="text" name="notisntncWritingEmplId" id="notisntncWritingEmplId"> <br />
+        <label for="notisntncSj">공지 제목</label> <br />
+        <input type="text" name="notisntncSj" id="notisntncSj"> <br />
+        <label for="notisntncCn">공지 내용</label><br />
+        <textarea name="notisntncCn" id="notisntncCn" cols="30" rows="10"></textarea><br />
         <input type="file" name="noticeFile" id="noticeFile"><br />
-        <textarea name="sntncCn" id="sntncCn" cols="30" rows="10"></textarea><br />
-        <button type="button" id="insertNotice">등록</button>
+        <label for="notisntncSj">글종류구분</label> <br />
+        <select name="noticommonCodeSntncCtgry" id="noticommonCodeSntncCtgry">
+            <option value="SNTNC010">공지</option>
+        </select>
     </form>
+    <button type="button" id="insertNotice">등록</button>
 </div>
 <br /><hr />
 <script>
@@ -460,31 +489,38 @@
         })
 
         /* 등록된 투표 수정*/
-        document.addEventListener("click",(event)=>{
+        document.addEventListener("click",function(event){
             if(event.target.classList.contains("modifyVote")){
-                document.querySelector("#modifyVoteModal").style.display = "block";
-                const optionWrapChild = document.querySelector(".optionWrap").children;
-                console.log(optionWrapChild.length);
-                for (let i = 1; i < optionWrapChild.length; i++) {
-                    let newInput = document.createElement("input");
-                    newInput.type = "radio";
-                    newInput.name = `modifyVoteOption${i}`;
-                    newInput.id =  `modifyVoteOption${i}`;
-                    let newLabel = document.createElement("label");
-                    let label = `label[for=modifyVoteOption${i}]`;
-                    let labelInnerText = label.innerText;
-                    newLabel.htmlFor = newInput.id;
-                    newLabel.innerText = labelInnerText;
-                    let newDiv = document.createElement("div");
+                const table = event.target.closest("table");
+                const inputText = table.querySelectorAll("input[type=text]");
+                const inputRadio = table.querySelectorAll("input[type=radio]");
 
-                    newDiv.className = "modifyOption";
-                    newDiv.appendChild(newInput);
-                    newDiv.appendChild(newLabel);
-                    document.querySelector(".modifyOptions").innerHTML = "";
+                event.target.style.display = "none";
+                event.target.nextElementSibling.style.display = "block";
 
-                    document.querySelector(".modifyOptions").appendChild(newDiv);
-                }
+                inputText.forEach(item => {
+                    item.readOnly = false;
+                })
+                inputRadio.forEach(item => {
+                    item.disabled = false;
+                })
+
             };
+            if(event.target.classList.contains("updateVote")){
+                event.target.style.display = "none";
+                event.target.previousElementSibling.style.display = "block";
+
+                const table = event.target.closest("table");
+                const inputText = table.querySelectorAll("input[type=text]");
+                const inputRadio = table.querySelectorAll("input[type=radio]");
+
+                inputText.forEach(item => {
+                    item.readOnly = true;
+                })
+                inputRadio.forEach(item => {
+                    item.disabled = true;
+                })
+            }
         })
         /*voteList.forEach(vote => {
             vote.addEventListener("click",event => {
@@ -510,5 +546,3 @@
         })
     })
 </script>
-</body>
-</html>

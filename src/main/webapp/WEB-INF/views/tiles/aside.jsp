@@ -44,7 +44,7 @@
       <span class="nav-cate">팀</span>
       <ul>
         <li class="nav-list"><a href="#"><i class="icon icon6"></i>캘린더</a></li>
-        <li class="nav-list"><a href="#"><i class="icon icon7"></i>팀 커뮤니티</a></li>
+        <li class="nav-list"><a href="${pageContext.request.contextPath}/employee/teamCommunity"><i class="icon icon7"></i>팀 커뮤니티</a></li>
       </ul>
     </div>
     <div class="company">
