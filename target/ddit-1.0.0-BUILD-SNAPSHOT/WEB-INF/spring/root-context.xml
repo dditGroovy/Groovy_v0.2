@@ -24,10 +24,18 @@
 	</bean>
 
 	<!-- 파일업로드 디렉토리 설정 -->
+	<!--운영 서버용-->
 	<bean id="uploadPath" class="java.lang.String">
-		<constructor-arg value=""/>
+		<constructor-arg value="/root/uploads"/>
 	</bean>
-
+	<!--개발/테스트용 (서주 로컬)-->
+	<bean id="uploadSeoju" class="java.lang.String">
+		<constructor-arg value="/Users/seojukang/uploads"/>
+	</bean>
+	<!--개발/테스트용 (맥 로컬 - 혜진이랑 테스트용)-->
+	<bean id="uploadTest" class="java.lang.String">
+		<constructor-arg value="/Users/uploads"/>
+	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="kr.co.groovy" />
 	</bean>

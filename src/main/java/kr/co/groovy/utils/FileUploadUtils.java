@@ -10,7 +10,11 @@ import java.util.UUID;
 
 @Slf4j
 public class FileUploadUtils {
-    public static String uploadFolder = "/resources/upload/";
+    public final String uploadPath;
+
+    public FileUploadUtils(String uploadTest) {
+        this.uploadPath = uploadTest;
+    }
 
     //2) 연월일 폴더 생성
     public static String getFolder() {

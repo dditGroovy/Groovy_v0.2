@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h1>공지 등록</h1>
+<h1 class="tab">공지 등록</h1>
 <form action="${pageContext.request.contextPath}/admin/inputNotice" method="post">
     <label for="noti-title">공지 제목</label>
     <input type="text" name="notiTitle" id="noti-title" required><br/>
     <label for="noti-content">공지 내용</label>
-    <textarea cols="10" rows="10" name="notiContent" id="noti-content" required></textarea><br>
+    <textarea cols="50" rows="10" name="notiContent" id="noti-content" required></textarea><br>
     <label for="noti-category">카테고리</label>
     <select name="notiCtgryIconFileStreNm" id="noti-category">
         <option value="important.png">중요</option>

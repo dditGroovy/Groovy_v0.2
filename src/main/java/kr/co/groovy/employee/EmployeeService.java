@@ -6,6 +6,7 @@ import kr.co.groovy.security.CustomUser;
 import kr.co.groovy.vo.EmployeeVO;
 import kr.co.groovy.vo.NotificationVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,12 +27,15 @@ public class EmployeeService {
     BCryptPasswordEncoder encoder;
     final
     MultipartHttpServletRequest request;
+    final
+    String uploadPath;
 
 
-    public EmployeeService(EmployeeMapper mapper, BCryptPasswordEncoder encoder, MultipartHttpServletRequest request) {
+    public EmployeeService(EmployeeMapper mapper, BCryptPasswordEncoder encoder, MultipartHttpServletRequest request, String uploadPath) {
         this.mapper = mapper;
         this.encoder = encoder;
         this.request = request;
+        this.uploadPath = uploadPath;
     }
 
     public EmployeeVO signIn(String emplId) {
@@ -84,7 +88,8 @@ public class EmployeeService {
 
     public void modifyProfile(String emplId, MultipartFile profileFile) {
         try {
-            String path = "/Users/seojukang/IdeaProjects/Groovy_v0.2.4/src/main/webapp/resources/images/uploads";
+            String path = uploadPath;
+            log.info(path);
 
             String originalFileName = profileFile.getOriginalFilename();
             String extension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
@@ -113,7 +118,7 @@ public class EmployeeService {
 
     public void modifySign(String emplId, MultipartFile signPhotoFile) {
         try {
-            String path = "/Users/seojukang/IdeaProjects/Groovy_v0.2.4/src/main/webapp/resources/images/sign";
+            String path = uploadPath;
 
             String originalFileName = signPhotoFile.getOriginalFilename();
             String extension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
