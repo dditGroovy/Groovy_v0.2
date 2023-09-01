@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <h1>공지 등록</h1>
 <form action="${pageContext.request.contextPath}/admin/inputNotice" method="post">
     <label for="noti-title">공지 제목</label>
@@ -13,20 +15,23 @@
         <option value="obituary.png">부고</option>
     </select>
     <br>
-<%--    <label for="noti-file">파일 첨부</label>--%>
-<%--    <input type="file" name="fileName" id="noti-file"><br/>--%>
+    <%--    <label for="noti-file">파일 첨부</label>--%>
+    <%--    <input type="file" name="fileName" id="noti-file"><br/>--%>
     <button type="submit">등록</button>
 </form>
 <table border="1">
     <tr>
         <th>번호</th>
+        <th>카테고리</th>
         <th><a href="#"></a>제목</th>
     </tr>
-    <tr>
-        <td>1</td>
-        <td>공지글입니다</td>
-    </tr>
+    <c:forEach var="noticeVO" items="${notiList}" varStatus="status"> <!-- 12: 공지사항 개수(length) -->
+        <tr>
+            <td>${status.count}</td>
+            <td>${noticeVO.notiCtgryIconFileStreNm}</td>
+            <td>${noticeVO.notiTitle}</td>
+        </tr>
+    </c:forEach>
 </table>
-
 <%--노출 : NOTI020--%>
 <%--비노출 : NOTI021--%>

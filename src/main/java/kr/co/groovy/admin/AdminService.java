@@ -1,7 +1,6 @@
 package kr.co.groovy.admin;
 
 import kr.co.groovy.vo.NoticeVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

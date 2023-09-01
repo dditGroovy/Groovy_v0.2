@@ -1,4 +1,4 @@
-package kr.co.groovy.enums.hold;
+package kr.co.groovy.enums;
 
 public enum NoticeEssentialReading {
     ESSENTIAL, NORMAL

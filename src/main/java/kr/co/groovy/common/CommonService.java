@@ -1,5 +1,6 @@
 package kr.co.groovy.common;
 
+import kr.co.groovy.enums.NoticeKind;
 import kr.co.groovy.vo.EmployeeVO;
 import kr.co.groovy.vo.NoticeVO;
 import org.springframework.stereotype.Service;
@@ -16,20 +17,23 @@ public class CommonService {
         this.mapper = mapper;
     }
 
-    List<NoticeVO> loadNoticeList() {
-        return mapper.loadNoticeList();
+    public List<NoticeVO> loadNoticeList() {
+        List<NoticeVO> list = mapper.loadNoticeList();
+        for (NoticeVO noticeVO : list) {
+            String iconFileName = noticeVO.getNotiCtgryIconFileStreNm();
+            String categoryLabel = NoticeKind.getCategoryLabel(iconFileName);
+            noticeVO.setNotiCtgryIconFileStreNm(categoryLabel);
+        }
+        return list;
     }
-
 
     public List<NoticeVO> findNotice(Map<String, Object> paramMap) {
         return mapper.findNotice(paramMap);
-
     }
 
     public NoticeVO loadNoticeDetail(int notiSeq) {
         return mapper.loadNoticeDetail(notiSeq);
     }
-
 
     public void modifyNoticeView(int notiSeq) {
         mapper.modifyNoticeView(notiSeq);
