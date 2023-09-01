@@ -1,18 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec"
-           uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authorize access="isAuthenticated()">
+  <sec:authentication property="principal" var="CustomUser"/>
 <div id="sideBar">
   <header id="header">
     <div id="profile">
-      <sec:authorize access="isAuthenticated()">
-      <sec:authentication property="principal" var="CustomUser" />
+
       <img id="userProfile" src = "/resources/images/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}" />
     </div>
     <div class="user">
       <div class="user-info">
         <span id="userName" class="font-24 font-md" >${CustomUser.employeeVO.emplNm}</span>
-        <span id="userHierarchy" class="font-14 font-md">${CustomUser.employeeVO.commonCodeClsf}</span></sec:authorize>
+        <span id="userHierarchy" class="font-14 font-md">${CustomUser.employeeVO.commonCodeClsf}</span>
       </div>
       <div class="user-service">
         <ul class="font-11 font-reg">
@@ -56,3 +56,4 @@
   </nav>
 
 </div>
+</sec:authorize>

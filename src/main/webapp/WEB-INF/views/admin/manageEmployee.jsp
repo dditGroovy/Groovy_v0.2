@@ -177,9 +177,7 @@
                             code += `<td>\${res[i].commonCodeClsf}</td>`;
                             code += `<td>\${res[i].emplEncpn}</td>`;
                             code += `<td>\${res[i].emplBrthdy}</td>`;
-                            /* 개인서명 등록 유무 */
-                            // code += `<td>\${res[i].empSign == null ? "미등록" : "등록완료"}</td>`;
-                            code += `<td>\${res[i].emplDetailAdres}</td>`;
+                            code += `<td>\${res[i].signPhotoFileStreNm == 'noSign.png' ? "미등록" : "등록완료"}</td>`;
                             code += `<td>\${(res[i].commonCodeHffcSttus == 'HFFC010') ? "재직" : (res[i].commonCodeHffcSttus == 'HFFC011') ? "휴직" : "퇴직"}</td>`;
                             code += "</tr>";
                         }
@@ -247,9 +245,7 @@
                             code += `<td>\${res[i].commonCodeClsf}</td>`;
                             code += `<td>\${res[i].emplEncpn}</td>`;
                             code += `<td>\${res[i].emplBrthdy}</td>`;
-                            /* 개인서명 등록 유무 */
-                            // code += `<td>\${res[i].empSign == null ? "미등록" : "등록완료"}</td>`;
-                            code += `<td>\${res[i].emplDetailAdres}</td>`;
+                            code += `<td>\${res[i].signPhotoFileStreNm == 'noSign.png' ? "미등록" : "등록완료"}</td>`;
                             code += `<td>\${(res[i].commonCodeHffcSttus == 'HFFC010') ? "재직" : (res[i].commonCodeHffcSttus == 'HFFC011') ? "휴직" : "퇴직"}</td>`;
                             code += "</tr>";
                         }

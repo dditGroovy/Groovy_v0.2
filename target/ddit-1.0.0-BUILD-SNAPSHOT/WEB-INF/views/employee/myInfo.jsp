@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <style>
     .toggle {
@@ -46,19 +45,18 @@
     }
 </style>
 
-
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="CustomUser"/>
 <h2>내 정보 관리</h2>
 <h3>프로필 변경</h3>
 <p>프로필 사진을 변경합니다.</p>
 <label for="empProflPhotoFile">사진</label> <!-- 톱니 모양 -->
-<sec:authorize access="isAuthenticated()">
-    <sec:authentication property="principal" var="CustomUser"/>
 <img id="userProfile" src="/resources/images/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
 
 <form action="${pageContext.request.contextPath}/employee/modifyProfile" enctype="multipart/form-data" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="text" name="emplId" id="emplId" readonly
-           value="${CustomUser.employeeVO.emplId}"><br/></sec:authorize>
+           value="${CustomUser.employeeVO.emplId}"><br/>
     <%--style="display: none;"--%>
     <input type="file" name="profileFile" id="empProflPhotoFile"/>
     <button type="reset" id="pCancel">취소</button>
@@ -75,9 +73,7 @@
     <label for="emplPasswordCheck1">새로운 비밀번호 입력</label>
     <input type="password" name="emplPassword" id="emplPasswordCheck1" placeholder="새로운 비밀번호를 입력하세요."/>
     <input type="password" name="reEmplPassword" id="" placeholder="새로운 비밀번호를 입력하세요."/>
-    <sec:authorize access="isAuthenticated()">
-        <sec:authentication property="principal.username" var="emplId"/>
-        <input type="hidden" name="emplId" id="emplId" readonly value="${emplId}"><br/></sec:authorize>
+        <input type="hidden" name="emplId" id="emplId" readonly value="${CustomUser.employeeVOemplId}"><br/>
 
     <button type="reset" id="iCancel">취소</button>
     <button type="submit" id="iSave">저장</button>
@@ -89,8 +85,6 @@
 <h3>서명 설정/변경</h3>
 <p>전자결재에 필요한 서명을 설정 · 변경합니다.</p>
 <div id="emplSignFilePreview"></div>
-<sec:authorize access="isAuthenticated()">
-    <sec:authentication property="principal" var="CustomUser"/>
 <img id="userSignProfile" src="/resources/images/sign/${CustomUser.employeeVO.signPhotoFileStreNm}"/>
 <!-- 미리보기 -->
 <p>서명</p>
@@ -106,7 +100,6 @@
     <button type="reset" id="sCancel">취소</button>
     <button type="submit" id="sSave">저장</button>
 </form>
-</sec:authorize>
 <hr/>
 
 <form action="">

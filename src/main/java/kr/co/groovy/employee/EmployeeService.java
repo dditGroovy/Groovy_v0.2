@@ -113,25 +113,19 @@ public class EmployeeService {
     public void modifySign(String emplId, MultipartFile signPhotoFile) {
         try {
             String path = "/Users/seojukang/IdeaProjects/Groovy_v0.2.4/src/main/webapp/resources/images/sign";
-            log.debug("왜?1");
 
             String originalFileName = signPhotoFile.getOriginalFilename();
             String extension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
             String newFileName = UUID.randomUUID() + "." + extension; // 나중에 처리해도 됨(테스트 기간에는 X)
-            log.debug("왜?2");
 
             File saveFile = new File(path, newFileName);
             signPhotoFile.transferTo(saveFile);
-            log.debug("왜?3");
 
             // 로그인한 유저의 서명 사진 변수 값 변경
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             CustomUser customUser = (CustomUser) authentication.getPrincipal();
             EmployeeVO employeeVO = customUser.getEmployeeVO();
             employeeVO.setSignPhotoFileStreNm(newFileName);
-            log.debug("왜?4");
-            log.info(emplId);
-            log.info(signPhotoFile + "service");
 
             mapper.modifySign(emplId, newFileName, originalFileName);
             log.info("서명 변경 성공");
