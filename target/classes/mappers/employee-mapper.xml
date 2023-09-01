@@ -64,7 +64,7 @@
                  JOIN UPLOAD_FILE UF ON P.PROFL_ETPR_CODE = UF.UPLOAD_FILE_ETPR_CODE
                  JOIN SIGN S ON B.AUTH_EMP_ID = S.SIGN_EMPL_ID
                  JOIN UPLOAD_FILE UF2 ON S.SIGN_ETPR_CODE = UF2.UPLOAD_FILE_ETPR_CODE
-        WHERE A.EMPL_ID = #{emplId};
+        WHERE A.EMPL_ID = #{emplId}
     </select>
 
 
