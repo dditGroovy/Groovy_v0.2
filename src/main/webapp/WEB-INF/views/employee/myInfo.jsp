@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <style>
     .toggle {
         position: relative;
@@ -45,12 +46,12 @@
     }
 </style>
 
-<sec:authorize access="isAuthenticated()">
-    <sec:authentication property="principal" var="CustomUser"/>
     <h2>내 정보 관리</h2>
     <h3>프로필 변경</h3>
     <p>프로필 사진을 변경합니다.</p>
     <label for="empProflPhotoFile">사진</label> <!-- 톱니 모양 -->
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="CustomUser"/>
     <img id="userProfile" src="/resources/images/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
 
     <form action="${pageContext.request.contextPath}/employee/modifyProfile" enctype="multipart/form-data"
@@ -74,7 +75,7 @@
         <label for="emplPasswordCheck1">새로운 비밀번호 입력</label>
         <input type="password" name="emplPassword" id="emplPasswordCheck1" placeholder="새로운 비밀번호를 입력하세요."/>
         <input type="password" name="reEmplPassword" placeholder="새로운 비밀번호를 입력하세요."/>
-        <input type="hidden" name="emplId" readonly value="${CustomUser.employeeVOemplId}"><br/>
+        <input type="hidden" name="emplId" readonly value="${CustomUser.employeeVO.emplId}"><br/>
 
         <button type="reset" id="iCancel">취소</button>
         <button type="submit" id="iSave">저장</button>
@@ -106,12 +107,11 @@
     <form action="">
         <h3>알림 설정</h3>
         <p>알림 범위를 설정합니다.</p>
-
         <!-- 각 요소의 id, for 임시로 넣어 놓음 -->
         <div>
             <p>업무 요청</p>
             <label class="toggle" for="a">
-                <input type="checkbox" id="a">
+                <input type="checkbox" id="a" value="NTCN010">
                 <span class="slider"></span>
             </label>
         </div>
@@ -160,7 +160,7 @@
         <button type="button">취소</button>
         <button type="button">저장</button>
     </form>
-
+</sec:authorize>
     <%--    <h3>정보 변경</h3>--%>
     <%--    <label for="emplTelNo">휴대폰 번호</label>--%>
     <%--    <input type="text" name="emplTelNo" id="emplTelNo" placeholder="010-1234-1234"/>--%>
@@ -168,4 +168,3 @@
     <%--    <input type="text" name="emplZip" id="emplZip" placeholder="12345"/>--%>
     <%--    <label for="emplAdres">주소</label>--%>
     <%--    <input type="text" name="emplAdres" id="emplAdres" placeholder="경기도 성남시 분당구 새마을로 38"/>--%>
-</sec:authorize>

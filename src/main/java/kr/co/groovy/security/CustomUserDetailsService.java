@@ -2,6 +2,7 @@ package kr.co.groovy.security;
 
 import kr.co.groovy.employee.EmployeeMapper;
 import kr.co.groovy.vo.EmployeeVO;
+import kr.co.groovy.vo.NotificationVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,6 +22,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
         EmployeeVO employeeVO = this.mapper.signIn(id);
+        log.info(employeeVO + "");
+//        NotificationVO notificationVO = mapper.loadNotiStatus(id);
+//        employeeVO.setNotificationVO(notificationVO);
+//        log.info(employeeVO.getNotificationVO()+"");
         return employeeVO == null ? null : new CustomUser(employeeVO);
     }
 }

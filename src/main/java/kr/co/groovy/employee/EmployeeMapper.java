@@ -1,6 +1,7 @@
 package kr.co.groovy.employee;
 
 import kr.co.groovy.vo.EmployeeVO;
+import kr.co.groovy.vo.NotificationVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,5 +33,6 @@ public interface EmployeeMapper {
     void modifyPassword(@Param("emplId")String emplId, @Param("emplPassword")String emplPassword);
     void modifySign(@Param("emplId") String emplId, @Param("fileName") String fileName, @Param("originalFileName") String originalFileName);
 
+    NotificationVO loadNotiStatus (String emplId);
 }
 

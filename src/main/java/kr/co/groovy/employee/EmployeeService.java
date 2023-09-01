@@ -4,6 +4,7 @@ import kr.co.groovy.enums.ClassOfPosition;
 import kr.co.groovy.enums.Department;
 import kr.co.groovy.security.CustomUser;
 import kr.co.groovy.vo.EmployeeVO;
+import kr.co.groovy.vo.NotificationVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -132,6 +133,10 @@ public class EmployeeService {
         } catch (Exception e) {
             log.info("서명 변경 실패");
         }
+    }
+
+    public NotificationVO loadNotiStatus(String emplId) {
+        return mapper.loadNotiStatus(emplId);
     }
 }
 

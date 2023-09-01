@@ -28,5 +28,15 @@ public class EmployeeVO {
     private String commonCodeLastAcdmcr; // 최종학력 (0: 고졸, 1: 학사, 2: 석사, 3: 박사)
     private String proflPhotoFileStreNm; // 프로필사진 (PROFL 테이블)
     private String signPhotoFileStreNm;  // 서명 (SIGN 테이블)
+//    private String dutyRequest;
+//    private String answer;
+//    private String teamNotice;
+//    private String companyNotice;
+//    private String schedule;
+//    private String newChattingRoom;
+//    private String emailReception;
+//    private String electronSanctionReception;
+//    private String electronSanction;
     private List<EmployeeAuthVO> employeeAuthVOList;
+//    private NotificationVO notificationVO;
 }

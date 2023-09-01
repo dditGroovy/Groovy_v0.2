@@ -14,15 +14,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
     <body>
-<sec:authorize access="isAuthenticated()">
-    <sec:authentication property="principal" var="CustomUser"/>
     <div class="wrapper">
         <tiles:insertAttribute name="aside"/>
         <div class="container">
             <tiles:insertAttribute name="body"/>
         </div>
     </div>
-</sec:authorize>
     </body>
 </html>
 

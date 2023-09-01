@@ -10,5 +10,6 @@
         <typeAlias type="kr.co.groovy.vo.EmployeeAuthVO" alias="employeeAuthVO" />
         <typeAlias type="kr.co.groovy.vo.DietVO" alias="dietVO" />
         <typeAlias type="kr.co.groovy.vo.NoticeVO" alias="noticeVO" />
+        <typeAlias type="kr.co.groovy.vo.NotificationVO" alias="notificationVO" />
     </typeAliases>
 </configuration>
