@@ -58,7 +58,7 @@
     <img  src="../uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
     <img  src="<%=request.getContextPath() %>/root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
 
-    
+
     <img  src="<%=request.getContextPath() %>/root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
 
     <form action="${pageContext.request.contextPath}/employee/modifyProfile" enctype="multipart/form-data"
