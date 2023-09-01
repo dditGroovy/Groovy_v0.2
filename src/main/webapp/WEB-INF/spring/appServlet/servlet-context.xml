@@ -11,6 +11,7 @@
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/profile/**" location="/root/uploads/" />
 
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
