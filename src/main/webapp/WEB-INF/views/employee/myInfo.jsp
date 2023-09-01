@@ -52,7 +52,14 @@
     <label for="empProflPhotoFile">사진</label> <!-- 톱니 모양 -->
 <sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal" var="CustomUser"/>
-    <img id="userProfile" src="<%=request.getContextPath() %>/root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
+<%--    <img id="userProfile" src="<%=request.getContextPath() %>/root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>--%>
+    <img  src="<%=request.getContextPath() %>/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
+    <img  src="<%=request.getContextPath() %>/resources/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
+    <img  src="../uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
+    <img  src="<%=request.getContextPath() %>/root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
+
+
+    <img  src="<%=request.getContextPath() %>/root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
 
     <form action="${pageContext.request.contextPath}/employee/modifyProfile" enctype="multipart/form-data"
           method="post">
