@@ -70,18 +70,18 @@
 
 
     <hr/>
-    <form action="${pageContext.request.contextPath}/employee/modifyPassword" method="post">
-        <h2>내 정보 관리</h2>
-        <h3>비밀번호 변경</h3>
+    <h2>내 정보 관리</h2>
+    <h3>비밀번호 변경</h3>
+    <form method="post" id="passForm">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <label for="emplPassword">현재 비밀번호 입력</label>
         <input type="password" name="currentPassword" id="emplPassword" placeholder="현재 비밀번호를 입력하세요."/>
         <label for="emplPasswordCheck1">새로운 비밀번호 입력</label>
         <input type="password" name="emplPassword" id="emplPasswordCheck1" placeholder="새로운 비밀번호를 입력하세요."/>
         <input type="password" name="reEmplPassword" placeholder="새로운 비밀번호를 입력하세요."/>
         <input type="hidden" name="emplId" readonly value="${CustomUser.employeeVO.emplId}"><br/>
-
         <button type="reset" id="iCancel">취소</button>
-        <button type="submit" id="iSave">저장</button>
+        <button type="button" id="iSave">저장</button>
     </form>
 
 
@@ -95,15 +95,14 @@
     <p>서명</p>
     <label for="emplSignFile">등록</label> <!-- 등록 버튼 -->
 
-
-    <form action="${pageContext.request.contextPath}/employee/modifySign" enctype="multipart/form-data" method="post">
+    <form id="signForm" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="text" name="emplId" readonly
                value="${CustomUser.employeeVO.emplId}"><br/>
         <input type="file" name="signPhotoFile" id="emplSignFile"/>
         <button type="button">삭제</button>
         <button type="reset" id="sCancel">취소</button>
-        <button type="submit" id="sSave">저장</button>
+        <button type="button" id="sSave">저장</button>
     </form>
     <hr/>
 
@@ -166,6 +165,7 @@
 </sec:authorize>
 <script>
     $(document).ready(function () {
+        // 프로필 사진 수정
         $("#pSave").on("click", function () {
             var formData = new FormData($("#profileForm")[0]);
             $.ajax({
@@ -174,7 +174,7 @@
                 data: formData,
                 contentType: false, // 필수
                 processData: false, // 필수
-                cache : false,
+                cache: false,
                 success: function (response) {
                     console.log("서버 응답:", response);
                     alert("프로필 사진 수정 성공")
@@ -185,6 +185,48 @@
                 }
             });
         });
+        // 패스워드 변경
+        $("#iSave").on("click", function () {
+            var formData = new FormData($("#passForm")[0]);
+            $.ajax({
+                type: "POST",
+                url: "/employee/modifyPassword",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    console.log("서버 응답:", response);
+                    alert("비밀번호 수정 성공")
+                },
+                error: function (xhr, textStatus, error) {
+                    // 오류 발생 시 처리
+                    console.log("AJAX 오류:", error);
+                }
+            });
+        });
+
+        // 서명 사진 수정
+        $("#sSave").on("click", function () {
+            var formData = new FormData($("#signForm")[0]);
+            $.ajax({
+                type: "POST",
+                url: "/employee/modifySign",
+                data: formData,
+                contentType: false, // 필수
+                processData: false, // 필수
+                cache: false,
+                success: function (response) {
+                    console.log("서버 응답:", response);
+                    alert("서명 사진 수정 성공")
+                },
+                error: function (xhr, textStatus, error) {
+                    // 오류 발생 시 처리
+                    console.log("AJAX 오류:", error);
+                }
+            });
+        });
+
+
     });
 </script>
 

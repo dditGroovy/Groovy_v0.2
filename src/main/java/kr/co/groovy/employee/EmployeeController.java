@@ -131,18 +131,20 @@ public class EmployeeController {
     }
 
     @PostMapping("/modifyPassword")
-    public String modifyPassword(String emplId, String emplPassword) {
+    @ResponseBody
+    public void modifyPassword(String emplId, String emplPassword) {
+        log.info(emplId);
+        log.info(emplPassword);
         service.modifyPassword(emplId, emplPassword);
-        return "redirect:/employee/myInfo";
-
     }
 
     @PostMapping("/modifySign")
-    public String modifySign(@RequestParam("emplId") String emplId, @RequestParam("signPhotoFile") MultipartFile signPhotoFile) {
+    @ResponseBody
+
+    public void modifySign(String emplId, MultipartFile signPhotoFile) {
         log.info(emplId);
         log.info(signPhotoFile + "");
         service.modifySign(emplId, signPhotoFile);
-        return "employee/myInfo";
     }
 }
 
