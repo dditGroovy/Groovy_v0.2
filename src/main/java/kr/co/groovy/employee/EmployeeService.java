@@ -31,11 +31,11 @@ public class EmployeeService {
     String uploadPath;
 
 
-    public EmployeeService(EmployeeMapper mapper, BCryptPasswordEncoder encoder, MultipartHttpServletRequest request, String uploadPath) {
+    public EmployeeService(EmployeeMapper mapper, BCryptPasswordEncoder encoder, MultipartHttpServletRequest request, String uploadSeoju) {
         this.mapper = mapper;
         this.encoder = encoder;
         this.request = request;
-        this.uploadPath = uploadPath;
+        this.uploadPath = uploadSeoju;
     }
 
     public EmployeeVO signIn(String emplId) {
@@ -88,8 +88,16 @@ public class EmployeeService {
 
     public void modifyProfile(String emplId, MultipartFile profileFile) {
         try {
-            String path = uploadPath;
-            log.info(path);
+            String path = uploadPath + "/profile";
+            log.info("profile path: " + path);
+            File uploadDir = new File(path);
+            if (!uploadDir.exists()) {
+                if (uploadDir.mkdirs()) {
+                    log.info("폴더 생성 성공");
+                } else {
+                    log.info("폴더 생성 실패");
+                }
+            }
 
             String originalFileName = profileFile.getOriginalFilename();
             String extension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
@@ -118,7 +126,15 @@ public class EmployeeService {
 
     public void modifySign(String emplId, MultipartFile signPhotoFile) {
         try {
-            String path = uploadPath;
+            String path = uploadPath + "/sign";
+            File uploadDir = new File(path);
+            if (!uploadDir.exists()) {
+                if (uploadDir.mkdirs()) {
+                    log.info("폴더 생성 성공");
+                } else {
+                    log.info("폴더 생성 실패");
+                }
+            }
 
             String originalFileName = signPhotoFile.getOriginalFilename();
             String extension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);

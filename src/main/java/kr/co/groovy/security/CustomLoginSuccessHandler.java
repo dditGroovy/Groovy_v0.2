@@ -29,13 +29,13 @@ public class CustomLoginSuccessHandler extends
         log.info("username : " + customUser.getUsername());
 
         // 아이디 기억하기 쿠키 생성
-        boolean isRememberIdChecked = request.getParameter("rememberId") != null;
-        if (isRememberIdChecked) {
-            Cookie idCookie = new Cookie("emplId", username);
-            idCookie.setMaxAge(60 * 60 * 24 * 7); // 쿠키 유효기간 7일
-            idCookie.setPath("/");
-            response.addCookie(idCookie);
-        }
+//        boolean isRememberIdChecked = request.getParameter("rememberId") != null;
+//        if (isRememberIdChecked) {
+//            Cookie idCookie = new Cookie("emplId", username);
+//            idCookie.setMaxAge(60 * 60 * 24 * 7); // 쿠키 유효기간 7일
+//            idCookie.setPath("/");
+//            response.addCookie(idCookie);
+//        }
 
         List<String> roleNames = new ArrayList<String>();
         auth.getAuthorities().forEach(authority -> {

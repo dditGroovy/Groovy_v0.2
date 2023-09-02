@@ -124,9 +124,10 @@ public class EmployeeController {
     }
 
     @PostMapping("/modifyProfile")
-    public String modifyProfile(String emplId, MultipartFile profileFile) {
+    @ResponseBody
+    public void modifyProfile(String emplId, @RequestPart(value = "profileFile") MultipartFile profileFile) {
+        log.info("modifyProfile");
         service.modifyProfile(emplId, profileFile);
-        return "redirect:/employee/myInfo";
     }
 
     @PostMapping("/modifyPassword")
@@ -137,7 +138,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/modifySign")
-    public String modifySign(@RequestParam("emplId")String emplId, @RequestParam("signPhotoFile")MultipartFile signPhotoFile) {
+    public String modifySign(@RequestParam("emplId") String emplId, @RequestParam("signPhotoFile") MultipartFile signPhotoFile) {
         log.info(emplId);
         log.info(signPhotoFile + "");
         service.modifySign(emplId, signPhotoFile);

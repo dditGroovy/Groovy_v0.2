@@ -30,6 +30,11 @@
                 invalidate-session="true"
                 delete-cookies="false"
         />
+        <security:remember-me key="groove_unique_key"
+                              token-validity-seconds="2419200"
+                              authentication-success-handler-ref="customLoginSuccess"
+                             />
+
         <security:access-denied-handler ref="customAccessDenied"/>
         <!--csrf : 테스트 위해 잠시 비활성화 -->
         <security:intercept-url pattern="/resources/**" access="permitAll"/>

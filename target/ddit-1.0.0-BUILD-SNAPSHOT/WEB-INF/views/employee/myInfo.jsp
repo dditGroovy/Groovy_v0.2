@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <style>
     .toggle {
@@ -46,25 +48,24 @@
     }
 </style>
 
-    <h2>내 정보 관리</h2>
-    <h3>프로필 변경</h3>
-    <p>프로필 사진을 변경합니다.</p>
-    <label for="empProflPhotoFile">사진</label> <!-- 톱니 모양 -->
+<h2>내 정보 관리</h2>
+<h3>프로필 변경</h3>
+<p>프로필 사진을 변경합니다.</p>
+<label for="empProflPhotoFile">사진</label> <!-- 톱니 모양 -->
 <sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal" var="CustomUser"/>
-<%--    <img id="userProfile" src="<%=request.getContextPath() %>/root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>--%>
-    <img  src="/root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
-    <img  src="root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
+    <img src="${pageContext.request.contextPath}/uploads/profile/${CustomUser.employeeVO.proflPhotoFileStreNm}"
+         alt="profileImage"/>
 
-    <form action="${pageContext.request.contextPath}/employee/modifyProfile" enctype="multipart/form-data"
-          method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+    <form id="profileForm" method="POST" enctype="multipart/form-data">
+            <%--        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
         <input type="text" name="emplId" id="emplId" readonly
                value="${CustomUser.employeeVO.emplId}"><br/>
             <%--style="display: none;"--%>
         <input type="file" name="profileFile" id="empProflPhotoFile"/>
         <button type="reset" id="pCancel">취소</button>
-        <button type="submit" id="pSave">저장</button>
+        <button type="button" id="pSave">저장</button>
     </form>
 
 
@@ -163,10 +164,36 @@
         <button type="button">저장</button>
     </form>
 </sec:authorize>
-    <%--    <h3>정보 변경</h3>--%>
-    <%--    <label for="emplTelNo">휴대폰 번호</label>--%>
-    <%--    <input type="text" name="emplTelNo" id="emplTelNo" placeholder="010-1234-1234"/>--%>
-    <%--    <label for="emplZip">우편번호</label> <!-- 나중에 display:none -->--%>
-    <%--    <input type="text" name="emplZip" id="emplZip" placeholder="12345"/>--%>
-    <%--    <label for="emplAdres">주소</label>--%>
-    <%--    <input type="text" name="emplAdres" id="emplAdres" placeholder="경기도 성남시 분당구 새마을로 38"/>--%>
+<script>
+    $(document).ready(function () {
+        $("#pSave").on("click", function () {
+            var formData = new FormData($("#profileForm")[0]);
+            $.ajax({
+                type: "POST",
+                url: "/employee/modifyProfile",
+                data: formData,
+                contentType: false, // 필수
+                processData: false, // 필수
+                cache : false,
+                success: function (response) {
+                    console.log("서버 응답:", response);
+                    alert("프로필 사진 수정 성공")
+                },
+                error: function (xhr, textStatus, error) {
+                    // 오류 발생 시 처리
+                    console.log("AJAX 오류:", error);
+                }
+            });
+        });
+    });
+</script>
+
+
+<%--    <h3>정보 변경</h3>--%>
+<%--    <label for="emplTelNo">휴대폰 번호</label>--%>
+<%--    <input type="text" name="emplTelNo" id="emplTelNo" placeholder="010-1234-1234"/>--%>
+<%--    <label for="emplZip">우편번호</label> <!-- 나중에 display:none -->--%>
+<%--    <input type="text" name="emplZip" id="emplZip" placeholder="12345"/>--%>
+<%--    <label for="emplAdres">주소</label>--%>
+<%--    <input type="text" name="emplAdres" id="emplAdres" placeholder="경기도 성남시 분당구 새마을로 38"/>--%>
+

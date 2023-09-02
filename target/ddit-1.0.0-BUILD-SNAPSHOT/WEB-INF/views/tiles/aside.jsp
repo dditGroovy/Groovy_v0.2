@@ -7,7 +7,7 @@
   <header id="header">
     <div id="profile">
 
-      <img id="userProfile" src = "/resources/images/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}" />
+      <img src="/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}" alt="profileImage"/>
     </div>
     <div class="user">
       <div class="user-info">

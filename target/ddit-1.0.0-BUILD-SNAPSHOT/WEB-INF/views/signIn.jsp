@@ -24,7 +24,7 @@
                    placeholder="PASSWORD"/>
             <div class="service-wrap">
                 <div class="checkboxWrap">
-                    <input type="checkbox" name="rememberId" id="rememberId" class="checkBox"/>
+                    <input type="checkbox" name="remember-me" id="rememberId" class="checkBox"/>
                     <label for="rememberId" class="checkBoxLabel">아이디 기억하기</label>
                 </div>
                 <div class="find-id-pw"><a href="#" class="font-14 color-font-row">비밀번호를 잊으셨나요?</a></div>
@@ -38,21 +38,21 @@
         </form>
     </div>
 </div>
-<script>
-    $(function () {
-        let emplIdCookie = Cookies.get("emplId");
-        if (emplIdCookie != null) {
-            $("#empl-id").val(emplIdCookie);
-            $("#rememberId").prop("checked", true); //
-        }
+<%--<script>--%>
+<%--    $(function () {--%>
+<%--        let emplIdCookie = Cookies.get("emplId");--%>
+<%--        if (emplIdCookie != null) {--%>
+<%--            $("#empl-id").val(emplIdCookie);--%>
+<%--            $("#rememberId").prop("checked", true); //--%>
+<%--        }--%>
 
-        $("#rememberId").change(function () {
-            if (!this.checked) {
-                $("#empl-id").val("");
-                Cookies.remove("emplId", {path: '/'});
-            }
-        });
-    });
-</script>
+<%--        $("#rememberId").change(function () {--%>
+<%--            if (!this.checked) {--%>
+<%--                $("#empl-id").val("");--%>
+<%--                Cookies.remove("emplId", {path: '/'});--%>
+<%--            }--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 </body>
 </html>
