@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -103,8 +104,10 @@ public class EmployeeController {
         return "employee/mySalary";
     }
 
-    @GetMapping("/myChat")
-    public String myChat() {
+    @GetMapping({"/chat"})
+    public String chat(Model model) {
+        List<EmployeeVO> empList = service.loadEmpList();
+        model.addAttribute("empList", empList);
         return "employee/myChat";
     }
 

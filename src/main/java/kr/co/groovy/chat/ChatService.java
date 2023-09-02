@@ -13,11 +13,6 @@ public class ChatService {
         this.chatMapper = chatMapper;
     }
 
-    public int createNewRoomNo() {
-        int chttRoomNo = chatMapper.createNewRoomNo();
-        return chttRoomNo;
-    }
-
     public int insertChatRoom(Map<String, Object> roomData) {
         int result = chatMapper.insertChatRoom(roomData);
         return result;

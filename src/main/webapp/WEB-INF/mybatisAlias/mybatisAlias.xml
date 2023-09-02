@@ -12,5 +12,8 @@
         <typeAlias type="kr.co.groovy.vo.NoticeVO" alias="noticeVO" />
         <typeAlias type="kr.co.groovy.vo.VehicleVO" alias="VehicleVO" />
         <typeAlias type="kr.co.groovy.vo.NotificationVO" alias="notificationVO" />
+        <typeAlias type="kr.co.groovy.vo.ChatRoomVO" alias="chatRoomVO" />
+        <typeAlias type="kr.co.groovy.vo.ChatMemberVO" alias="chatMemberVO" />
+        <typeAlias type="kr.co.groovy.vo.ChatVO" alias="chatVO" />
     </typeAliases>
 </configuration>
