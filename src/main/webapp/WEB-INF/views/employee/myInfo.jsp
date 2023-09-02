@@ -46,19 +46,13 @@
     }
 </style>
 
-    <h2>내 정보 관리</h2>
-    <h3>프로필 변경</h3>
-    <p>프로필 사진을 변경합니다.</p>
-    <label for="empProflPhotoFile">사진</label> <!-- 톱니 모양 -->
+<h2>내 정보 관리</h2>
+<h3>프로필 변경</h3>
+<p>프로필 사진을 변경합니다.</p>
+<label for="empProflPhotoFile">사진</label> <!-- 톱니 모양 -->
 <sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal" var="CustomUser"/>
-<%--    <img id="userProfile" src="<%=request.getContextPath() %>/root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>--%>
-    <img  src="${pageContext.request.contextPath}/root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
-    <img  src="root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
-    <img  src="${pageContext.request.contextPath}/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
-    <img  src="${pageContext.request.contextPath}root/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
-    <img  src="/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
-    <img  src="uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}"/>
+    <img src="/uploads/${CustomUser.employeeVO.proflPhotoFileStreNm}" alt="profileImage"/>
 
     <form action="${pageContext.request.contextPath}/employee/modifyProfile" enctype="multipart/form-data"
           method="post">
@@ -167,10 +161,10 @@
         <button type="button">저장</button>
     </form>
 </sec:authorize>
-    <%--    <h3>정보 변경</h3>--%>
-    <%--    <label for="emplTelNo">휴대폰 번호</label>--%>
-    <%--    <input type="text" name="emplTelNo" id="emplTelNo" placeholder="010-1234-1234"/>--%>
-    <%--    <label for="emplZip">우편번호</label> <!-- 나중에 display:none -->--%>
-    <%--    <input type="text" name="emplZip" id="emplZip" placeholder="12345"/>--%>
-    <%--    <label for="emplAdres">주소</label>--%>
-    <%--    <input type="text" name="emplAdres" id="emplAdres" placeholder="경기도 성남시 분당구 새마을로 38"/>--%>
+<%--    <h3>정보 변경</h3>--%>
+<%--    <label for="emplTelNo">휴대폰 번호</label>--%>
+<%--    <input type="text" name="emplTelNo" id="emplTelNo" placeholder="010-1234-1234"/>--%>
+<%--    <label for="emplZip">우편번호</label> <!-- 나중에 display:none -->--%>
+<%--    <input type="text" name="emplZip" id="emplZip" placeholder="12345"/>--%>
+<%--    <label for="emplAdres">주소</label>--%>
+<%--    <input type="text" name="emplAdres" id="emplAdres" placeholder="경기도 성남시 분당구 새마을로 38"/>--%>
