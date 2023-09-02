@@ -34,5 +34,7 @@ public interface EmployeeMapper {
     void modifySign(@Param("emplId") String emplId, @Param("fileName") String fileName, @Param("originalFileName") String originalFileName);
 
     NotificationVO loadNotiStatus (String emplId);
+
+    void modifyEmp(EmployeeVO vo);
 }
 

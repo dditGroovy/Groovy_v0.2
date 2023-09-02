@@ -10,7 +10,7 @@
 <h2>사원정보</h2>
 <!--    사원 추가 모달   -->
 <div id="empDetail">
-    <form action="#" method="post">
+    <form action="#" method="post" id="modifyEmpForm">
         <!-- seoju : csrf 토큰 추가-->
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <%--        <input type="hidden" name="enabled" value="1"/>--%>
@@ -36,7 +36,7 @@
                readonly><br/>
 
         <label>생년월일</label>
-        <input type="date" name="emplBrthdy" value="${empVO.emplBrthdy}" required readonly><br/>
+        <input type="date" name="#" value="${empVO.emplBrthdy}" required readonly><br/>
 
 
         <%-- commonCodeLastAcdmcr --%>
@@ -92,11 +92,11 @@
         </select><br/>
 
         <label>입사일</label>
-        <input type="date" value="" name="emplEncpn" id="joinDate" value="${empVO.emplEncpn}" required readonly><br/>
+        <input type="date" name="#" id="joinDate" value="${empVO.emplEncpn}" required readonly><br/>
 
 
         <label>이메일</label>
-        <input type="email" name="emplEmail" id="emplEmail" value="${empVO.emplEmail}" required readonly><br/>
+        <input type="email" name="#" id="emplEmail" value="${empVO.emplEmail}" required readonly><br/>
 
         <label>재직 상태 설정</label>
         <input type="radio" name="commonCodeHffcSttus" id="office"
@@ -110,7 +110,7 @@
         <label for="quit">퇴사</label>
         <br/><br/>
         <button type="button" id="btn-modify">수정</button>
-        <button type="submit" id="btn-save" hidden="hidden">저장</button>
+        <button type="button" id="btn-save" hidden="hidden">저장</button>
         <button type="button" id="btn-list" disabled>목록</button>
     </form>
 
@@ -118,6 +118,26 @@
 
 
 <script>
+<%--    모든 요소 (사번/입사일/이메일)제외 선택하면 val("") 처리--%>
+    $("#btn-save").on("click", function () {
+        var formData = new FormData($("#modifyEmpForm")[0]);
+        $.ajax({
+            type: "POST",
+            url: "/employee/modifyEmp",
+            data: formData,
+            contentType: false, // 필수
+            processData: false, // 필수
+            success: function (response) {
+                console.log("서버 응답:", response);
+                alert("사원 정보 수정 성공")
+            },
+            error: function (xhr, textStatus, error) {
+                // 오류 발생 시 처리
+                console.log("AJAX 오류:", error);
+            }
+        });
+    })
+
     $("#btn-modify").on("click", function () {
         // 우편번호 찾기 버튼 활성화
         $("#findZip").prop("hidden", false)

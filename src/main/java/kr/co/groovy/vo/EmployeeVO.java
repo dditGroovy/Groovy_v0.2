@@ -3,6 +3,7 @@ package kr.co.groovy.vo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 import java.util.List;
@@ -19,7 +20,9 @@ public class EmployeeVO {
     private String emplZip;
     private String emplAdres;
     private String emplDetailAdres;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date emplEncpn; // 입사일
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date emplBrthdy;
     private String enabled;
     private String commonCodeDept; // 부서구분

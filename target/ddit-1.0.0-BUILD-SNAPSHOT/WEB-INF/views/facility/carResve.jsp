@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h1><a href="#">회의실 예약</a></h1>
-<h1><a href="#">자리 예약</a></h1>
-<h1><a href="#">차량 예약</a></h1>
+<h1><a href="/facility/meeting">회의실 예약</a></h1>
+<h1><a href="/facility/rest">자리 예약</a></h1>
+<h1><a href="/facility/vehicle">차량 예약</a></h1>
 
 <hr/>
 <c:forEach var="vehicleVO" items="${vehicles}" >

@@ -159,5 +159,10 @@ public class EmployeeService {
     public NotificationVO loadNotiStatus(String emplId) {
         return mapper.loadNotiStatus(emplId);
     }
+
+    public void modifyEmp(EmployeeVO vo){
+        vo.setEmplPassword(encoder.encode(vo.getEmplPassword()));
+        mapper.modifyEmp(vo);
+    }
 }
 

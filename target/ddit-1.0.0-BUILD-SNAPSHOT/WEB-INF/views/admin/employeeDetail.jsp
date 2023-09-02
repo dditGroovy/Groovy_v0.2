@@ -3,13 +3,14 @@
 <head>
     <title>Title</title>
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <h1>사원 관리</h1>
 <h2>사원정보</h2>
 <!--    사원 추가 모달   -->
 <div id="empDetail">
-    <form action="#" method="post">
+    <form action="#" method="post" id="modifyEmpForm">
         <!-- seoju : csrf 토큰 추가-->
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <%--        <input type="hidden" name="enabled" value="1"/>--%>
@@ -26,14 +27,16 @@
         <input type="text" name="emplTelno" value="${empVO.emplTelno}" required readonly><br/>
 
         <label>우편번호</label>
-        <input type="text" name="emplZip" value="${empVO.emplZip}" required readonly><br/>
+        <input type="text" name="emplZip" class="emplZip" value="${empVO.emplZip}" required readonly><br/>
+        <button type="button" id="findZip" hidden="hidden">우편번호 찾기</button>
         <label>주소</label>
-        <input type="text" name="emplAdres" value="${empVO.emplAdres}" required readonly><br/>
+        <input type="text" name="emplAdres" class="emplAdres" value="${empVO.emplAdres}" required readonly><br/>
         <label>상세주소</label>
-        <input type="text" name="emplDetailAdres" value="${empVO.emplDetailAdres}" required readonly><br/>
+        <input type="text" name="emplDetailAdres" class="emplDetailAdres" value="${empVO.emplDetailAdres}" required
+               readonly><br/>
 
         <label>생년월일</label>
-        <input type="date" name="emplBrthdy" value="${empVO.emplBrthdy}" required readonly><br/>
+        <input type="date" name="#" value="${empVO.emplBrthdy}" required readonly><br/>
 
 
         <%-- commonCodeLastAcdmcr --%>
@@ -89,11 +92,11 @@
         </select><br/>
 
         <label>입사일</label>
-        <input type="date" value="" name="emplEncpn" id="joinDate" value="${empVO.emplEncpn}" required readonly><br/>
+        <input type="date" name="#" id="joinDate" value="${empVO.emplEncpn}" required readonly><br/>
 
 
         <label>이메일</label>
-        <input type="email" name="emplEmail" id="emplEmail" value="${empVO.emplEmail}" required readonly><br/>
+        <input type="email" name="#" id="emplEmail" value="${empVO.emplEmail}" required readonly><br/>
 
         <label>재직 상태 설정</label>
         <input type="radio" name="commonCodeHffcSttus" id="office"
@@ -107,7 +110,7 @@
         <label for="quit">퇴사</label>
         <br/><br/>
         <button type="button" id="btn-modify">수정</button>
-        <button type="submit" id="btn-save" hidden="hidden">저장</button>
+        <button type="button" id="btn-save" hidden="hidden">저장</button>
         <button type="button" id="btn-list" disabled>목록</button>
     </form>
 
@@ -115,22 +118,54 @@
 
 
 <script>
-    $(function () {
-        $("#btn-modify").on("click", function () {
-            // 모든 인풋 요소 readonly 속성 제거
-            let inputElements = $("#empDetail form input");
-            inputElements.each(function () {
-                $(this).removeAttr("readonly");
-            });
+<%--    모든 요소 (사번/입사일/이메일)제외 선택하면 val("") 처리--%>
+    $("#btn-save").on("click", function () {
+        var formData = new FormData($("#modifyEmpForm")[0]);
+        $.ajax({
+            type: "POST",
+            url: "/employee/modifyEmp",
+            data: formData,
+            contentType: false, // 필수
+            processData: false, // 필수
+            success: function (response) {
+                console.log("서버 응답:", response);
+                alert("사원 정보 수정 성공")
+            },
+            error: function (xhr, textStatus, error) {
+                // 오류 발생 시 처리
+                console.log("AJAX 오류:", error);
+            }
+        });
+    })
 
-            // 저장(submit)버튼 활성화
-            let saveBtn = $("#btn-save").removeAttr("hidden");
+    $("#btn-modify").on("click", function () {
+        // 우편번호 찾기 버튼 활성화
+        $("#findZip").prop("hidden", false)
+        // 모든 인풋 요소 readonly 속성 제거
+        let inputElements = $("#empDetail form input");
 
-            //수정 버튼 숨김
-            $(this).hide();
-        })
-    });
+        inputElements.each(function () {
+            $(this).removeAttr("readonly");
+        });
 
-</script>ㅌㅈㅈ
+        // 저장(submit)버튼 활성화
+        let saveBtn = $("#btn-save").removeAttr("hidden");
+
+        //수정 버튼 숨김
+        $(this).hide();
+    })
+
+    // 다음 주소 API
+    $("#findZip").on("click", function () {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                $(".emplZip").val(data.zonecode);
+                $(".emplAdres").val(data.address);
+                $(".emplDetailAdres").val("")
+                $(".emplDetailAdres").focus();
+            }
+        }).open();
+    })
+</script>
 </body>
 </html>

@@ -250,4 +250,18 @@
                                                 JOIN SIGN S ON E.EMPL_ID = S.SIGN_EMPL_ID
                                        WHERE E.EMPL_ID = #{emplId})
     </update>
+    <update id="modifyEmp" parameterType="employeeVO">
+        UPDATE EMPL
+        SET EMPL_NM = #{emplNm},
+            EMPL_PASSWORD = #{emplPassword},
+            EMPL_TELNO = #{emplTelno},
+            EMPL_ZIP = #{emplZip},
+            EMPL_ADRES = #{emplAdres},
+            EMPL_DETAIL_ADRES = #{emplDetailAdres},
+            COMMON_CODE_LAST_ACDMCR = #{commonCodeLastAcdmcr},
+            COMMON_CODE_CLSF = #{commonCodeClsf},
+            COMMON_CODE_DEPT = #{commonCodeDept},
+            COMMON_CODE_HFFC_STTUS = #{commonCodeHffcSttus}
+        WHERE EMPL_ID = #{emplId}
+    </update>
 </mapper>

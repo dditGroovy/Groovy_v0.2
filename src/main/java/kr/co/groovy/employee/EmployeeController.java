@@ -140,11 +140,16 @@ public class EmployeeController {
 
     @PostMapping("/modifySign")
     @ResponseBody
-
     public void modifySign(String emplId, MultipartFile signPhotoFile) {
         log.info(emplId);
         log.info(signPhotoFile + "");
         service.modifySign(emplId, signPhotoFile);
+    }
+
+    @PostMapping("/modifyEmp")
+    @ResponseBody
+    public void modifyEmp(EmployeeVO vo){
+        service.modifyEmp(vo);
     }
 }
 
