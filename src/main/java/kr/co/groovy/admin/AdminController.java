@@ -25,7 +25,7 @@ public class AdminController {
 
     @GetMapping("/manageNotice")
     public ModelAndView manageNotice(ModelAndView mav) {
-        List<NoticeVO> list = commonService.loadNoticeList();
+        List<NoticeVO> list = commonService.loadNoticeListForAdmin();
         mav.addObject("notiList", list);
         mav.setViewName("admin/manageNotice");
         return mav;
