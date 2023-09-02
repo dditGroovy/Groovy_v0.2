@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.groovy.admin.AdminMapper">
+<insert id="inputNotice" parameterType="String">
+    INSERT INTO NOTI(NOTI_ETPR_CODE,
+                     NOTI_TITLE,
+                     NOTI_CONTENT,
+                     NOTI_DATE,
+                     NOTI_CTGRY_ICON_FILE_STRE_NM,
+                     COMMON_CODE_NOTI_KIND)
+    VALUES ('NOTI-' || NOTI_SEQ.nextval || '-' || TO_CHAR(sysdate, 'yyyyMMdd'),
+            #{notiTitle},
+            #{notiContent},
+            TO_CHAR(sysdate, 'yyyyMMdd'),
+            #{notiCtgryIconFileStreNm},
+            'NOTI020')
+</insert>
+</mapper>
+
+
+
