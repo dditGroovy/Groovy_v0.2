@@ -176,8 +176,7 @@
                 processData: false, // 필수
                 cache: false,
                 success: function (response) {
-                    console.log("서버 응답:", response);
-                    alert("프로필 사진 수정 성공")
+                    console.log("프로필 사진 수정 성공", response);
                 },
                 error: function (xhr, textStatus, error) {
                     // 오류 발생 시 처리
@@ -195,8 +194,7 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    console.log("서버 응답:", response);
-                    alert("비밀번호 수정 성공")
+                    console.log("비밀번호 수정 성공");
                 },
                 error: function (xhr, textStatus, error) {
                     // 오류 발생 시 처리
@@ -216,8 +214,7 @@
                 processData: false, // 필수
                 cache: false,
                 success: function (response) {
-                    console.log("서버 응답:", response);
-                    alert("서명 사진 수정 성공")
+                    console.log("서명 사진 수정 성공");
                 },
                 error: function (xhr, textStatus, error) {
                     // 오류 발생 시 처리
