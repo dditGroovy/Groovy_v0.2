@@ -1,7 +1,14 @@
 package kr.co.groovy.vo;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.Date;
 
+@Getter
+@Setter
+@ToString
 public class VehicleVO {
     private String vhcleNo;
     private String vhcleVhcty;
@@ -11,5 +18,6 @@ public class VehicleVO {
     private Date vhcleResveBeginTime;
     private Date vhcleResveEndTime;
     private String vhcleResveEmplId;
+    private String vhcleResveEmpNm;
     private String commonCodeResveAt;
 }
