@@ -1,17 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h1><a href="#">회의실 예약</a></h1>
-<h1><a href="#">자리 예약</a></h1>
-<h1><a href="#">차량 예약</a></h1>
+<h1><a href="/facility/meeting">회의실 예약</a></h1>
+<h1><a href="/facility/rest">자리 예약</a></h1>
+<h1><a href="/facility/vehicle">차량 예약</a></h1>
 
 <hr/>
-<c:forEach var="" items="" varStatus="" >
+<c:forEach var="vehicleVO" items="${vehicles}" >
   <button type="button" onclick="setRoomNumber(this)">
     <i></i>
     <div>
-      <h3>레이</h3> <!-- 차량 -->
-      <p class="no">14허8538</p> <!-- 차 번호 -->
+      <h3></h3> <!-- 차량 -->
+      <p class="no">${vehicle.vhcleNo}</p> <!-- 차 번호 -->
       <h4>하이패스</h4>
       <p></p> <!-- 가능/불가능 -->
       <h4>인원</h4>
