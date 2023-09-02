@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.groovy.chat.ChatMapper">
+
+    <insert id="insertChatRoom" parameterType="map">
+        INSERT INTO CHTT_ROOM
+        VALUES (
+                CHTT_ROOM_SEQ.NEXTVAL,
+                #{chttRoomNm},
+                #{chttRoomTy},
+                #{chttRoomNmpr},
+                SYSDATE
+               )
+    </insert>
+
+    <insert id="insertChatMember" parameterType="String">
+        INSERT INTO CHTT_MBR
+        VALUES (
+                CHTT_ROOM_SEQ.CURRVAL,
+                #{chttMbrEmplId}
+               )
+    </insert>
+
+    <select id="createNewRoomNo" resultType="integer">
+        SELECT MAX(CHTT_ROOM_NO) FROM CHTT_ROOM
+    </select>
+
+</mapper>
