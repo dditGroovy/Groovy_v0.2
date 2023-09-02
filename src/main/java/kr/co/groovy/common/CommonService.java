@@ -18,6 +18,9 @@ public class CommonService {
     }
 
     public List<NoticeVO> loadNoticeList() {
+        return mapper.loadNoticeList();
+    }
+    public List<NoticeVO> loadNoticeListForAdmin() {
         List<NoticeVO> list = mapper.loadNoticeList();
         for (NoticeVO noticeVO : list) {
             String iconFileName = noticeVO.getNotiCtgryIconFileStreNm();
@@ -26,7 +29,6 @@ public class CommonService {
         }
         return list;
     }
-
     public List<NoticeVO> findNotice(Map<String, Object> paramMap) {
         return mapper.findNotice(paramMap);
     }
