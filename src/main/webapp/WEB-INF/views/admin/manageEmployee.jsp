@@ -3,6 +3,7 @@
 <head>
     <title>Title</title>
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
 <body>
@@ -27,12 +28,20 @@
             <label>휴대폰 번호</label>
             <input type="text" name="emplTelno" required><br/>
 
+
+
             <label>우편번호</label>
-            <input type="text" name="emplZip" required><br/>
+            <input type="text" name="emplZip" class="emplZip" required><br/>
+            <button type="button" id="findZip">우편번호 찾기</button>
+
             <label>주소</label>
-            <input type="text" name="emplAdres" required><br/>
+            <input type="text" name="emplAdres" class="emplAdres" required><br/>
             <label>상세주소</label>
-            <input type="text" name="emplDetailAdres" required><br/>
+            <input type="text" name="emplDetailAdres" class="emplDetailAdres" required><br/>
+
+
+
+
 
             <label>생년월일</label>
             <input type="date" value="2000-01-01" name="emplBrthdy" required><br/>
@@ -141,7 +150,19 @@
 
 
 <script>
+$("#findZip").on("click", function (){
+    // 다음 주소 API
+    new daum.Postcode({
+        oncomplete: function(data) {
+            $(".emplZip").val(data.zonecode);
+            $(".emplAdres").val(data.address);
+            $(".emplDetailAdres").focus();
+        }
+    }).open();
+})
+
     $(document).ready(function () {
+
         let joinDateVal = undefined;
         const emplEncpn = document.querySelector("input[name=emplEncpn]");
         const emplId = document.querySelector("input[name=emplId]");
@@ -164,12 +185,12 @@
                 success: function (res) {
                     console.log("findEmp success");
                     let code = "<table border=1>";
-                    code += `<thead><tr><th><input type="checkbox" id="selectAll"></th><th>사번</th><th>이름</th><th>팀</th><th>직급</th><th>입사일</th><th>생년월일</th><th>전자서명</th><th>재직상태</th></tr></thead><tbody>`;
+                    code += `<thead><tr><th>번호</th><th><input type="checkbox" id="selectAll"></th><th>사번</th><th>이름</th><th>팀</th><th>직급</th><th>입사일</th><th>생년월일</th><th>전자서명</th><th>재직상태</th></tr></thead><tbody>`;
                     if (res.length === 0) {
                         code += "<td colspan='8'>검색 결과가 없습니다</td>";
                     } else {
                         for (let i = 0; i < res.length; i++) {
-                            code += "<tr>";
+                            code += `<tr><td>\${i+1}</td>`;
                             code += `<td><input type="checkbox" class="selectEmp"></td>`;
                             code += `<td>\${res[i].emplId}</td>`;
                             code += `<td>\${res[i].emplNm}</td>`;
@@ -232,12 +253,12 @@
                 success: function (res) {
                     console.log("loadEmp success");
                     let code = "<table border=1>";
-                    code += `<thead><tr><th><input type="checkbox" id="selectAll"></th><th>사번</th><th>이름</th><th>팀</th><th>직급</th><th>입사일</th><th>생년월일</th><th>전자서명</th><th>재직상태</th></tr></thead><tbody>`;
+                    code += `<thead><tr><th>번호</th><th><input type="checkbox" id="selectAll"></th><th>사번</th><th>이름</th><th>팀</th><th>직급</th><th>입사일</th><th>생년월일</th><th>전자서명</th><th>재직상태</th></tr></thead><tbody>`;
                     if (res.length === 0) {
                         code += "<td colspan='8'>결과가 없습니다</td>";
                     } else {
                         for (let i = 0; i < res.length; i++) {
-                            code += "<tr>";
+                            code += `<tr><td>\${i+1}</td>`;
                             code += `<td><input type="checkbox" class="selectEmp"></td>`;
                             code += `<td><a href="/employee/loadEmp/\${res[i].emplId}">\${res[i].emplId}</a></td>`;
                             code += `<td>\${res[i].emplNm}</td>`;

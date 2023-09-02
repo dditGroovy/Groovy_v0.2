@@ -3,6 +3,7 @@
 <head>
     <title>Title</title>
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <h1>사원 관리</h1>
@@ -26,11 +27,13 @@
         <input type="text" name="emplTelno" value="${empVO.emplTelno}" required readonly><br/>
 
         <label>우편번호</label>
-        <input type="text" name="emplZip" value="${empVO.emplZip}" required readonly><br/>
+        <input type="text" name="emplZip" class="emplZip" value="${empVO.emplZip}" required readonly><br/>
+        <button type="button" id="findZip" hidden="hidden">우편번호 찾기</button>
         <label>주소</label>
-        <input type="text" name="emplAdres" value="${empVO.emplAdres}" required readonly><br/>
+        <input type="text" name="emplAdres" class="emplAdres" value="${empVO.emplAdres}" required readonly><br/>
         <label>상세주소</label>
-        <input type="text" name="emplDetailAdres" value="${empVO.emplDetailAdres}" required readonly><br/>
+        <input type="text" name="emplDetailAdres" class="emplDetailAdres" value="${empVO.emplDetailAdres}" required
+               readonly><br/>
 
         <label>생년월일</label>
         <input type="date" name="emplBrthdy" value="${empVO.emplBrthdy}" required readonly><br/>
@@ -115,22 +118,34 @@
 
 
 <script>
-    $(function () {
-        $("#btn-modify").on("click", function () {
-            // 모든 인풋 요소 readonly 속성 제거
-            let inputElements = $("#empDetail form input");
-            inputElements.each(function () {
-                $(this).removeAttr("readonly");
-            });
+    $("#btn-modify").on("click", function () {
+        // 우편번호 찾기 버튼 활성화
+        $("#findZip").prop("hidden", false)
+        // 모든 인풋 요소 readonly 속성 제거
+        let inputElements = $("#empDetail form input");
 
-            // 저장(submit)버튼 활성화
-            let saveBtn = $("#btn-save").removeAttr("hidden");
+        inputElements.each(function () {
+            $(this).removeAttr("readonly");
+        });
 
-            //수정 버튼 숨김
-            $(this).hide();
-        })
-    });
+        // 저장(submit)버튼 활성화
+        let saveBtn = $("#btn-save").removeAttr("hidden");
 
-</script>ㅌㅈㅈ
+        //수정 버튼 숨김
+        $(this).hide();
+    })
+
+    // 다음 주소 API
+    $("#findZip").on("click", function () {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                $(".emplZip").val(data.zonecode);
+                $(".emplAdres").val(data.address);
+                $(".emplDetailAdres").val("")
+                $(".emplDetailAdres").focus();
+            }
+        }).open();
+    })
+</script>
 </body>
 </html>
