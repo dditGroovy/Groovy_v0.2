@@ -17,6 +17,7 @@
     <div class="wrapper">
         <tiles:insertAttribute name="aside"/>
         <div class="container">
+            <tiles:insertAttribute name="floating"/>
             <tiles:insertAttribute name="body"/>
         </div>
     </div>
