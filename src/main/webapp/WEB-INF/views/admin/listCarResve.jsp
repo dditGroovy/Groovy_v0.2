@@ -44,7 +44,7 @@
             destroy() {}
         }
         const getMedalString = function (param) {
-            const str = `${param} `;
+            const str = `\${param} `;
             return str;
         };
         const MedalRenderer = function (params) {
