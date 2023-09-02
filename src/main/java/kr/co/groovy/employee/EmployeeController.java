@@ -128,9 +128,9 @@ public class EmployeeController {
 
     @PostMapping("/modifyProfile")
     @ResponseBody
-    public void modifyProfile(String emplId, @RequestPart(value = "profileFile") MultipartFile profileFile) {
+    public String modifyProfile(String emplId, @RequestPart(value = "profileFile") MultipartFile profileFile) {
         log.info("modifyProfile");
-        service.modifyProfile(emplId, profileFile);
+        return service.modifyProfile(emplId, profileFile);
     }
 
     @PostMapping("/modifyPassword")

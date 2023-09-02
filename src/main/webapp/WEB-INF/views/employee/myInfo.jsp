@@ -55,7 +55,7 @@
 <sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal" var="CustomUser"/>
     <img src="${pageContext.request.contextPath}/uploads/profile/${CustomUser.employeeVO.proflPhotoFileStreNm}"
-         alt="profileImage"/>
+         alt="profileImage" id="profileImage"/>
 
 
     <form id="profileForm" method="POST" enctype="multipart/form-data">
@@ -177,6 +177,9 @@
                 cache: false,
                 success: function (response) {
                     console.log("프로필 사진 수정 성공", response);
+                    var newImageUrl = "/uploads/profile/" + response;
+                    $("#profileImage").attr("src", newImageUrl)
+
                 },
                 error: function (xhr, textStatus, error) {
                     // 오류 발생 시 처리

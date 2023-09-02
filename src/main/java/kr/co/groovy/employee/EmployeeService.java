@@ -86,7 +86,7 @@ public class EmployeeService {
         return mapper.findById(emplId);
     }
 
-    public void modifyProfile(String emplId, MultipartFile profileFile) {
+    public String modifyProfile(String emplId, MultipartFile profileFile) {
         try {
             String path = uploadPath + "/profile";
             log.info("profile path: " + path);
@@ -114,8 +114,10 @@ public class EmployeeService {
 
             mapper.modifyProfile(emplId, newFileName, originalFileName);
             log.info("프로필 사진 변경 성공");
+            return newFileName;
         } catch (Exception e) {
             log.info("프로필 사진 변경 실패");
+            return "error";
         }
     }
 
