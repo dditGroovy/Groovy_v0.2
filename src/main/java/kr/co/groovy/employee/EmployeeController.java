@@ -104,7 +104,7 @@ public class EmployeeController {
         return "employee/mySalary";
     }
 
-    @GetMapping({"/chat"})
+    @GetMapping("/chat")
     public String chat(Model model) {
         List<EmployeeVO> empList = service.loadEmpList();
         model.addAttribute("empList", empList);
