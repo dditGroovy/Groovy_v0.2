@@ -16,9 +16,14 @@ public class VehicleService {
 
     public List<VehicleVO> getVehicles() {
         List<VehicleVO> vehicles = mapper.getVehicles();
-        for (VehicleVO vehicle : vehicles) {
-            vehicle.setCommonCodeHipassAsnAt(Hipass.valueOf(vehicle.getCommonCodeHipassAsnAt()).label());
+        for (VehicleVO vehicleVO : vehicles) {
+            vehicleVO.setCommonCodeHipassAsnAt(Hipass.valueOf(vehicleVO.getCommonCodeHipassAsnAt()).getLabel());
         }
         return vehicles;
+    }
+
+    public List<VehicleVO> getReservedVehicle(String vhcleNo) {
+        List<VehicleVO> reservedVehicle = mapper.getReservedVehicle(vhcleNo);
+        return reservedVehicle;
     }
 }

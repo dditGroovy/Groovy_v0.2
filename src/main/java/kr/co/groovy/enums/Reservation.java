@@ -1,10 +1,11 @@
 package kr.co.groovy.enums;
 
-public enum Hipass {
-    HIPASS010("가능"), HIPASS011("불가능");
+public enum Reservation {
+    RESVE010("비예약"), RESVE011("예약");
+
     private String label;
 
-    Hipass(String label) {
+    Reservation(String label) {
         this.label = label;
     }
 
