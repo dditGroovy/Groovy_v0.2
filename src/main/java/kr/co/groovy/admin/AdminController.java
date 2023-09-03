@@ -2,14 +2,17 @@ package kr.co.groovy.admin;
 
 import kr.co.groovy.common.CommonService;
 import kr.co.groovy.vo.NoticeVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-
+@Slf4j
 @RequestMapping("/admin")
 @Controller
 public class AdminController {
@@ -32,8 +35,10 @@ public class AdminController {
 
     }
     @PostMapping("/inputNotice")
-    public String inputNotice(NoticeVO vo){
-        service.inputNotice(vo);
+    public String inputNotice(NoticeVO vo, @RequestParam(value = "notiFiles")MultipartFile[] notiFiles){
+        log.info(vo + "");
+        log.info(notiFiles+"");
+        service.inputNotice(vo, notiFiles);
         return "redirect:/admin/manageNotice";
     }
 }

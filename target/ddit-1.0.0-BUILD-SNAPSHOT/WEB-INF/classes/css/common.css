@@ -116,7 +116,13 @@ i.icon {
     height:  var(--vw-18);
     margin-right: var(--vw-12);
 }
-
+/*  floating*/
+#floating {
+    position: absolute;
+    top: calc((100 / 1080) * 100vh);
+    right: calc((50 / 1920) * 100vw);
+}
+#floating ul {display: flex; gap: 8px;}
 /*  sign in */
 .container.login {
     display: flex;

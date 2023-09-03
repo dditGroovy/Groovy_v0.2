@@ -3,7 +3,7 @@
 <h1 class="tab">공지 등록</h1>
 <button id="insertNoti">공지 등록</button>
 <div id="modal" style="display: none;">
-    <form action="${pageContext.request.contextPath}/admin/inputNotice" method="post">
+    <form action="${pageContext.request.contextPath}/admin/inputNotice" method="post" enctype="multipart/form-data">
         <label for="noti-title">공지 제목</label>
         <input type="text" name="notiTitle" id="noti-title" required><br/>
         <label for="noti-content">공지 내용</label>
@@ -16,8 +16,8 @@
             <option value="obituary.png">부고</option>
         </select>
         <br>
-        <%--    <label for="noti-file">파일 첨부</label>--%>
-        <%--    <input type="file" name="fileName" id="noti-file"><br/>--%>
+            <label for="noti-file">파일 첨부</label>
+        <input type="file" name="notiFiles" id="noti-file" multiple><br/>
         <button type="submit" id="submitBtn">등록</button>
     </form>
 </div>

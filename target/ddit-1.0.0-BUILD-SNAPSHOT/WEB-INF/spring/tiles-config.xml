@@ -6,10 +6,11 @@
 <tiles-definitions>
     <definition name="tiles-layout" template="/WEB-INF/views/tiles/index.jsp">
         <put-attribute name="aside" value="/WEB-INF/views/tiles/aside.jsp"/>
+        <put-attribute name="floating" value="/WEB-INF/views/tiles/floating.jsp"/>
         <put-attribute name="body" value=""/>
 
     </definition>
-    <definition name="tiles-layout-manage" template="/WEB-INF/views/tiles/index.jsp">
+    <definition name="tiles-layout-manage" template="/WEB-INF/views/tilesManage/index.jsp">
         <put-attribute name="aside" value="/WEB-INF/views/tilesManage/manageAside.jsp"/>
         <put-attribute name="body" value=""/>
 
