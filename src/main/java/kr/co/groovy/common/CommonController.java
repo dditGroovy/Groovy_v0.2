@@ -1,16 +1,25 @@
 package kr.co.groovy.common;
 
+import com.sun.deploy.net.HttpResponse;
 import kr.co.groovy.enums.ClassOfPosition;
 import kr.co.groovy.enums.Department;
 import kr.co.groovy.vo.EmployeeVO;
 import kr.co.groovy.vo.NoticeVO;
+import kr.co.groovy.vo.UploadFileVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -22,9 +31,13 @@ import java.util.Map;
 public class CommonController {
     final
     CommonService service;
+    final
+    String uploadPath;
 
-    public CommonController(CommonService service) {
+
+    public CommonController(CommonService service, String uploadSeoju) {
         this.service = service;
+        this.uploadPath = uploadSeoju;
     }
 
     @GetMapping("/loadNoticeList")
@@ -47,10 +60,12 @@ public class CommonController {
     }
 
     @GetMapping("/noticeDetail")
-    public ModelAndView loadNoticeDetail(ModelAndView mav, int notiEtprCode) {
-        service.modifyNoticeView(notiEtprCode);
+    public ModelAndView loadNoticeDetail(ModelAndView mav, String notiEtprCode) {
+        service.loadNoticeDetail(notiEtprCode);
         NoticeVO vo = service.loadNoticeDetail(notiEtprCode);
+        List<UploadFileVO> list = service.loadNotiFiles(notiEtprCode);
         mav.addObject("noticeDetail", vo);
+        mav.addObject("notiFiles", list);
         mav.setViewName("common/companyNoticeDetail");
         return mav;
     }
@@ -70,11 +85,46 @@ public class CommonController {
         mav.setViewName("common/orgChart");
         return mav;
     }
+
     // 동호회
     @GetMapping("/club")
-    public String club(){
+    public String club() {
         return "common/club";
     }
+
+    @GetMapping("/fileDownload")
+    public void fileDownload(int uploadFileSn, HttpServletResponse resp) throws Exception {
+        try {
+            UploadFileVO vo = service.downloadNotiFile(uploadFileSn);
+            String originalName = new String(vo.getUploadFileOrginlNm().getBytes("utf-8"), "iso-8859-1");
+            String filePath = uploadPath + "/notice";
+            String fileName = vo.getUploadFileStreNm();
+
+            File f = new File(filePath, fileName);
+            if (!f.isFile()) {
+                log.info("파일 없음");
+                return;
+            }
+
+            resp.setContentType("application/octet-stream");
+            resp.setHeader("Content-Disposition", "attachment; filename=\"" + originalName + "\"");
+            resp.setHeader("Content-Transfer-Encoding", "binary");
+            resp.setContentLength((int) f.length());
+
+            FileInputStream inputStream = new FileInputStream(f);
+            OutputStream outputStream = resp.getOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead = -1;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            inputStream.close();
+            outputStream.close();
+        } catch (IOException e) {
+            log.info("파일 다운로드 실패");
+        }
+    }
+
 
 }
 

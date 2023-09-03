@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
     .box-sort-search {
         margin-top: calc((18 / var(--vh)) * 100vh);
@@ -58,17 +59,23 @@
 <h1 class="font-36 font-md color-font-high">공지사항</h1>
 <div class="box-notices">
 
-        <div class="box-notice card-df">
-                <p>${noticeDetail.notiTitle}</p>
-                <p>${noticeDetail.notiContent}</p>
-                <div class="box-view-date">
-                    <div class="box-view">
-                        <i class="icon icon-view-24"></i>
-                        <span class="text-view-count">${noticeDetail.notiRdcnt}</span> view
-                    </div>
-                    <div class="box-date">
-                            ${noticeDetail.notiDate}
-                    </div>
-                </div>
+    <div class="box-notice card-df">
+        <p>${noticeDetail.notiTitle}</p>
+        <p>${noticeDetail.notiContent}</p>
+        <div class="box-view-date">
+            <div class="box-view">
+                <i class="icon icon-view-24"></i>
+                <span class="text-view-count">${noticeDetail.notiRdcnt}</span> view
+            </div>
+            <div class="box-date">
+                ${noticeDetail.notiDate}
+            </div>
+            <c:forEach var="notiFile" items="${notiFiles}" varStatus="stat">
+                <p><a href="/common/fileDownload?uploadFileSn=${notiFile.uploadFileSn}">${notiFile.uploadFileOrginlNm}</a>
+                    <fmt:formatNumber value="${notiFile.uploadFileSize / 1024.0 / 1024.0}"
+                                      type="number" minFractionDigits="1" maxFractionDigits="1"/> MB</p>
+            </c:forEach>
         </div>
+    </div>
 </div>
+

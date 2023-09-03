@@ -35,9 +35,7 @@ public class AdminController {
 
     }
     @PostMapping("/inputNotice")
-    public String inputNotice(NoticeVO vo, @RequestParam(value = "notiFiles")MultipartFile[] notiFiles){
-        log.info(vo + "");
-        log.info(notiFiles+"");
+    public String inputNotice(NoticeVO vo, MultipartFile[] notiFiles){
         service.inputNotice(vo, notiFiles);
         return "redirect:/admin/manageNotice";
     }

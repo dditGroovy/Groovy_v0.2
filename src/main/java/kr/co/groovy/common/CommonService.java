@@ -3,6 +3,7 @@ package kr.co.groovy.common;
 import kr.co.groovy.enums.NoticeKind;
 import kr.co.groovy.vo.EmployeeVO;
 import kr.co.groovy.vo.NoticeVO;
+import kr.co.groovy.vo.UploadFileVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class CommonService {
     public List<NoticeVO> loadNoticeList() {
         return mapper.loadNoticeList();
     }
+
     public List<NoticeVO> loadNoticeListForAdmin() {
         List<NoticeVO> list = mapper.loadNoticeList();
         for (NoticeVO noticeVO : list) {
@@ -29,12 +31,21 @@ public class CommonService {
         }
         return list;
     }
+
     public List<NoticeVO> findNotice(Map<String, Object> paramMap) {
         return mapper.findNotice(paramMap);
     }
 
-    public NoticeVO loadNoticeDetail(int notiSeq) {
+    public NoticeVO loadNoticeDetail(String notiSeq) {
         return mapper.loadNoticeDetail(notiSeq);
+    }
+
+    public UploadFileVO downloadNotiFile(int uploadFileSn) {
+        return mapper.downloadNotiFile(uploadFileSn);
+    }
+
+    public List<UploadFileVO> loadNotiFiles(String notiEtprCode) {
+        return mapper.loadNotiFiles(notiEtprCode);
     }
 
     public void modifyNoticeView(int notiSeq) {

@@ -15,5 +15,6 @@
         <typeAlias type="kr.co.groovy.vo.ChatRoomVO" alias="chatRoomVO" />
         <typeAlias type="kr.co.groovy.vo.ChatMemberVO" alias="chatMemberVO" />
         <typeAlias type="kr.co.groovy.vo.ChatVO" alias="chatVO" />
+        <typeAlias type="kr.co.groovy.vo.UploadFileVO" alias="uploadFileVO" />
     </typeAliases>
 </configuration>
