@@ -15,14 +15,14 @@
     </resultMap>
 
     <select id="loadNoticeList" parameterType="String" resultType="noticeVO">
-        SELECT
-            NOTI_ETPR_CODE,
-            NOTI_TITLE,
-            NOTI_CONTENT,
-            NOTI_DATE,
-            NOTI_CTGRY_ICON_FILE_STRE_NM,
-            COMMON_CODE_NOTI_KIND
+        SELECT NOTI_ETPR_CODE,
+               NOTI_TITLE,
+               NOTI_CONTENT,
+               NOTI_DATE,
+               NOTI_CTGRY_ICON_FILE_STRE_NM,
+               COMMON_CODE_NOTI_KIND
         FROM NOTI
+        ORDER BY LENGTH(NOTI_ETPR_CODE) DESC, NOTI_ETPR_CODE DESC
 
     </select>
     <select id="findNotice" parameterType="map" resultType="noticeVO">
@@ -46,40 +46,40 @@
         </if>
     </select>
     <select id="loadNoticeDetail" parameterType="String" resultType="noticeVO">
-            SELECT   NOTI_ETPR_CODE,
-                     NOTI_TITLE,
-                     NOTI_CONTENT,
-                     NOTI_DATE,
-                     NOTI_CTGRY_ICON_FILE_STRE_NM,
-                     COMMON_CODE_NOTI_KIND
-            FROM NOTI
-            WHERE NOTI_ETPR_CODE = #{notiEtprCode}
+        SELECT NOTI_ETPR_CODE,
+               NOTI_TITLE,
+               NOTI_CONTENT,
+               NOTI_DATE,
+               NOTI_CTGRY_ICON_FILE_STRE_NM,
+               COMMON_CODE_NOTI_KIND
+        FROM NOTI
+        WHERE NOTI_ETPR_CODE = #{notiEtprCode}
     </select>
     <select id="loadNotiFiles" parameterType="String" resultType="uploadFileVO">
-        SELECT
-            UPLOAD_FILE.UPLOAD_FILE_SN,
-            UPLOAD_FILE.UPLOAD_FILE_ETPR_CODE,
-            UPLOAD_FILE.UPLOAD_FILE_ORGINL_NM,
-            UPLOAD_FILE.UPLOAD_FILE_STRE_NM,
-            UPLOAD_FILE.UPLOAD_FILE_SIZE,
-            UPLOAD_FILE.UPLOAD_FILE_RGSDE
+        SELECT UPLOAD_FILE.UPLOAD_FILE_SN,
+               UPLOAD_FILE.UPLOAD_FILE_ETPR_CODE,
+               UPLOAD_FILE.UPLOAD_FILE_ORGINL_NM,
+               UPLOAD_FILE.UPLOAD_FILE_STRE_NM,
+               UPLOAD_FILE.UPLOAD_FILE_SIZE,
+               UPLOAD_FILE.UPLOAD_FILE_RGSDE
         FROM NOTI
                  LEFT JOIN UPLOAD_FILE ON NOTI.NOTI_ETPR_CODE = UPLOAD_FILE.UPLOAD_FILE_ETPR_CODE
         WHERE NOTI.NOTI_ETPR_CODE = #{notiEtprCode}
     </select>
     <select id="downloadNotiFile" parameterType="int" resultType="uploadFileVO">
-        SELECT
-           UPLOAD_FILE_SN,
-          UPLOAD_FILE_ETPR_CODE,
-            UPLOAD_FILE_ORGINL_NM,
-            UPLOAD_FILE_STRE_NM,
-           UPLOAD_FILE_SIZE,
-          UPLOAD_FILE_RGSDE
+        SELECT UPLOAD_FILE_SN,
+               UPLOAD_FILE_ETPR_CODE,
+               UPLOAD_FILE_ORGINL_NM,
+               UPLOAD_FILE_STRE_NM,
+               UPLOAD_FILE_SIZE,
+               UPLOAD_FILE_RGSDE
         FROM UPLOAD_FILE
         WHERE UPLOAD_FILE_SN = #{uploadFileSn}
     </select>
     <update id="modifyNoticeView" parameterType="int">
-        UPDATE NOTI SET NOTI_RDCNT=NOTI_RDCNT + 1 WHERE NOTI_ETPR_CODE = #{notiEtprCode}
+        UPDATE NOTI
+        SET NOTI_RDCNT=NOTI_RDCNT + 1
+        WHERE NOTI_ETPR_CODE = #{notiEtprCode}
     </update>
     <select id="loadOrgChart" parameterType="String" resultMap="employeeWithPhoto">
         SELECT UF.UPLOAD_FILE_STRE_NM,

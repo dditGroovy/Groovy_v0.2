@@ -22,6 +22,7 @@
                NOTI_CTGRY_ICON_FILE_STRE_NM,
                COMMON_CODE_NOTI_KIND
         FROM NOTI
+        ORDER BY LENGTH(NOTI_ETPR_CODE) DESC, NOTI_ETPR_CODE DESC
 
     </select>
     <select id="findNotice" parameterType="map" resultType="noticeVO">
