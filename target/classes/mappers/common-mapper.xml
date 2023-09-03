@@ -19,6 +19,7 @@
                NOTI_TITLE,
                NOTI_CONTENT,
                NOTI_DATE,
+               NOTI_RDCNT,
                NOTI_CTGRY_ICON_FILE_STRE_NM,
                COMMON_CODE_NOTI_KIND
         FROM NOTI
@@ -31,6 +32,7 @@
         NOTI_TITLE,
         NOTI_CONTENT,
         NOTI_DATE,
+        NOTI_RDCNT,
         NOTI_CTGRY_ICON_FILE_STRE_NM,
         COMMON_CODE_NOTI_KIND
         FROM NOTI
@@ -50,6 +52,7 @@
                NOTI_TITLE,
                NOTI_CONTENT,
                NOTI_DATE,
+               NOTI_RDCNT,
                NOTI_CTGRY_ICON_FILE_STRE_NM,
                COMMON_CODE_NOTI_KIND
         FROM NOTI
@@ -76,7 +79,7 @@
         FROM UPLOAD_FILE
         WHERE UPLOAD_FILE_SN = #{uploadFileSn}
     </select>
-    <update id="modifyNoticeView" parameterType="int">
+    <update id="modifyNoticeView" parameterType="String">
         UPDATE NOTI
         SET NOTI_RDCNT=NOTI_RDCNT + 1
         WHERE NOTI_ETPR_CODE = #{notiEtprCode}

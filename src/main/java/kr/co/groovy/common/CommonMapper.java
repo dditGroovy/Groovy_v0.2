@@ -20,7 +20,7 @@ public interface CommonMapper {
 
     UploadFileVO downloadNotiFile(int uploadFileSn);
 
-    void modifyNoticeView(int notiSeq);
+    void modifyNoticeView(String notiEtprCode);
 
     List<EmployeeVO> loadOrgChart (String depCode);
 }

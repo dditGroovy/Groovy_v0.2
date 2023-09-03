@@ -61,7 +61,7 @@ public class CommonController {
 
     @GetMapping("/noticeDetail")
     public ModelAndView loadNoticeDetail(ModelAndView mav, String notiEtprCode) {
-        service.loadNoticeDetail(notiEtprCode);
+        service.modifyNoticeView(notiEtprCode);
         NoticeVO vo = service.loadNoticeDetail(notiEtprCode);
         List<UploadFileVO> list = service.loadNotiFiles(notiEtprCode);
         mav.addObject("noticeDetail", vo);
@@ -100,8 +100,8 @@ public class CommonController {
             String filePath = uploadPath + "/notice";
             String fileName = vo.getUploadFileStreNm();
 
-            File f = new File(filePath, fileName);
-            if (!f.isFile()) {
+            File file = new File(filePath, fileName);
+            if (!file.isFile()) {
                 log.info("파일 없음");
                 return;
             }
@@ -109,9 +109,9 @@ public class CommonController {
             resp.setContentType("application/octet-stream");
             resp.setHeader("Content-Disposition", "attachment; filename=\"" + originalName + "\"");
             resp.setHeader("Content-Transfer-Encoding", "binary");
-            resp.setContentLength((int) f.length());
+            resp.setContentLength((int) file.length());
 
-            FileInputStream inputStream = new FileInputStream(f);
+            FileInputStream inputStream = new FileInputStream(file);
             OutputStream outputStream = resp.getOutputStream();
             byte[] buffer = new byte[4096];
             int bytesRead = -1;

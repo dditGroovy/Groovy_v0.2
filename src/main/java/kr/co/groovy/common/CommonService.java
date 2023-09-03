@@ -48,8 +48,8 @@ public class CommonService {
         return mapper.loadNotiFiles(notiEtprCode);
     }
 
-    public void modifyNoticeView(int notiSeq) {
-        mapper.modifyNoticeView(notiSeq);
+    public void modifyNoticeView(String notiEtprCode) {
+        mapper.modifyNoticeView(notiEtprCode);
     }
 
     public List<EmployeeVO> loadOrgChart(String depCode) {
