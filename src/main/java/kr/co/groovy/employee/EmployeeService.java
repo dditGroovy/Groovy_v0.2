@@ -31,11 +31,11 @@ public class EmployeeService {
     String uploadPath;
 
 
-    public EmployeeService(EmployeeMapper mapper, BCryptPasswordEncoder encoder, MultipartHttpServletRequest request, String uploadPath) {
+    public EmployeeService(EmployeeMapper mapper, BCryptPasswordEncoder encoder, MultipartHttpServletRequest request, String uploadTest) {
         this.mapper = mapper;
         this.encoder = encoder;
         this.request = request;
-        this.uploadPath = uploadPath;
+        this.uploadPath = uploadTest;
     }
 
     public EmployeeVO signIn(String emplId) {

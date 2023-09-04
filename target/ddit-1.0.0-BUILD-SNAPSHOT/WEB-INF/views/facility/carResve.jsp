@@ -90,7 +90,7 @@
                     const now = `\${nowYear}/\${month}/\${day}`;
 
                     let reservedTime = reservedDate.getHours();
-                    console.log(reservedTime)
+                    console.log(reservedTime);
                     const timeButtonList = document.querySelectorAll(".timeButton");
                     for (let j = 0; j < timeButtonList.length; j++) {
                         let timeButtonValue = timeButtonList[j].textContent;
