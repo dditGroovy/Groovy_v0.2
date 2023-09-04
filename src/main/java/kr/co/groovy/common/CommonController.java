@@ -1,6 +1,5 @@
 package kr.co.groovy.common;
 
-import com.sun.deploy.net.HttpResponse;
 import kr.co.groovy.enums.ClassOfPosition;
 import kr.co.groovy.enums.Department;
 import kr.co.groovy.vo.EmployeeVO;
